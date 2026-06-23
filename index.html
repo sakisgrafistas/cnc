@@ -6,7 +6,7 @@
     <title>Click & Clip | Βίντεο που μαγνητίζουν. Σελίδες που πουλάνε.</title>
 
     <link rel="icon" type="image/png" href="favicon.png">
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -55,11 +55,13 @@
         </div>
     </div>
 
-    <header class="py-6 px-4 md:px-8 max-w-7xl mx-auto flex justify-between items-center">
+    <!-- Header / Navigation -->
+    <header class="py-6 px-4 md:px-8 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-5 md:gap-0">
         <div>
-            <img src="logo.png" alt="Click n Clip Logo" class="h-10 md:h-14">
+            <!-- Αυξήσαμε το μέγεθος του λογότυπου -->
+            <img src="logo.png" alt="Click n Clip Logo" class="h-16 md:h-20 object-contain">
         </div>
-        <a href="#pricing" class="bg-brandRed hover:bg-red-600 text-white font-bold py-2 px-6 rounded-full transition duration-300 text-sm md:text-base">
+        <a href="#pricing" class="bg-brandRed hover:bg-red-600 text-white font-bold py-3 px-8 md:py-2 md:px-6 rounded-full transition duration-300 text-base shadow-[0_0_15px_rgba(255,51,51,0.2)] md:shadow-none">
             Δείτε τα Πακέτα
         </a>
     </header>
