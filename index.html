@@ -3,8 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ΒΑΣΙΚΟ SEO -->
     <title>Click & Clip | Premium Video Agency & Landing Pages</title>
+    <meta name="description" content="Το απόλυτο Video Agency για την επιχείρησή σου. Αναλαμβάνουμε πλήρως την παραγωγή κάθετων βίντεο (TikTok, Reels) και την κατασκευή premium Landing Pages.">
+    <meta name="keywords" content="video agency, video production, παραγωγή βίντεο θεσσαλονίκη, video editing κύπρος, social media marketing, tiktok videos, instagram reels, κατασκευή ιστοσελίδων, landing page">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://clicknclip.gr/">
     <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- OPEN GRAPH / SOCIAL MEDIA SEO -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://clicknclip.gr/">
+    <meta property="og:title" content="Click & Clip | Premium Video Agency & Landing Pages">
+    <meta property="og:description" content="Βίντεο που μαγνητίζουν. Σελίδες που πουλάνε. Πλήρης παραγωγή βίντεο και κατασκευή ιστοσελίδων.">
+    <meta property="og:image" content="https://clicknclip.gr/logo.png">
+
+    <!-- GOOGLE SCHEMA MARKUP (Τοπική Επιχείρηση & Υπηρεσίες) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Click & Clip",
+      "url": "https://clicknclip.gr/",
+      "logo": "https://clicknclip.gr/logo.png",
+      "description": "Premium Video Agency & Web Design. Πλήρης παραγωγή βίντεο για Social Media και κατασκευή Landing Pages.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Thessaloniki",
+        "addressCountry": "GR"
+      },
+      "areaServed": ["Thessaloniki", "Greece", "Cyprus"]
+    }
+    </script>
+
+    <!-- TAILWIND CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -56,7 +89,8 @@
 
     <!-- Header / Navigation -->
     <header class="py-8 px-4 w-full flex justify-center items-center relative z-10">
-        <img src="logo.png" alt="Click n Clip Logo" class="h-16 md:h-20 object-contain hover:scale-105 transition transform duration-300">
+        <!-- Προστέθηκε βελτιωμένο alt text για το SEO -->
+        <img src="logo.png" alt="Click & Clip Premium Video Agency Logo" class="h-16 md:h-20 object-contain hover:scale-105 transition transform duration-300">
     </header>
 
     <!-- Hero Section -->
@@ -215,7 +249,7 @@
                 
                 <!-- ΠΑΚΕΤΟ 1: ΜΟΝΟ LANDING PAGE -->
                 <div class="p-6 md:p-8 border border-gray-800 bg-brandDark rounded-2xl flex flex-col hover:border-brandRed transition duration-300">
-                    <h4 class="text-2xl font-bold mb-3 tracking-wide">The Click Page</h4>
+                    <h3 class="text-2xl font-bold mb-3 tracking-wide">The Click Page</h3>
                     <p class="text-gray-400 text-sm mb-6 leading-relaxed">Μια ταχύτατη, premium σελίδα στημένη αποκλειστικά για να μετατρέπει τους επισκέπτες σε πελάτες.</p>
                     <div class="text-5xl font-extrabold mb-6 text-white">350€ <span class="text-sm font-normal text-gray-500">+ΦΠΑ (Εφάπαξ)</span></div>
                     
@@ -231,7 +265,7 @@
                 <!-- ΠΑΚΕΤΟ 3: THE COMBO (ΠΡΟΤΕΙΝΟΜΕΝΟ) -->
                 <div class="p-6 md:p-8 border-2 border-brandRed bg-[#0a0a0a] rounded-2xl flex flex-col relative shadow-[0_0_25px_rgba(255,51,51,0.15)] md:-translate-y-4">
                     <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-brandRed text-white text-xs font-bold px-5 py-1 rounded-full uppercase tracking-wider whitespace-nowrap">Η Απολυτη Μηχανη Πωλησεων</div>
-                    <h4 class="text-2xl font-bold mb-3 tracking-wide text-white mt-2">The Ultimate Combo</h4>
+                    <h3 class="text-2xl font-bold mb-3 tracking-wide text-white mt-2">The Ultimate Combo</h3>
                     <p class="text-gray-300 text-sm mb-6 leading-relaxed">Κατασκευή Landing Page και μηνιαία παραγωγή 8 βίντεο. Κερδίζετε 50€ έκπτωση στο στήσιμο της σελίδας.</p>
                     
                     <div class="mb-6 bg-[#111] p-4 rounded-lg border border-gray-800">
@@ -259,7 +293,7 @@
 
                 <!-- ΠΑΚΕΤΟ 2: ΜΟΝΟ ΒΙΝΤΕΟ (AGENCY PACK) -->
                 <div class="p-6 md:p-8 border border-gray-800 bg-brandDark rounded-2xl flex flex-col hover:border-brandRed transition duration-300">
-                    <h4 class="text-2xl font-bold mb-3 tracking-wide">The Agency Pack</h4>
+                    <h3 class="text-2xl font-bold mb-3 tracking-wide">The Agency Pack</h3>
                     <p class="text-gray-400 text-sm mb-6 leading-relaxed">Μηνιαία παραγωγή 8 βίντεο. Ερχόμαστε στον χώρο σας, στήνουμε τον εξοπλισμό και τα αναλαμβάνουμε όλα.</p>
                     <div class="text-5xl font-extrabold mb-6 text-white">400€ <span class="text-sm font-normal text-gray-500">/μήνα +ΦΠΑ</span></div>
                     
