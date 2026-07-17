@@ -2,8 +2,8 @@
 <html lang="el">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Click & Clip | Cloud OS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Click & Clip | Mobile OS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -19,76 +19,77 @@
         }
     </script>
     <style>
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0A0A0A; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #FF3333; }
         .modal-active { overflow: hidden; }
+        
+        /* Mobile friendly adjustments */
+        input, select, button { font-size: 16px !important; } /* Αποτρέπει το auto-zoom στο iPhone */
     </style>
 </head>
-<body class="bg-brandDark text-white font-sans h-screen flex overflow-hidden">
+<body class="bg-brandDark text-white font-sans h-screen flex flex-col overflow-hidden">
 
     <!-- PIN SECURITY OVERLAY -->
     <div id="pinScreen" class="fixed inset-0 bg-brandDark z-[100] flex flex-col items-center justify-center p-4">
         <h1 class="text-4xl font-black text-white mb-2 tracking-wider">CLICK<span class="text-brandRed">&</span>CLIP</h1>
-        <p class="text-gray-500 mb-8 uppercase tracking-widest text-sm">Secure Cloud Access</p>
+        <p class="text-gray-500 mb-8 uppercase tracking-widest text-sm text-center">Secure Cloud Access</p>
         
-        <input type="password" id="pinInput" placeholder="PIN" class="bg-cardDark border border-gray-700 rounded-lg px-6 py-4 text-white text-center text-2xl tracking-widest focus:border-brandRed outline-none mb-4 w-64 shadow-2xl" onkeyup="if(event.key === 'Enter') unlockApp()">
-        <button onclick="unlockApp()" class="bg-brandRed hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition w-64 text-lg">Είσοδος</button>
+        <input type="password" id="pinInput" placeholder="PIN" class="bg-cardDark border border-gray-700 rounded-lg px-6 py-4 text-white text-center text-2xl tracking-widest focus:border-brandRed outline-none mb-4 w-full max-w-xs shadow-2xl" onkeyup="if(event.key === 'Enter') unlockApp()">
+        <button onclick="unlockApp()" class="bg-brandRed hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition w-full max-w-xs text-lg">Είσοδος</button>
         <p id="pinError" class="text-red-500 text-sm mt-4 hidden">Λάθος κωδικός πρόσβασης.</p>
         <p id="loadingText" class="text-blue-400 text-sm mt-4 hidden">Συγχρονισμός δεδομένων...</p>
     </div>
 
-    <!-- Sidebar -->
-    <aside class="w-64 bg-cardDark border-r border-gray-800 flex flex-col z-10 hidden" id="sidebar">
-        <div class="p-6 border-b border-gray-800">
-            <h1 class="text-2xl font-black text-white tracking-wider">CLICK<span class="text-brandRed">&</span>CLIP</h1>
-            <p class="text-xs text-gray-500 mt-1 uppercase tracking-widest">Cloud OS ☁️</p>
-        </div>
-        <nav class="flex-1 p-4 space-y-2">
-            <button class="w-full text-left px-4 py-3 rounded-xl bg-brandRed/10 text-brandRed font-bold border border-brandRed/20 transition">Πελατολόγιο</button>
-            <button onclick="openExpensesModal()" class="w-full text-left px-4 py-3 rounded-xl text-gray-400 hover:bg-gray-800 hover:text-white transition">Έξοδα Μήνα</button>
-        </nav>
-    </aside>
-
     <!-- Main Content -->
     <main class="flex-1 flex flex-col h-full overflow-hidden relative hidden" id="mainContent">
-        <header class="p-8 border-b border-gray-800 flex justify-between items-center bg-cardDark/50">
-            <div>
-                <h2 class="text-3xl font-bold">Dashboard</h2>
-                <p class="text-green-500 text-sm mt-1 font-bold">● Vercel Cloud Sync Active</p>
+        
+        <!-- Mobile Friendly Header -->
+        <header class="p-4 md:p-8 border-b border-gray-800 bg-cardDark/50">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold">Dashboard</h2>
+                    <p class="text-green-500 text-xs md:text-sm mt-1 font-bold">● Vercel Cloud Sync</p>
+                </div>
+                <button onclick="openExpensesModal()" class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 md:px-6 md:py-3 rounded-xl text-sm font-bold transition flex items-center gap-2">
+                    💶 <span class="hidden md:inline">Έξοδα Μήνα</span>
+                </button>
             </div>
-            <div class="flex space-x-4">
-                <div class="bg-cardDark border border-gray-800 px-5 py-2 rounded-xl">
-                    <p class="text-xs text-gray-500 uppercase">Εισπραχθηκαν</p>
-                    <p class="text-xl font-black text-white" id="statPaid">0€</p>
+            
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                <div class="bg-cardDark border border-gray-800 px-4 py-3 rounded-xl flex flex-col justify-center">
+                    <p class="text-[10px] md:text-xs text-gray-500 uppercase">Εισπραχθηκαν</p>
+                    <p class="text-lg md:text-xl font-black text-white" id="statPaid">0€</p>
                 </div>
-                <div class="bg-cardDark border border-gray-800 px-5 py-2 rounded-xl">
-                    <p class="text-xs text-gray-500 uppercase">Εξοδα</p>
-                    <p class="text-xl font-black text-red-500" id="statExpenses">0€</p>
+                <div class="bg-cardDark border border-gray-800 px-4 py-3 rounded-xl flex flex-col justify-center">
+                    <p class="text-[10px] md:text-xs text-gray-500 uppercase">Εξοδα</p>
+                    <p class="text-lg md:text-xl font-black text-red-500" id="statExpenses">0€</p>
                 </div>
-                <div class="bg-green-500/10 border border-green-500/20 px-5 py-2 rounded-xl">
-                    <p class="text-xs text-green-500 uppercase">Καθαρο Ταμειο</p>
-                    <p class="text-xl font-black text-green-500" id="statNet">0€</p>
+                <div class="bg-green-500/10 border border-green-500/20 px-4 py-3 rounded-xl flex flex-col justify-center">
+                    <p class="text-[10px] md:text-xs text-green-500 uppercase">Καθαρο Ταμειο</p>
+                    <p class="text-lg md:text-xl font-black text-green-500" id="statNet">0€</p>
                 </div>
-                <div class="bg-brandRed/10 border border-brandRed/20 px-5 py-2 rounded-xl ml-4">
-                    <p class="text-xs text-brandRed uppercase">Μας Χρωστανε</p>
-                    <p class="text-xl font-black text-brandRed" id="statOwed">0€</p>
+                <div class="bg-brandRed/10 border border-brandRed/20 px-4 py-3 rounded-xl flex flex-col justify-center">
+                    <p class="text-[10px] md:text-xs text-brandRed uppercase">Μας Χρωστανε</p>
+                    <p class="text-lg md:text-xl font-black text-brandRed" id="statOwed">0€</p>
                 </div>
             </div>
         </header>
 
-        <div class="p-8 flex-1 overflow-y-auto">
-            <div class="bg-cardDark border border-gray-800 rounded-2xl p-6 mb-8">
+        <div class="p-4 md:p-8 flex-1 overflow-y-auto">
+            <!-- Add Client Form -->
+            <div class="bg-cardDark border border-gray-800 rounded-2xl p-4 md:p-6 mb-8">
                 <h3 class="text-lg font-bold mb-4 flex items-center"><span class="text-brandRed mr-2">➕</span> Νέο Project</h3>
-                <form id="addClientForm" class="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
+                <form id="addClientForm" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-4 items-end">
                     <div>
                         <label class="block text-xs text-gray-400 mb-1">Όνομα Πελάτη</label>
-                        <input type="text" id="newClientName" required class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-4 py-2 text-white focus:border-brandRed outline-none">
+                        <input type="text" id="newClientName" required class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-4 py-3 md:py-2 text-white focus:border-brandRed outline-none">
                     </div>
                     <div>
                         <label class="block text-xs text-gray-400 mb-1">Επιλογή Πακέτου</label>
-                        <select id="newClientPackage" onchange="autoFillPackage()" class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-4 py-2 text-white focus:border-brandRed outline-none">
+                        <select id="newClientPackage" onchange="autoFillPackage()" class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-4 py-3 md:py-2 text-white focus:border-brandRed outline-none">
                             <option value="Custom">Custom (Άλλο)</option>
                             <option value="The Ultimate Combo">The Ultimate Combo</option>
                             <option value="The Click Page">The Click Page</option>
@@ -96,65 +97,91 @@
                     </div>
                     <div>
                         <label class="block text-xs text-gray-400 mb-1">Συμφωνηθέν Ποσό (€)</label>
-                        <input type="number" id="newClientCost" required class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-4 py-2 text-white focus:border-brandRed outline-none">
+                        <input type="number" id="newClientCost" required class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-4 py-3 md:py-2 text-white focus:border-brandRed outline-none">
                     </div>
                     <div>
-                        <label class="block text-xs text-gray-400 mb-1">Στόχος Βίντεο</label>
-                        <input type="number" id="newClientVideos" required value="0" class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-4 py-2 text-white focus:border-brandRed outline-none">
+                        <label class="block text-xs text-gray-400 mb-1">Αρχικός Στόχος Βίντεο</label>
+                        <input type="number" id="newClientVideos" required value="0" class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-4 py-3 md:py-2 text-white focus:border-brandRed outline-none">
                     </div>
-                    <button type="submit" class="bg-brandRed hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition h-[42px]">Προσθήκη</button>
+                    <button type="submit" class="bg-brandRed hover:bg-red-600 text-white font-bold py-3 md:py-2 px-4 rounded-lg transition w-full h-auto md:h-[42px] mt-2 lg:mt-0">Προσθήκη</button>
                 </form>
             </div>
 
-            <div id="clientsGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+            <!-- Clients Grid -->
+            <div id="clientsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 pb-20">
+                <!-- Injected via JS -->
+            </div>
         </div>
     </main>
 
     <!-- CLIENT MODAL -->
-    <div id="clientModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-cardDark border border-gray-700 rounded-2xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl">
-            <div class="p-6 border-b border-gray-800 flex justify-between items-center bg-[#050505] rounded-t-2xl">
-                <div>
-                    <h2 class="text-2xl font-black text-white" id="modalClientName">Όνομα</h2>
-                    <p class="text-sm text-gray-400 mt-1" id="modalClientPackage">Πακέτο</p>
+    <div id="clientModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 hidden flex items-center justify-center p-2 md:p-4">
+        <div class="bg-cardDark border border-gray-700 rounded-2xl w-full max-w-4xl max-h-[95vh] md:max-h-[90vh] flex flex-col shadow-2xl">
+            
+            <!-- Modal Header -->
+            <div class="p-4 md:p-6 border-b border-gray-800 flex flex-wrap justify-between items-start md:items-center bg-[#050505] rounded-t-2xl gap-3">
+                <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-1">
+                        <h2 class="text-xl md:text-2xl font-black text-white" id="modalClientName">Όνομα</h2>
+                        <select id="modalClientStatus" onchange="updateStatus(this.value)" class="bg-[#111] border border-gray-700 rounded px-2 py-1 text-xs outline-none">
+                            <option value="active">🟢 Ενεργός</option>
+                            <option value="inactive">🔴 Ανενεργός</option>
+                        </select>
+                    </div>
+                    <p class="text-sm text-gray-400" id="modalClientPackage">Πακέτο</p>
                 </div>
-                <button onclick="closeModal()" class="text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 p-2 rounded-lg transition">✕</button>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 p-2 md:px-4 md:py-2 rounded-lg transition text-sm font-bold">✕ <span class="hidden md:inline ml-1">Κλείσιμο</span></button>
             </div>
-            <div class="p-6 overflow-y-auto flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+            <!-- Modal Body -->
+            <div class="p-4 md:p-6 overflow-y-auto flex-1 grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+                
+                <!-- Left Column -->
                 <div class="space-y-6">
-                    <div class="bg-[#0a0a0a] p-5 rounded-xl border border-gray-800">
-                        <h3 class="font-bold mb-4 text-brandRed">Συμφωνία</h3>
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-sm text-gray-400">Συνολικό Κόστος:</span>
-                            <input type="number" id="modalTotalCostInput" class="w-24 bg-cardDark border border-gray-700 rounded px-2 py-1 text-right text-white" onchange="updateTotalCost(this.value)">
-                        </div>
+                    
+                    <!-- Monthly Videos Section -->
+                    <div class="bg-[#0a0a0a] p-4 md:p-5 rounded-xl border border-gray-800">
                         <div class="flex justify-between items-center mb-4">
-                            <span class="text-sm text-gray-400">Στόχος Βίντεο:</span>
-                            <input type="number" id="modalVideosTarget" class="w-20 bg-cardDark border border-gray-700 rounded px-2 py-1 text-center text-white" onchange="updateVideoTarget(this.value)">
+                            <h3 class="font-bold text-brandRed">Μηνιαία Παραγωγή Βίντεο</h3>
+                            <button onclick="addMonth()" class="text-xs bg-brandRed/20 text-brandRed hover:bg-brandRed/40 px-2 py-1 rounded transition">+ Νέος Μήνας</button>
                         </div>
-                        <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-800">
-                            <label class="text-sm text-gray-400">Βίντεο που παραδόθηκαν:</label>
-                            <input type="number" id="modalVideosDelivered" class="w-20 bg-cardDark border border-gray-700 rounded px-3 py-1 text-center" onchange="updateDelivered(this.value)">
+                        <div class="flex text-[10px] text-gray-500 uppercase mb-2 px-1">
+                            <div class="w-1/2">Μηνας / Περιοδος</div>
+                            <div class="w-1/2 text-right pr-6">Εγιναν / Στοχος</div>
                         </div>
+                        <div id="modalMonthsList" class="space-y-2 max-h-48 overflow-y-auto pr-1"></div>
                     </div>
-                    <div class="bg-[#0a0a0a] p-5 rounded-xl border border-gray-800">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-green-500">Πληρωμές Πελάτη</h3>
-                            <span class="text-sm bg-green-500/20 text-green-500 px-2 py-1 rounded" id="modalTotalPaid">0€</span>
+
+                    <!-- Financials Section -->
+                    <div class="bg-[#0a0a0a] p-4 md:p-5 rounded-xl border border-gray-800">
+                        <div class="flex justify-between items-center mb-4 pb-4 border-b border-gray-800">
+                            <span class="text-sm text-gray-400">Συνολικό Κόστος Συμφωνίας:</span>
+                            <div class="flex items-center gap-1">
+                                <input type="number" id="modalTotalCostInput" class="w-20 md:w-24 bg-cardDark border border-gray-700 rounded px-2 py-1 text-right text-white font-bold" onchange="updateTotalCost(this.value)">
+                                <span class="text-gray-400">€</span>
+                            </div>
                         </div>
-                        <div id="modalPaymentsList" class="space-y-2 mb-4 max-h-40 overflow-y-auto pr-2"></div>
-                        <div class="flex gap-2">
-                            <input type="date" id="newPayDate" class="bg-cardDark border border-gray-700 rounded px-2 py-1 text-sm text-gray-300 w-1/2">
-                            <input type="number" id="newPayAmount" placeholder="Ποσό €" class="bg-cardDark border border-gray-700 rounded px-2 py-1 text-sm w-1/3">
-                            <button onclick="addPayment()" class="bg-green-600 hover:bg-green-500 text-white rounded px-3 py-1 text-sm font-bold flex-1 transition">+</button>
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-bold text-green-500">Πληρωμές</h3>
+                            <span class="text-xs md:text-sm bg-green-500/20 text-green-500 px-2 py-1 rounded font-bold" id="modalTotalPaid">0€</span>
+                        </div>
+                        <div id="modalPaymentsList" class="space-y-2 mb-4 max-h-32 overflow-y-auto pr-1"></div>
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <div class="flex gap-2 flex-1">
+                                <input type="date" id="newPayDate" class="bg-cardDark border border-gray-700 rounded px-2 py-2 text-sm text-gray-300 w-1/2">
+                                <input type="number" id="newPayAmount" placeholder="Ποσό €" class="bg-cardDark border border-gray-700 rounded px-2 py-2 text-sm w-1/2">
+                            </div>
+                            <button onclick="addPayment()" class="bg-green-600 hover:bg-green-500 text-white rounded px-4 py-2 text-sm font-bold transition sm:w-auto w-full">+</button>
                         </div>
                     </div>
                 </div>
-                <div class="bg-[#0a0a0a] p-5 rounded-xl border border-gray-800 flex flex-col h-full">
+
+                <!-- Right Column (Notes) -->
+                <div class="bg-[#0a0a0a] p-4 md:p-5 rounded-xl border border-gray-800 flex flex-col h-full min-h-[300px]">
                     <h3 class="font-bold mb-4 text-blue-400">Εκκρεμότητες & Σημειώσεις</h3>
-                    <div id="modalNotesList" class="flex-1 space-y-3 mb-4 overflow-y-auto pr-2"></div>
+                    <div id="modalNotesList" class="flex-1 space-y-3 mb-4 overflow-y-auto pr-1"></div>
                     <div class="flex flex-col gap-2 mt-auto pt-4 border-t border-gray-800">
-                        <input type="date" id="newNoteDate" class="bg-cardDark border border-gray-700 rounded px-3 py-2 text-sm text-gray-300">
+                        <input type="date" id="newNoteDate" class="bg-cardDark border border-gray-700 rounded px-3 py-2 text-sm text-gray-300 w-full">
                         <div class="flex gap-2">
                             <input type="text" id="newNoteText" placeholder="π.χ. Γύρισμα την Τρίτη..." class="bg-cardDark border border-gray-700 rounded px-3 py-2 text-sm flex-1">
                             <button onclick="addNote()" class="bg-blue-600 hover:bg-blue-500 text-white rounded px-4 py-2 font-bold transition">Add</button>
@@ -162,28 +189,30 @@
                     </div>
                 </div>
             </div>
+            
             <div class="p-4 border-t border-gray-800 flex justify-between bg-[#050505] rounded-b-2xl">
-                <button onclick="deleteCurrentClient()" class="text-sm text-gray-500 hover:text-red-500 transition">🗑 Διαγραφή Project</button>
-                <button onclick="closeModal()" class="bg-gray-200 hover:bg-white text-black font-bold py-2 px-6 rounded-lg transition">Κλείσιμο</button>
+                <button onclick="deleteCurrentClient()" class="text-xs md:text-sm text-gray-600 hover:text-red-500 transition font-bold">🗑 Διαγραφή Project</button>
             </div>
         </div>
     </div>
 
     <!-- EXPENSES MODAL -->
-    <div id="expensesModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-cardDark border border-gray-700 rounded-2xl w-full max-w-2xl shadow-2xl flex flex-col">
-            <div class="p-6 border-b border-gray-800 flex justify-between items-center bg-[#050505] rounded-t-2xl">
-                <h2 class="text-2xl font-black text-white">Λίστα Εξόδων</h2>
-                <button onclick="closeExpensesModal()" class="text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 p-2 rounded-lg transition">✕</button>
+    <div id="expensesModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 hidden flex items-center justify-center p-2 md:p-4">
+        <div class="bg-cardDark border border-gray-700 rounded-2xl w-full max-w-2xl shadow-2xl flex flex-col max-h-[90vh]">
+            <div class="p-4 md:p-6 border-b border-gray-800 flex justify-between items-center bg-[#050505] rounded-t-2xl">
+                <h2 class="text-xl md:text-2xl font-black text-white">Λίστα Εξόδων</h2>
+                <button onclick="closeExpensesModal()" class="text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 p-2 rounded-lg transition text-sm">✕</button>
             </div>
-            <div class="p-6 bg-[#0a0a0a]">
-                <div class="flex gap-2 mb-6">
-                    <input type="date" id="expDate" class="bg-cardDark border border-gray-700 rounded px-3 py-2 text-sm text-gray-300 w-1/4">
-                    <input type="text" id="expDesc" placeholder="Αιτιολογία" class="bg-cardDark border border-gray-700 rounded px-3 py-2 text-sm flex-1">
-                    <input type="number" id="expAmount" placeholder="Ποσό €" class="bg-cardDark border border-gray-700 rounded px-3 py-2 text-sm w-1/4">
-                    <button onclick="addExpense()" class="bg-red-600 hover:bg-red-500 text-white rounded px-4 py-2 font-bold transition">Προσθήκη</button>
+            <div class="p-4 md:p-6 bg-[#0a0a0a] flex-1 overflow-y-auto">
+                <div class="flex flex-col md:flex-row gap-2 mb-6">
+                    <input type="date" id="expDate" class="bg-cardDark border border-gray-700 rounded px-3 py-3 md:py-2 text-sm text-gray-300 md:w-1/4">
+                    <input type="text" id="expDesc" placeholder="Αιτιολογία" class="bg-cardDark border border-gray-700 rounded px-3 py-3 md:py-2 text-sm flex-1">
+                    <div class="flex gap-2">
+                        <input type="number" id="expAmount" placeholder="Ποσό €" class="bg-cardDark border border-gray-700 rounded px-3 py-3 md:py-2 text-sm w-full md:w-24">
+                        <button onclick="addExpense()" class="bg-red-600 hover:bg-red-500 text-white rounded px-4 py-3 md:py-2 font-bold transition w-full md:w-auto">Add</button>
+                    </div>
                 </div>
-                <div id="expensesList" class="space-y-2 max-h-60 overflow-y-auto pr-2"></div>
+                <div id="expensesList" class="space-y-2"></div>
             </div>
         </div>
     </div>
@@ -194,7 +223,7 @@
         let userPin = '';
         const today = new Date().toISOString().split('T')[0];
 
-        // --- CLOUD API LOGIC ---
+        // --- CLOUD API LOGIC & DATA MIGRATION ---
         async function unlockApp() {
             const input = document.getElementById('pinInput').value;
             if(!input) return;
@@ -217,10 +246,26 @@
                 
                 if (response.ok) {
                     const serverData = await response.json();
-                    if(serverData.clients) db = serverData;
+                    if(serverData.clients) {
+                        db = serverData;
+                        
+                        // MIGRATION: Auto-update old data structure to new one seamlessly
+                        db.clients.forEach(c => {
+                            if (!c.status) c.status = 'active'; // Default new field
+                            if (!c.months) {
+                                // Convert old single target to the new monthly array format
+                                const currentMonthName = new Date().toLocaleString('el-GR', { month: 'long', year: 'numeric' });
+                                c.months = [{
+                                    id: Date.now() + Math.floor(Math.random() * 1000),
+                                    name: currentMonthName,
+                                    target: c.videoTarget || 0,
+                                    delivered: c.delivered || 0
+                                }];
+                            }
+                        });
+                    }
                     
                     document.getElementById('pinScreen').classList.add('hidden');
-                    document.getElementById('sidebar').classList.remove('hidden');
                     document.getElementById('mainContent').classList.remove('hidden');
                     renderDashboard();
                 }
@@ -234,10 +279,7 @@
             try {
                 const response = await fetch('/api/tam', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-PIN': userPin
-                    },
+                    headers: { 'Content-Type': 'application/json', 'X-PIN': userPin },
                     body: JSON.stringify(db)
                 });
                 if (!response.ok) throw new Error('API Error');
@@ -257,13 +299,22 @@
 
         document.getElementById('addClientForm').addEventListener('submit', (e) => {
             e.preventDefault();
+            const initialVideos = parseInt(document.getElementById('newClientVideos').value || 0);
+            const currentMonthName = new Date().toLocaleString('el-GR', { month: 'long', year: 'numeric' });
+
             db.clients.push({
                 id: Date.now(),
                 name: document.getElementById('newClientName').value,
                 package: document.getElementById('newClientPackage').value,
                 cost: parseFloat(document.getElementById('newClientCost').value || 0),
-                videoTarget: parseInt(document.getElementById('newClientVideos').value || 0),
-                delivered: 0, payments: [], notes: []
+                status: 'active',
+                months: [{
+                    id: Date.now(),
+                    name: currentMonthName,
+                    target: initialVideos,
+                    delivered: 0
+                }],
+                payments: [], notes: []
             });
             saveToServer();
             document.getElementById('newClientName').value = '';
@@ -277,24 +328,36 @@
             grid.innerHTML = '';
             let totalPaid = 0, totalOwed = 0, totalExpenses = db.expenses.reduce((sum, e) => sum + parseFloat(e.amount), 0);
 
-            db.clients.forEach(c => {
+            // Sort so active clients appear first
+            const sortedClients = [...db.clients].sort((a, b) => (a.status === 'inactive') - (b.status === 'inactive'));
+
+            sortedClients.forEach(c => {
                 const paid = c.payments.reduce((sum, p) => sum + parseFloat(p.amount), 0);
                 const owed = c.cost - paid;
                 totalPaid += paid; totalOwed += owed;
 
+                const isInactive = c.status === 'inactive';
+                const opacityClass = isInactive ? 'opacity-60 grayscale-[30%]' : '';
+                const borderClass = owed > 0 && !isInactive ? 'border-brandRed/30' : 'border-gray-800';
+                const statusBadge = isInactive ? '<span class="text-[10px] bg-red-500/20 text-red-500 px-2 py-1 rounded font-bold">ΑΝΕΝΕΡΓΟΣ</span>' : '';
+
+                // Calculate totals across all months
+                const totalVideosDelivered = c.months.reduce((sum, m) => sum + parseInt(m.delivered || 0), 0);
+                const totalVideosTarget = c.months.reduce((sum, m) => sum + parseInt(m.target || 0), 0);
+
                 grid.insertAdjacentHTML('beforeend', `
-                    <div class="bg-cardDark border ${owed > 0 ? 'border-brandRed/30' : 'border-gray-800'} rounded-xl p-5 hover:border-gray-600 cursor-pointer transition flex flex-col" onclick="openModal(${c.id})">
+                    <div class="bg-cardDark border ${borderClass} ${opacityClass} rounded-xl p-4 md:p-5 hover:border-gray-600 cursor-pointer transition flex flex-col" onclick="openModal(${c.id})">
                         <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold">${c.name}</h3>
-                            <span class="text-[10px] bg-gray-800 px-2 py-1 rounded text-gray-400">${c.package}</span>
+                            <h3 class="text-lg md:text-xl font-bold truncate pr-2">${c.name}</h3>
+                            ${statusBadge || `<span class="text-[10px] bg-gray-800 text-gray-400 px-2 py-1 rounded truncate max-w-[80px] text-right">${c.package}</span>`}
                         </div>
-                        <div class="flex justify-between text-sm text-gray-400 mb-4 border-b border-gray-800 pb-3">
+                        <div class="flex justify-between text-xs md:text-sm text-gray-400 mb-4 border-b border-gray-800 pb-3">
                             <span>Αξία: <strong class="text-white">${c.cost}€</strong></span>
-                            <span>Βίντεο: <strong class="text-white">${c.delivered}/${c.videoTarget}</strong></span>
+                            <span>Βίντεο: <strong class="text-white">${totalVideosDelivered}/${totalVideosTarget}</strong></span>
                         </div>
-                        <div class="mt-auto pt-2">
-                            <p class="text-xs text-gray-500 uppercase">Οικονομικα</p>
-                            <p class="font-bold ${owed > 0 ? 'text-brandRed' : 'text-green-500'}">${owed > 0 ? `Υπόλοιπο: ${owed}€` : 'Εξοφλήθηκε'}</p>
+                        <div class="mt-auto pt-1">
+                            <p class="text-[10px] text-gray-500 uppercase mb-1">Οικονομικα</p>
+                            <p class="font-bold text-sm md:text-base ${owed > 0 ? 'text-brandRed' : 'text-green-500'}">${owed > 0 ? `Υπόλοιπο: ${owed}€` : 'Εξοφλήθηκε'}</p>
                         </div>
                     </div>
                 `);
@@ -305,6 +368,7 @@
             document.getElementById('statNet').innerText = `${totalPaid - totalExpenses}€`;
         }
 
+        // --- EXPENSES LOGIC ---
         function openExpensesModal() { document.getElementById('expDate').value = today; renderExpensesList(); document.getElementById('expensesModal').classList.remove('hidden'); }
         function closeExpensesModal() { document.getElementById('expensesModal').classList.add('hidden'); }
         function addExpense() {
@@ -316,22 +380,22 @@
         function deleteExpense(id) { db.expenses = db.expenses.filter(e => e.id !== id); saveToServer(); renderExpensesList(); }
         function renderExpensesList() {
             document.getElementById('expensesList').innerHTML = db.expenses.sort((a,b) => new Date(b.date) - new Date(a.date)).map(e => `
-                <div class="flex justify-between items-center bg-cardDark p-3 rounded border border-gray-800 text-sm">
-                    <span class="text-gray-400 w-24">${formatDate(e.date)}</span>
-                    <span class="text-gray-200 flex-1">${e.desc}</span>
-                    <span class="font-bold text-red-500 mr-4">-${e.amount}€</span>
-                    <button onclick="deleteExpense(${e.id})" class="text-gray-600 hover:text-brandRed">&times;</button>
+                <div class="flex justify-between items-center bg-black/50 p-3 rounded border border-gray-800 text-sm">
+                    <span class="text-gray-400 text-xs w-20">${formatDate(e.date)}</span>
+                    <span class="text-gray-200 flex-1 truncate px-2">${e.desc}</span>
+                    <span class="font-bold text-red-500 mr-2">-${e.amount}€</span>
+                    <button onclick="deleteExpense(${e.id})" class="text-gray-600 hover:text-red-500 p-1">&times;</button>
                 </div>
             `).join('');
         }
 
+        // --- MODAL & MONTHLY LOGIC ---
         function openModal(id) {
             activeClientId = id; const c = db.clients.find(x => x.id === id);
             document.getElementById('modalClientName').innerText = c.name;
             document.getElementById('modalClientPackage').innerText = c.package;
+            document.getElementById('modalClientStatus').value = c.status || 'active';
             document.getElementById('modalTotalCostInput').value = c.cost;
-            document.getElementById('modalVideosTarget').value = c.videoTarget;
-            document.getElementById('modalVideosDelivered').value = c.delivered;
             document.getElementById('newPayDate').value = today;
             document.getElementById('newNoteDate').value = today;
             refreshModalUI(); document.getElementById('clientModal').classList.remove('hidden');
@@ -340,27 +404,59 @@
         
         function refreshModalUI() {
             const c = db.clients.find(x => x.id === activeClientId);
-            document.getElementById('modalTotalPaid').innerText = `Σύνολο: ${c.payments.reduce((sum, p) => sum + parseFloat(p.amount), 0)}€`;
-            document.getElementById('modalPaymentsList').innerHTML = c.payments.map(p => `
-                <div class="flex justify-between items-center bg-cardDark p-2 rounded border border-gray-800 text-sm">
-                    <span class="text-gray-400">${formatDate(p.date)}</span>
-                    <span class="font-bold text-white">+${p.amount}€</span>
-                    <button onclick="deletePayment(${p.id})" class="text-gray-600 hover:text-brandRed">&times;</button>
+            
+            // Render Months
+            document.getElementById('modalMonthsList').innerHTML = c.months.map(m => `
+                <div class="flex items-center gap-2 bg-[#111] p-2 rounded border border-gray-800">
+                    <input type="text" value="${m.name}" onchange="updateMonth(${m.id}, 'name', this.value)" class="bg-transparent text-white text-sm w-1/2 outline-none border-b border-transparent focus:border-gray-600 px-1" placeholder="Όνομα Μήνα">
+                    <div class="flex items-center gap-1 w-1/2 justify-end">
+                        <input type="number" value="${m.delivered}" onchange="updateMonth(${m.id}, 'delivered', this.value)" class="w-10 bg-black border border-gray-700 rounded text-center text-sm py-1 focus:border-brandRed outline-none">
+                        <span class="text-gray-500 text-xs">/</span>
+                        <input type="number" value="${m.target}" onchange="updateMonth(${m.id}, 'target', this.value)" class="w-10 bg-black border border-gray-700 rounded text-center text-sm py-1 focus:border-brandRed outline-none">
+                        <button onclick="deleteMonth(${m.id})" class="text-gray-600 hover:text-red-500 ml-1 px-1">&times;</button>
+                    </div>
                 </div>
             `).join('');
+
+            // Render Payments
+            document.getElementById('modalTotalPaid').innerText = `${c.payments.reduce((sum, p) => sum + parseFloat(p.amount), 0)}€`;
+            document.getElementById('modalPaymentsList').innerHTML = c.payments.map(p => `
+                <div class="flex justify-between items-center bg-[#111] p-2 rounded border border-gray-800 text-sm">
+                    <span class="text-gray-400 text-xs">${formatDate(p.date)}</span>
+                    <span class="font-bold text-white">+${p.amount}€</span>
+                    <button onclick="deletePayment(${p.id})" class="text-gray-600 hover:text-red-500 px-2">&times;</button>
+                </div>
+            `).join('');
+
+            // Render Notes
             document.getElementById('modalNotesList').innerHTML = c.notes.sort((a,b) => new Date(a.date) - new Date(b.date)).map(n => `
-                <div class="bg-cardDark p-3 rounded-lg border border-gray-800 text-sm relative group">
-                    <div class="text-xs text-blue-400 mb-1 font-bold">${formatDate(n.date)}</div>
-                    <div class="text-gray-200">${n.text}</div>
-                    <button onclick="deleteNote(${n.id})" class="absolute top-2 right-2 text-gray-600 hover:text-brandRed opacity-0 group-hover:opacity-100 transition">&times;</button>
+                <div class="bg-[#111] p-3 rounded-lg border border-gray-800 text-sm relative group">
+                    <div class="text-[10px] text-blue-400 mb-1 font-bold">${formatDate(n.date)}</div>
+                    <div class="text-gray-200 pr-4">${n.text}</div>
+                    <button onclick="deleteNote(${n.id})" class="absolute top-2 right-2 text-gray-600 hover:text-red-500 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition">&times;</button>
                 </div>
             `).join('');
         }
 
+        // --- UPDATERS ---
+        function updateStatus(val) { db.clients.find(x => x.id === activeClientId).status = val; saveToServer(); }
         function updateTotalCost(val) { db.clients.find(x => x.id === activeClientId).cost = parseFloat(val) || 0; saveToServer(); }
-        function updateVideoTarget(val) { db.clients.find(x => x.id === activeClientId).videoTarget = parseInt(val) || 0; saveToServer(); }
-        function updateDelivered(val) { db.clients.find(x => x.id === activeClientId).delivered = parseInt(val) || 0; saveToServer(); }
         
+        function addMonth() {
+            const nextMonth = new Date(); nextMonth.setMonth(nextMonth.getMonth() + 1); // Helper
+            const monthName = nextMonth.toLocaleString('el-GR', { month: 'long', year: 'numeric' });
+            db.clients.find(x => x.id === activeClientId).months.push({ id: Date.now(), name: 'Νέος Μήνας', target: 0, delivered: 0 });
+            saveToServer(); refreshModalUI();
+        }
+        function updateMonth(mId, field, val) {
+            const m = db.clients.find(x => x.id === activeClientId).months.find(m => m.id === mId);
+            if(m) { m[field] = field === 'name' ? val : parseInt(val) || 0; saveToServer(); renderDashboard(); }
+        }
+        function deleteMonth(mId) {
+            const c = db.clients.find(x => x.id === activeClientId);
+            c.months = c.months.filter(m => m.id !== mId); saveToServer(); refreshModalUI();
+        }
+
         function addPayment() {
             const amount = document.getElementById('newPayAmount').value; if(!amount) return;
             db.clients.find(x => x.id === activeClientId).payments.push({ id: Date.now(), date: document.getElementById('newPayDate').value, amount: parseFloat(amount) });
@@ -375,7 +471,7 @@
         }
         function deleteNote(nid) { db.clients.find(x => x.id === activeClientId).notes = db.clients.find(x => x.id === activeClientId).notes.filter(n => n.id !== nid); saveToServer(); refreshModalUI(); }
         
-        function deleteCurrentClient() { if(confirm('Διαγραφή Project;')) { db.clients = db.clients.filter(c => c.id !== activeClientId); saveToServer(); closeModal(); } }
+        function deleteCurrentClient() { if(confirm('Διαγραφή Project οριστικά;')) { db.clients = db.clients.filter(c => c.id !== activeClientId); saveToServer(); closeModal(); } }
         function formatDate(d) { if(!d) return ''; const parts = d.split('-'); return `${parts[2]}/${parts[1]}/${parts[0]}`; }
     </script>
 </body>
