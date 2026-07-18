@@ -140,7 +140,7 @@
         <div class="bg-cardDark border border-gray-700 rounded-2xl w-full max-w-4xl max-h-[95vh] md:max-h-[90vh] flex flex-col shadow-2xl">
             <div class="p-4 md:p-6 border-b border-gray-800 flex flex-col md:flex-row justify-between items-start md:items-center bg-[#050505] rounded-t-2xl gap-4">
                 <div class="flex-1 w-full">
-                    <div class="flex flex-wrap items-center gap-3 mb-2">
+                    <div class="flex flex-wrap items-center gap-3 mb-1">
                         <h2 class="text-xl md:text-2xl font-black text-white" id="modalClientName">Όνομα</h2>
                         <select id="modalClientStatus" onchange="updateStatus(this.value)" class="bg-[#111] border border-gray-700 rounded px-2 py-1 text-xs outline-none font-bold">
                             <option value="active">🟢 Ενεργός</option>
@@ -151,7 +151,10 @@
                             <option value="one-off">📌 Εφάπαξ Project</option>
                         </select>
                     </div>
-                    <div class="flex items-center gap-2 mt-2">
+                    <!-- ΕΔΩ ΕΙΧΕ ΓΙΝΕΙ ΤΟ ΛΑΘΟΣ - Το πρόσθεσα ξανά! -->
+                    <p class="text-sm text-gray-400 mb-3" id="modalClientPackage">Πακέτο</p>
+                    
+                    <div class="flex items-center gap-2">
                         <span class="text-xs text-gray-500 uppercase">Σταδιο:</span>
                         <select id="modalClientPipeline" onchange="updatePipeline(this.value)" class="bg-cardDark border border-gray-700 rounded px-2 py-1 text-xs outline-none font-bold cursor-pointer">
                             <option value="Δημιουργια σεναριων" class="text-yellow-500">Δημιουργια σεναριων</option>
@@ -167,7 +170,6 @@
 
             <div class="p-4 md:p-6 overflow-y-auto flex-1 grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
                 <div class="space-y-6">
-                    <!-- Months & Revenue -->
                     <div class="bg-[#0a0a0a] p-4 md:p-5 rounded-xl border border-gray-800">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-brandRed">Μηνιαία Χρέωση & Βίντεο</h3>
@@ -187,7 +189,6 @@
                         </div>
                     </div>
 
-                    <!-- Payments -->
                     <div class="bg-[#0a0a0a] p-4 md:p-5 rounded-xl border border-gray-800">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-green-500">Πληρωμές</h3>
@@ -204,7 +205,6 @@
                     </div>
                 </div>
 
-                <!-- Notes -->
                 <div class="bg-[#0a0a0a] p-4 md:p-5 rounded-xl border border-gray-800 flex flex-col h-full min-h-[300px]">
                     <h3 class="font-bold mb-4 text-blue-400">Εκκρεμότητες & Σημειώσεις</h3>
                     <div id="modalNotesList" class="flex-1 space-y-3 mb-4 overflow-y-auto pr-1"></div>
@@ -231,7 +231,6 @@
                 <h2 class="text-xl md:text-2xl font-black text-white">Οργάνωση Εξόδων</h2>
                 <button onclick="closeExpensesModal()" class="text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 p-2 rounded-lg transition text-sm">✕</button>
             </div>
-            
             <div class="p-4 md:p-6 bg-[#0a0a0a] flex-1 overflow-y-auto flex flex-col">
                 <div class="bg-[#111] p-4 rounded-xl border border-gray-800 mb-6">
                     <h3 class="text-sm font-bold text-gray-400 mb-3">Καταχώρηση Νέου</h3>
@@ -315,7 +314,6 @@
                     const serverData = await response.json();
                     if(serverData.clients) {
                         db = serverData;
-                        // Migration for new features
                         db.clients.forEach(c => {
                             if (!c.status) c.status = 'active';
                             if (!c.type) c.type = (c.package === 'The Click Page') ? 'one-off' : 'mrr';
@@ -392,19 +390,16 @@
                 const opacityClass = isInactive ? 'opacity-60 grayscale-[30%]' : '';
                 const borderClass = owed > 0 && !isInactive ? 'border-brandRed/30' : 'border-gray-800';
                 
-                // Dashboard Logic: Global Tracker & Revenue Calculation
                 if (!isInactive) {
-                    const currentMonthData = c.months.find(m => m.name === currentMonthName) || c.months[c.months.length - 1]; // Try to find current month, else fallback to latest
+                    const currentMonthData = c.months.find(m => m.name === currentMonthName) || c.months[c.months.length - 1];
                     if (currentMonthData) {
                         if (c.type === 'mrr') mrrThisMonth += parseFloat(currentMonthData.cost || 0);
                         if (c.type === 'one-off') oneOffThisMonth += parseFloat(currentMonthData.cost || 0);
-                        
                         globalVideosTarget += parseInt(currentMonthData.target || 0);
                         globalVideosDelivered += parseInt(currentMonthData.delivered || 0);
                     }
                 }
 
-                // Pipeline UI Setup
                 const pipeInfo = pipelineColors[c.pipeline || 'Δημιουργια σεναριων'];
                 const pipelineBadge = !isInactive ? `<span class="text-[10px] ${pipeInfo.bg} ${pipeInfo.text} border ${pipeInfo.border} px-2 py-1 rounded truncate ml-2">${c.pipeline}</span>` : '';
                 
@@ -430,21 +425,18 @@
                 `);
             });
 
-            // Update Stats Display
             document.getElementById('statMRR').innerText = `${mrrThisMonth}€`;
             document.getElementById('statOneOff').innerText = `${oneOffThisMonth}€`;
             document.getElementById('statPaid').innerText = `${totalPaid}€`;
             document.getElementById('statOwed').innerText = `${totalOwed}€`;
             document.getElementById('statExpenses').innerText = `${totalExpenses}€`;
             
-            // Update Global Tracker Display
             document.getElementById('globalDelivered').innerText = globalVideosDelivered;
             document.getElementById('globalTarget').innerText = globalVideosTarget;
             const progressPercent = globalVideosTarget > 0 ? Math.min((globalVideosDelivered / globalVideosTarget) * 100, 100) : 0;
             const bar = document.getElementById('globalProgressBar');
             bar.style.width = `${progressPercent}%`;
-            // Change color dynamically based on progress
-            if (progressPercent === 100) { bar.classList.replace('bg-brandRed', 'bg-green-500'); } 
+            if (progressPercent >= 100 && globalVideosTarget > 0) { bar.classList.replace('bg-brandRed', 'bg-green-500'); } 
             else { bar.classList.replace('bg-green-500', 'bg-brandRed'); }
         }
 
@@ -549,11 +541,10 @@
         function openModal(id) {
             activeClientId = id; const c = db.clients.find(x => x.id === id);
             document.getElementById('modalClientName').innerText = c.name;
-            document.getElementById('modalClientPackage').innerText = c.package;
+            document.getElementById('modalClientPackage').innerText = c.package || 'Custom';
             document.getElementById('modalClientStatus').value = c.status || 'active';
             document.getElementById('modalClientType').value = c.type || 'mrr';
             
-            // Set Pipeline Dropdown color dynamically
             const pipelineSelect = document.getElementById('modalClientPipeline');
             pipelineSelect.value = c.pipeline || 'Δημιουργια σεναριων';
             updatePipelineColor(pipelineSelect.value);
@@ -600,17 +591,11 @@
             `).join('');
         }
 
-        // Updaters
         function updateStatus(val) { db.clients.find(x => x.id === activeClientId).status = val; saveToServer(); }
         function updateClientType(val) { db.clients.find(x => x.id === activeClientId).type = val; saveToServer(); }
-        function updatePipeline(val) { 
-            db.clients.find(x => x.id === activeClientId).pipeline = val; 
-            updatePipelineColor(val);
-            saveToServer(); 
-        }
+        function updatePipeline(val) { db.clients.find(x => x.id === activeClientId).pipeline = val; updatePipelineColor(val); saveToServer(); }
         function updatePipelineColor(val) {
             const select = document.getElementById('modalClientPipeline');
-            // Remove all old color classes
             select.className = "bg-cardDark border border-gray-700 rounded px-2 py-1 text-xs outline-none font-bold cursor-pointer";
             const colorClass = pipelineColors[val]?.text || 'text-white';
             select.classList.add(colorClass);
