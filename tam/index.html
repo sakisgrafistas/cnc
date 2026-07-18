@@ -26,7 +26,6 @@
         .modal-active { overflow: hidden; }
         input, select, button { font-size: 16px !important; }
         
-        /* Calendar Specific */
         .calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
         .calendar-day { min-height: 80px; }
         @media (max-width: 640px) { .calendar-day { min-height: 60px; } }
@@ -115,9 +114,8 @@
         </div>
     </main>
 
-    <!-- CLIENT MODAL (Ίδιο με πριν) -->
+    <!-- CLIENT MODAL -->
     <div id="clientModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 hidden flex items-center justify-center p-2 md:p-4">
-        <!-- Περιεχόμενο Modal Πελάτη -->
         <div class="bg-cardDark border border-gray-700 rounded-2xl w-full max-w-4xl max-h-[95vh] md:max-h-[90vh] flex flex-col shadow-2xl">
             <div class="p-4 md:p-6 border-b border-gray-800 flex flex-wrap justify-between items-start md:items-center bg-[#050505] rounded-t-2xl gap-3">
                 <div class="flex-1">
@@ -189,7 +187,7 @@
         </div>
     </div>
 
-    <!-- EXPENSES MODAL (Οργανωμένο) -->
+    <!-- EXPENSES MODAL -->
     <div id="expensesModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 hidden flex items-center justify-center p-2 md:p-4">
         <div class="bg-cardDark border border-gray-700 rounded-2xl w-full max-w-3xl shadow-2xl flex flex-col max-h-[90vh]">
             <div class="p-4 md:p-6 border-b border-gray-800 flex justify-between items-center bg-[#050505] rounded-t-2xl">
@@ -198,7 +196,6 @@
             </div>
             
             <div class="p-4 md:p-6 bg-[#0a0a0a] flex-1 overflow-y-auto flex flex-col">
-                <!-- Προσθήκη Νέου Εξόδου -->
                 <div class="bg-[#111] p-4 rounded-xl border border-gray-800 mb-6">
                     <h3 class="text-sm font-bold text-gray-400 mb-3">Καταχώρηση Νέου</h3>
                     <div class="flex flex-col lg:flex-row gap-3">
@@ -210,7 +207,7 @@
                             <option value="Μετακινήσεις">Μετακινήσεις</option>
                             <option value="Μάρκετινγκ / Διαφήμιση">Μάρκετινγκ / Διαφήμιση</option>
                         </select>
-                        <input type="text" id="expDesc" placeholder="Αιτιολογία (π.χ. CapCut)" class="bg-cardDark border border-gray-700 rounded px-3 py-2 text-sm flex-1">
+                        <input type="text" id="expDesc" placeholder="Αιτιολογία" class="bg-cardDark border border-gray-700 rounded px-3 py-2 text-sm flex-1">
                         <div class="flex gap-2 lg:w-[20%]">
                             <input type="number" id="expAmount" placeholder="Ποσό €" class="bg-cardDark border border-gray-700 rounded px-3 py-2 text-sm w-full">
                             <button onclick="addExpense()" class="bg-red-600 hover:bg-red-500 text-white rounded px-4 py-2 font-bold transition">Add</button>
@@ -218,15 +215,12 @@
                     </div>
                 </div>
 
-                <!-- Λίστα Εξόδων (Ομαδοποιημένη) -->
-                <div id="expensesList" class="flex-1 overflow-y-auto pr-2 space-y-6">
-                    <!-- Γεμίζει μέσω JS -->
-                </div>
+                <div id="expensesList" class="flex-1 overflow-y-auto pr-2 space-y-6"></div>
             </div>
         </div>
     </div>
 
-    <!-- CALENDAR MODAL (Νέο) -->
+    <!-- CALENDAR MODAL -->
     <div id="calendarModal" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[60] hidden flex items-center justify-center p-2 md:p-6">
         <div class="bg-cardDark border border-gray-700 rounded-2xl w-full max-w-6xl h-full md:h-[90vh] flex flex-col shadow-2xl">
             <div class="p-4 md:p-6 border-b border-gray-800 flex justify-between items-center bg-[#050505] rounded-t-2xl">
@@ -242,14 +236,10 @@
             </div>
             
             <div class="p-2 md:p-6 flex-1 overflow-y-auto bg-[#0a0a0a]">
-                <!-- Ημέρες Εβδομάδας -->
                 <div class="calendar-grid mb-2 text-center text-xs text-gray-500 font-bold uppercase tracking-wider">
                     <div>Δευ</div><div>Τρι</div><div>Τετ</div><div>Πεμ</div><div>Παρ</div><div>Σαβ</div><div>Κυρ</div>
                 </div>
-                <!-- Πλέγμα Ημερολογίου -->
-                <div id="calendarDaysGrid" class="calendar-grid">
-                    <!-- Γεμίζει μέσω JS -->
-                </div>
+                <div id="calendarDaysGrid" class="calendar-grid"></div>
             </div>
         </div>
     </div>
@@ -260,7 +250,6 @@
         let userPin = '';
         const today = new Date().toISOString().split('T')[0];
         
-        // Calendar state
         let currentCalMonth = new Date().getMonth();
         let currentCalYear = new Date().getFullYear();
 
@@ -281,13 +270,7 @@
                     const serverData = await response.json();
                     if(serverData.clients) {
                         db = serverData;
-                        
-                        // Migration Check: Ensure expenses have categories
-                        db.expenses.forEach(e => {
-                            if(!e.category) e.category = 'Γενικά';
-                        });
-
-                        // Migration Check: Ensure clients have months array
+                        db.expenses.forEach(e => { if(!e.category) e.category = 'Γενικά'; });
                         db.clients.forEach(c => {
                             if (!c.status) c.status = 'active';
                             if (!c.months) {
@@ -376,7 +359,7 @@
             document.getElementById('statNet').innerText = `${totalPaid - totalExpenses}€`;
         }
 
-        // --- EXPENSES (Οργανωμένα) ---
+        // --- EXPENSES ---
         function openExpensesModal() { document.getElementById('expDate').value = today; renderExpensesList(); document.getElementById('expensesModal').classList.remove('hidden'); }
         function closeExpensesModal() { document.getElementById('expensesModal').classList.add('hidden'); }
         function addExpense() {
@@ -391,15 +374,13 @@
             const list = document.getElementById('expensesList');
             list.innerHTML = '';
             
-            // Group by Month-Year (YYYY-MM)
             const grouped = {};
             db.expenses.forEach(e => {
-                const monthKey = e.date.substring(0, 7); // e.g., "2026-07"
+                const monthKey = e.date.substring(0, 7);
                 if(!grouped[monthKey]) grouped[monthKey] = [];
                 grouped[monthKey].push(e);
             });
 
-            // Sort months descending
             const sortedMonths = Object.keys(grouped).sort().reverse();
             
             sortedMonths.forEach(monthKey => {
@@ -419,16 +400,17 @@
                 `;
 
                 monthExpenses.forEach(e => {
+                    // ΕΔΩ ΕΓΙΝΕ Η ΔΙΟΡΘΩΣΗ: Προστέθηκε flex-start/center, shrink-0, min-w και whitespace-nowrap
                     html += `
-                        <div class="flex justify-between items-center bg-[#111] p-3 rounded border border-gray-800 text-sm">
-                            <div class="flex-1 flex flex-col md:flex-row md:items-center gap-1 md:gap-3 overflow-hidden">
-                                <span class="text-gray-400 text-xs w-20">${formatDate(e.date)}</span>
-                                <span class="text-[10px] bg-gray-800 text-gray-300 px-2 py-0.5 rounded w-fit whitespace-nowrap">${e.category || 'Γενικά'}</span>
-                                <span class="text-gray-200 truncate">${e.desc}</span>
+                        <div class="flex justify-between items-start md:items-center bg-[#111] p-3 rounded border border-gray-800 text-sm gap-2">
+                            <div class="flex-1 flex flex-col md:flex-row md:items-center gap-2 overflow-hidden">
+                                <span class="text-gray-400 text-xs whitespace-nowrap min-w-[75px]">${formatDate(e.date)}</span>
+                                <span class="text-[10px] bg-gray-800 text-gray-300 px-2 py-0.5 rounded whitespace-nowrap w-max">${e.category || 'Γενικά'}</span>
+                                <span class="text-gray-200 truncate" title="${e.desc}">${e.desc}</span>
                             </div>
-                            <div class="flex items-center gap-3 pl-2">
-                                <span class="font-bold text-red-500">-${e.amount}€</span>
-                                <button onclick="deleteExpense(${e.id})" class="text-gray-600 hover:text-red-500 text-lg">&times;</button>
+                            <div class="flex items-center gap-3 pl-2 shrink-0">
+                                <span class="font-bold text-red-500 whitespace-nowrap">-${e.amount}€</span>
+                                <button onclick="deleteExpense(${e.id})" class="text-gray-600 hover:text-red-500 text-lg leading-none">&times;</button>
                             </div>
                         </div>
                     `;
@@ -441,7 +423,7 @@
             if(sortedMonths.length === 0) list.innerHTML = '<p class="text-gray-500 text-sm text-center mt-4">Δεν υπάρχουν έξοδα ακόμα.</p>';
         }
 
-        // --- CALENDAR LOGIC (Νέο) ---
+        // --- CALENDAR LOGIC ---
         function openCalendarModal() { renderCalendar(); document.getElementById('calendarModal').classList.remove('hidden'); }
         function closeCalendarModal() { document.getElementById('calendarModal').classList.add('hidden'); }
         function changeCalendarMonth(offset) {
@@ -459,29 +441,24 @@
             const grid = document.getElementById('calendarDaysGrid');
             grid.innerHTML = '';
 
-            // Get events (Notes) from all clients
-            const events = {}; // Key: "YYYY-MM-DD"
+            const events = {};
             db.clients.forEach(c => {
-                if (c.status === 'inactive') return; // Skip inactive clients in calendar
+                if (c.status === 'inactive') return;
                 c.notes.forEach(n => {
                     if (!events[n.date]) events[n.date] = [];
                     events[n.date].push({ client: c.name, text: n.text });
                 });
             });
 
-            // Logic to fill the grid (Starts on Monday)
             let firstDay = new Date(currentCalYear, currentCalMonth, 1).getDay();
-            firstDay = firstDay === 0 ? 6 : firstDay - 1; // JS Sunday is 0, we want Monday to be 0
+            firstDay = firstDay === 0 ? 6 : firstDay - 1;
             const daysInMonth = new Date(currentCalYear, currentCalMonth + 1, 0).getDate();
 
-            // Padding days before start of month
             for (let i = 0; i < firstDay; i++) {
                 grid.insertAdjacentHTML('beforeend', `<div class="bg-cardDark/30 border border-gray-800/50 rounded-lg"></div>`);
             }
 
-            // Actual days
             for (let day = 1; day <= daysInMonth; day++) {
-                // Format day to match note dates "YYYY-MM-DD"
                 const dateString = `${currentCalYear}-${String(currentCalMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
                 const isToday = dateString === today;
                 const dayEvents = events[dateString] || [];
@@ -503,7 +480,7 @@
             }
         }
 
-        // --- CLIENT MODAL (Ίδιο με πριν) ---
+        // --- CLIENT MODAL ---
         function openModal(id) {
             activeClientId = id; const c = db.clients.find(x => x.id === id);
             document.getElementById('modalClientName').innerText = c.name;
