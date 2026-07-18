@@ -46,57 +46,69 @@
 
     <!-- Main Content -->
     <main class="flex-1 flex flex-col h-full overflow-hidden relative hidden" id="mainContent">
-        <header class="p-4 md:p-8 border-b border-gray-800 bg-cardDark/50">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-                <div>
-                    <h2 class="text-2xl md:text-3xl font-bold">Dashboard</h2>
-                    <p class="text-green-500 text-xs md:text-sm mt-1 font-bold">● Vercel Cloud Sync</p>
-                </div>
-                <div class="flex gap-2 w-full md:w-auto">
-                    <button onclick="openCalendarModal()" class="flex-1 md:flex-none bg-blue-600/20 text-blue-400 hover:bg-blue-600/40 border border-blue-600/30 px-4 py-2 md:px-6 md:py-3 rounded-xl text-sm font-bold transition flex items-center justify-center gap-2">
-                        📅 <span class="inline">Ημερολόγιο</span>
-                    </button>
-                    <button onclick="openExpensesModal()" class="flex-1 md:flex-none bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 md:px-6 md:py-3 rounded-xl text-sm font-bold transition flex items-center justify-center gap-2">
-                        💶 <span class="inline">Έξοδα Μήνα</span>
-                    </button>
-                </div>
+        
+        <!-- Pinned Slim Header (Always Visible) -->
+        <header class="p-3 md:p-5 border-b border-gray-800 bg-[#050505] z-10 shrink-0 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+            <div>
+                <h2 class="text-xl md:text-2xl font-bold flex items-center gap-2">
+                    Dashboard 
+                    <span class="text-green-500 text-[10px] md:text-xs mt-1 font-bold tracking-widest uppercase flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Sync
+                    </span>
+                </h2>
             </div>
-            
-            <!-- Global Video Tracker -->
-            <div class="mb-6 bg-[#111] border border-gray-800 rounded-xl p-4 md:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                <div>
-                    <p class="text-xs text-gray-500 uppercase tracking-widest mb-1">Προοδος Παραγωγης: <strong class="text-white" id="trackerMonthName">-</strong></p>
-                    <p class="text-lg font-black"><span id="globalDelivered" class="text-brandRed">0</span> / <span id="globalTarget">0</span> Βίντεο Παραδόθηκαν</p>
-                </div>
-                <div class="w-full md:w-1/2 bg-black rounded-full h-3 border border-gray-800 overflow-hidden relative">
-                    <div id="globalProgressBar" class="bg-brandRed h-full rounded-full transition-all duration-500" style="width: 0%"></div>
-                </div>
-            </div>
-
-            <!-- Stats Grid -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-                <div class="bg-blue-900/10 border border-blue-900/30 px-4 py-3 rounded-xl flex flex-col justify-center relative overflow-hidden">
-                    <div class="absolute left-0 top-0 h-full w-1 bg-blue-500"></div>
-                    <p class="text-[10px] md:text-xs text-blue-400 uppercase font-bold">Μηνιαια Εσοδα (MRR)</p>
-                    <p class="text-lg md:text-xl font-black text-white" id="statMRR">0€</p>
-                    <p class="text-[10px] text-gray-500 mt-1">Εφάπαξ (One-off): <span id="statOneOff" class="text-gray-300">0€</span></p>
-                </div>
-                <div class="bg-cardDark border border-gray-800 px-4 py-3 rounded-xl flex flex-col justify-center">
-                    <p class="text-[10px] md:text-xs text-gray-500 uppercase">Συνολο Εισπραξεων</p>
-                    <p class="text-lg md:text-xl font-black text-white" id="statPaid">0€</p>
-                </div>
-                <div class="bg-cardDark border border-gray-800 px-4 py-3 rounded-xl flex flex-col justify-center">
-                    <p class="text-[10px] md:text-xs text-gray-500 uppercase">Συνολο Εξοδων</p>
-                    <p class="text-lg md:text-xl font-black text-red-500" id="statExpenses">0€</p>
-                </div>
-                <div class="bg-brandRed/10 border border-brandRed/20 px-4 py-3 rounded-xl flex flex-col justify-center">
-                    <p class="text-[10px] md:text-xs text-brandRed uppercase">Μας Χρωστανε</p>
-                    <p class="text-lg md:text-xl font-black text-brandRed" id="statOwed">0€</p>
-                </div>
+            <div class="flex gap-2 w-full sm:w-auto">
+                <button onclick="openCalendarModal()" class="flex-1 sm:flex-none bg-blue-600/20 text-blue-400 hover:bg-blue-600/40 border border-blue-600/30 px-3 py-2 rounded-lg text-xs md:text-sm font-bold transition flex items-center justify-center gap-2">
+                    📅 Ημερολόγιο
+                </button>
+                <button onclick="openExpensesModal()" class="flex-1 sm:flex-none bg-gray-800 hover:bg-gray-700 text-white px-3 py-2 rounded-lg text-xs md:text-sm font-bold transition flex items-center justify-center gap-2">
+                    💶 Έξοδα Μήνα
+                </button>
             </div>
         </header>
 
-        <div class="p-4 md:p-8 flex-1 overflow-y-auto">
+        <!-- Scrollable Area (Stats + Form + Clients) -->
+        <div class="flex-1 overflow-y-auto p-4 md:p-8 pb-20">
+            
+            <!-- Dashboard Stats Section (Scrolls away) -->
+            <div class="mb-8 space-y-4">
+                <!-- Global Video Tracker -->
+                <div class="bg-[#111] border border-gray-800 rounded-xl p-4 md:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div class="w-full md:w-auto">
+                        <p class="text-xs text-gray-500 uppercase tracking-widest mb-1 flex justify-between">
+                            <span>Προοδος Παραγωγης: <strong class="text-white" id="trackerMonthName">-</strong></span>
+                        </p>
+                        <p class="text-lg font-black"><span id="globalDelivered" class="text-brandRed">0</span> / <span id="globalTarget">0</span> Βίντεο</p>
+                    </div>
+                    <div class="w-full md:flex-1 md:max-w-xl bg-black rounded-full h-3 border border-gray-800 overflow-hidden relative">
+                        <div id="globalProgressBar" class="bg-brandRed h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                    <div class="bg-blue-900/10 border border-blue-900/30 px-4 py-3 rounded-xl flex flex-col justify-center relative overflow-hidden">
+                        <div class="absolute left-0 top-0 h-full w-1 bg-blue-500"></div>
+                        <p class="text-[10px] md:text-xs text-blue-400 uppercase font-bold">Μηνιαια Εσοδα (MRR)</p>
+                        <p class="text-lg md:text-xl font-black text-white" id="statMRR">0€</p>
+                        <p class="text-[10px] text-gray-500 mt-1">Εφάπαξ (One-off): <span id="statOneOff" class="text-gray-300">0€</span></p>
+                    </div>
+                    <div class="bg-cardDark border border-gray-800 px-4 py-3 rounded-xl flex flex-col justify-center">
+                        <p class="text-[10px] md:text-xs text-gray-500 uppercase">Συνολο Εισπραξεων</p>
+                        <p class="text-lg md:text-xl font-black text-white" id="statPaid">0€</p>
+                    </div>
+                    <div class="bg-cardDark border border-gray-800 px-4 py-3 rounded-xl flex flex-col justify-center">
+                        <p class="text-[10px] md:text-xs text-gray-500 uppercase">Συνολο Εξοδων</p>
+                        <p class="text-lg md:text-xl font-black text-red-500" id="statExpenses">0€</p>
+                    </div>
+                    <div class="bg-brandRed/10 border border-brandRed/20 px-4 py-3 rounded-xl flex flex-col justify-center">
+                        <p class="text-[10px] md:text-xs text-brandRed uppercase">Μας Χρωστανε</p>
+                        <p class="text-lg md:text-xl font-black text-brandRed" id="statOwed">0€</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Project Form -->
             <div class="bg-cardDark border border-gray-800 rounded-2xl p-4 md:p-6 mb-8">
                 <h3 class="text-lg font-bold mb-4 flex items-center"><span class="text-brandRed mr-2">➕</span> Νέο Project</h3>
                 <form id="addClientForm" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 md:gap-4 items-end">
@@ -131,7 +143,8 @@
                 </form>
             </div>
 
-            <div id="clientsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 pb-20"></div>
+            <!-- Clients Grid -->
+            <div id="clientsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6"></div>
         </div>
     </main>
 
@@ -151,7 +164,6 @@
                             <option value="one-off">📌 Εφάπαξ Project</option>
                         </select>
                     </div>
-                    <!-- ΕΔΩ ΕΙΧΕ ΓΙΝΕΙ ΤΟ ΛΑΘΟΣ - Το πρόσθεσα ξανά! -->
                     <p class="text-sm text-gray-400 mb-3" id="modalClientPackage">Πακέτο</p>
                     
                     <div class="flex items-center gap-2">
