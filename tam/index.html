@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Click & Clip | Mobile OS</title>
+    <title>Click & Clip | Cloud OS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -25,6 +25,11 @@
         ::-webkit-scrollbar-thumb:hover { background: #FF3333; }
         .modal-active { overflow: hidden; }
         input, select, button { font-size: 16px !important; }
+        
+        /* Calendar Specific */
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+        .calendar-day { min-height: 80px; }
+        @media (max-width: 640px) { .calendar-day { min-height: 60px; } }
     </style>
 </head>
 <body class="bg-brandDark text-white font-sans h-screen flex flex-col overflow-hidden">
@@ -43,14 +48,19 @@
     <!-- Main Content -->
     <main class="flex-1 flex flex-col h-full overflow-hidden relative hidden" id="mainContent">
         <header class="p-4 md:p-8 border-b border-gray-800 bg-cardDark/50">
-            <div class="flex justify-between items-center mb-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
                 <div>
                     <h2 class="text-2xl md:text-3xl font-bold">Dashboard</h2>
                     <p class="text-green-500 text-xs md:text-sm mt-1 font-bold">● Vercel Cloud Sync</p>
                 </div>
-                <button onclick="openExpensesModal()" class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 md:px-6 md:py-3 rounded-xl text-sm font-bold transition flex items-center gap-2">
-                    💶 <span class="hidden md:inline">Έξοδα Μήνα</span>
-                </button>
+                <div class="flex gap-2 w-full md:w-auto">
+                    <button onclick="openCalendarModal()" class="flex-1 md:flex-none bg-blue-600/20 text-blue-400 hover:bg-blue-600/40 border border-blue-600/30 px-4 py-2 md:px-6 md:py-3 rounded-xl text-sm font-bold transition flex items-center justify-center gap-2">
+                        📅 <span class="inline">Ημερολόγιο</span>
+                    </button>
+                    <button onclick="openExpensesModal()" class="flex-1 md:flex-none bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 md:px-6 md:py-3 rounded-xl text-sm font-bold transition flex items-center justify-center gap-2">
+                        💶 <span class="inline">Έξοδα Μήνα</span>
+                    </button>
+                </div>
             </div>
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
@@ -105,10 +115,10 @@
         </div>
     </main>
 
-    <!-- CLIENT MODAL -->
+    <!-- CLIENT MODAL (Ίδιο με πριν) -->
     <div id="clientModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 hidden flex items-center justify-center p-2 md:p-4">
+        <!-- Περιεχόμενο Modal Πελάτη -->
         <div class="bg-cardDark border border-gray-700 rounded-2xl w-full max-w-4xl max-h-[95vh] md:max-h-[90vh] flex flex-col shadow-2xl">
-            
             <div class="p-4 md:p-6 border-b border-gray-800 flex flex-wrap justify-between items-start md:items-center bg-[#050505] rounded-t-2xl gap-3">
                 <div class="flex-1">
                     <div class="flex items-center gap-3 mb-1">
@@ -124,9 +134,7 @@
             </div>
 
             <div class="p-4 md:p-6 overflow-y-auto flex-1 grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-                
                 <div class="space-y-6">
-                    <!-- Monthly Breakdown -->
                     <div class="bg-[#0a0a0a] p-4 md:p-5 rounded-xl border border-gray-800">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-brandRed">Μηνιαία Χρέωση & Βίντεο</h3>
@@ -146,7 +154,6 @@
                         </div>
                     </div>
 
-                    <!-- Payments -->
                     <div class="bg-[#0a0a0a] p-4 md:p-5 rounded-xl border border-gray-800">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-green-500">Πληρωμές</h3>
@@ -163,7 +170,6 @@
                     </div>
                 </div>
 
-                <!-- Notes -->
                 <div class="bg-[#0a0a0a] p-4 md:p-5 rounded-xl border border-gray-800 flex flex-col h-full min-h-[300px]">
                     <h3 class="font-bold mb-4 text-blue-400">Εκκρεμότητες & Σημειώσεις</h3>
                     <div id="modalNotesList" class="flex-1 space-y-3 mb-4 overflow-y-auto pr-1"></div>
@@ -183,23 +189,67 @@
         </div>
     </div>
 
-    <!-- EXPENSES MODAL -->
+    <!-- EXPENSES MODAL (Οργανωμένο) -->
     <div id="expensesModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 hidden flex items-center justify-center p-2 md:p-4">
-        <div class="bg-cardDark border border-gray-700 rounded-2xl w-full max-w-2xl shadow-2xl flex flex-col max-h-[90vh]">
+        <div class="bg-cardDark border border-gray-700 rounded-2xl w-full max-w-3xl shadow-2xl flex flex-col max-h-[90vh]">
             <div class="p-4 md:p-6 border-b border-gray-800 flex justify-between items-center bg-[#050505] rounded-t-2xl">
-                <h2 class="text-xl md:text-2xl font-black text-white">Λίστα Εξόδων</h2>
+                <h2 class="text-xl md:text-2xl font-black text-white">Οργάνωση Εξόδων</h2>
                 <button onclick="closeExpensesModal()" class="text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 p-2 rounded-lg transition text-sm">✕</button>
             </div>
-            <div class="p-4 md:p-6 bg-[#0a0a0a] flex-1 overflow-y-auto">
-                <div class="flex flex-col md:flex-row gap-2 mb-6">
-                    <input type="date" id="expDate" class="bg-cardDark border border-gray-700 rounded px-3 py-3 md:py-2 text-sm text-gray-300 md:w-1/4">
-                    <input type="text" id="expDesc" placeholder="Αιτιολογία" class="bg-cardDark border border-gray-700 rounded px-3 py-3 md:py-2 text-sm flex-1">
-                    <div class="flex gap-2">
-                        <input type="number" id="expAmount" placeholder="Ποσό €" class="bg-cardDark border border-gray-700 rounded px-3 py-3 md:py-2 text-sm w-full md:w-24">
-                        <button onclick="addExpense()" class="bg-red-600 hover:bg-red-500 text-white rounded px-4 py-3 md:py-2 font-bold transition w-full md:w-auto">Add</button>
+            
+            <div class="p-4 md:p-6 bg-[#0a0a0a] flex-1 overflow-y-auto flex flex-col">
+                <!-- Προσθήκη Νέου Εξόδου -->
+                <div class="bg-[#111] p-4 rounded-xl border border-gray-800 mb-6">
+                    <h3 class="text-sm font-bold text-gray-400 mb-3">Καταχώρηση Νέου</h3>
+                    <div class="flex flex-col lg:flex-row gap-3">
+                        <input type="date" id="expDate" class="bg-cardDark border border-gray-700 rounded px-3 py-2 text-sm text-gray-300 lg:w-[15%]">
+                        <select id="expCategory" class="bg-cardDark border border-gray-700 rounded px-3 py-2 text-sm text-gray-300 lg:w-[25%] outline-none">
+                            <option value="Γενικά">Γενικά</option>
+                            <option value="Εξοπλισμός / Hardware">Εξοπλισμός / Hardware</option>
+                            <option value="Συνδρομές / SaaS">Συνδρομές / SaaS</option>
+                            <option value="Μετακινήσεις">Μετακινήσεις</option>
+                            <option value="Μάρκετινγκ / Διαφήμιση">Μάρκετινγκ / Διαφήμιση</option>
+                        </select>
+                        <input type="text" id="expDesc" placeholder="Αιτιολογία (π.χ. CapCut)" class="bg-cardDark border border-gray-700 rounded px-3 py-2 text-sm flex-1">
+                        <div class="flex gap-2 lg:w-[20%]">
+                            <input type="number" id="expAmount" placeholder="Ποσό €" class="bg-cardDark border border-gray-700 rounded px-3 py-2 text-sm w-full">
+                            <button onclick="addExpense()" class="bg-red-600 hover:bg-red-500 text-white rounded px-4 py-2 font-bold transition">Add</button>
+                        </div>
                     </div>
                 </div>
-                <div id="expensesList" class="space-y-2"></div>
+
+                <!-- Λίστα Εξόδων (Ομαδοποιημένη) -->
+                <div id="expensesList" class="flex-1 overflow-y-auto pr-2 space-y-6">
+                    <!-- Γεμίζει μέσω JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CALENDAR MODAL (Νέο) -->
+    <div id="calendarModal" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[60] hidden flex items-center justify-center p-2 md:p-6">
+        <div class="bg-cardDark border border-gray-700 rounded-2xl w-full max-w-6xl h-full md:h-[90vh] flex flex-col shadow-2xl">
+            <div class="p-4 md:p-6 border-b border-gray-800 flex justify-between items-center bg-[#050505] rounded-t-2xl">
+                <div class="flex items-center gap-4">
+                    <h2 class="text-xl md:text-2xl font-black text-white">Πρόγραμμα & Γυρίσματα</h2>
+                    <div class="flex items-center bg-gray-800 rounded-lg overflow-hidden">
+                        <button onclick="changeCalendarMonth(-1)" class="px-3 py-1 hover:bg-gray-700 transition">◀</button>
+                        <span id="calendarMonthYear" class="px-4 py-1 font-bold text-sm min-w-[120px] text-center">Ιούλιος 2026</span>
+                        <button onclick="changeCalendarMonth(1)" class="px-3 py-1 hover:bg-gray-700 transition">▶</button>
+                    </div>
+                </div>
+                <button onclick="closeCalendarModal()" class="text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 p-2 md:px-4 md:py-2 rounded-lg transition text-sm font-bold">✕ <span class="hidden md:inline ml-1">Κλείσιμο</span></button>
+            </div>
+            
+            <div class="p-2 md:p-6 flex-1 overflow-y-auto bg-[#0a0a0a]">
+                <!-- Ημέρες Εβδομάδας -->
+                <div class="calendar-grid mb-2 text-center text-xs text-gray-500 font-bold uppercase tracking-wider">
+                    <div>Δευ</div><div>Τρι</div><div>Τετ</div><div>Πεμ</div><div>Παρ</div><div>Σαβ</div><div>Κυρ</div>
+                </div>
+                <!-- Πλέγμα Ημερολογίου -->
+                <div id="calendarDaysGrid" class="calendar-grid">
+                    <!-- Γεμίζει μέσω JS -->
+                </div>
             </div>
         </div>
     </div>
@@ -209,81 +259,61 @@
         let activeClientId = null;
         let userPin = '';
         const today = new Date().toISOString().split('T')[0];
+        
+        // Calendar state
+        let currentCalMonth = new Date().getMonth();
+        let currentCalYear = new Date().getFullYear();
 
-        // --- CLOUD API & DATA MIGRATION ---
+        // --- CLOUD API & MIGRATION ---
         async function unlockApp() {
             const input = document.getElementById('pinInput').value;
             if(!input) return;
-            
             document.getElementById('pinError').classList.add('hidden');
             document.getElementById('loadingText').classList.remove('hidden');
             userPin = input;
-            
             try {
-                const response = await fetch('/api/tam', {
-                    method: 'GET',
-                    headers: { 'X-PIN': userPin }
-                });
-                
+                const response = await fetch('/api/tam', { method: 'GET', headers: { 'X-PIN': userPin } });
                 if (response.status === 401) {
                     document.getElementById('loadingText').classList.add('hidden');
-                    document.getElementById('pinError').classList.remove('hidden');
-                    return;
+                    document.getElementById('pinError').classList.remove('hidden'); return;
                 }
-                
                 if (response.ok) {
                     const serverData = await response.json();
                     if(serverData.clients) {
                         db = serverData;
                         
-                        // MIGRATION: Auto-update old clients to new monthly cost system
+                        // Migration Check: Ensure expenses have categories
+                        db.expenses.forEach(e => {
+                            if(!e.category) e.category = 'Γενικά';
+                        });
+
+                        // Migration Check: Ensure clients have months array
                         db.clients.forEach(c => {
                             if (!c.status) c.status = 'active';
                             if (!c.months) {
                                 const currentMonthName = new Date().toLocaleString('el-GR', { month: 'long', year: 'numeric' });
-                                c.months = [{
-                                    id: Date.now() + Math.floor(Math.random() * 1000),
-                                    name: currentMonthName,
-                                    target: c.videoTarget || 0,
-                                    delivered: c.delivered || 0,
-                                    cost: c.cost || 0 // Μεταφορά του παλιού κόστους στον 1ο μήνα
-                                }];
+                                c.months = [{ id: Date.now() + Math.floor(Math.random() * 1000), name: currentMonthName, target: c.videoTarget || 0, delivered: c.delivered || 0, cost: c.cost || 0 }];
                             } else {
-                                // Αν έχουν ήδη μήνες αλλά χωρίς κόστος
-                                c.months.forEach((m, idx) => {
-                                    if (m.cost === undefined) {
-                                        m.cost = (idx === 0) ? (c.cost || 0) : 0;
-                                    }
-                                });
+                                c.months.forEach((m, idx) => { if (m.cost === undefined) m.cost = (idx === 0) ? (c.cost || 0) : 0; });
                             }
                         });
                     }
-                    
                     document.getElementById('pinScreen').classList.add('hidden');
                     document.getElementById('mainContent').classList.remove('hidden');
                     renderDashboard();
                 }
-            } catch (err) {
-                alert('Σφάλμα: Δεν υπάρχει σύνδεση με το Vercel API!');
-                document.getElementById('loadingText').classList.add('hidden');
-            }
+            } catch (err) { alert('Σφάλμα: Δεν υπάρχει σύνδεση με το Vercel API!'); document.getElementById('loadingText').classList.add('hidden'); }
         }
 
         async function saveToServer() {
             try {
-                const response = await fetch('/api/tam', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'X-PIN': userPin },
-                    body: JSON.stringify(db)
-                });
+                const response = await fetch('/api/tam', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-PIN': userPin }, body: JSON.stringify(db) });
                 if (!response.ok) throw new Error('API Error');
                 renderDashboard();
-            } catch (err) {
-                alert('Αποτυχία αποθήκευσης στο Cloud. Ελέγξτε τη σύνδεσή σας.');
-            }
+            } catch (err) { alert('Αποτυχία αποθήκευσης στο Cloud.'); }
         }
 
-        // --- APP LOGIC ---
+        // --- DASHBOARD LOGIC ---
         function autoFillPackage() {
             const pkg = document.getElementById('newClientPackage').value;
             if (pkg === 'The Ultimate Combo') { document.getElementById('newClientCost').value = 700; document.getElementById('newClientVideos').value = 8; } 
@@ -293,36 +323,24 @@
 
         document.getElementById('addClientForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            const initialVideos = parseInt(document.getElementById('newClientVideos').value || 0);
-            const initialCost = parseFloat(document.getElementById('newClientCost').value || 0);
             const currentMonthName = new Date().toLocaleString('el-GR', { month: 'long', year: 'numeric' });
-
             db.clients.push({
                 id: Date.now(),
                 name: document.getElementById('newClientName').value,
                 package: document.getElementById('newClientPackage').value,
                 status: 'active',
-                months: [{
-                    id: Date.now(),
-                    name: currentMonthName,
-                    target: initialVideos,
-                    delivered: 0,
-                    cost: initialCost
-                }],
+                months: [{ id: Date.now(), name: currentMonthName, target: parseInt(document.getElementById('newClientVideos').value || 0), delivered: 0, cost: parseFloat(document.getElementById('newClientCost').value || 0) }],
                 payments: [], notes: []
             });
             saveToServer();
-            document.getElementById('newClientName').value = '';
-            document.getElementById('newClientPackage').value = 'Custom';
-            document.getElementById('newClientCost').value = '';
-            document.getElementById('newClientVideos').value = '0';
+            document.getElementById('newClientName').value = ''; document.getElementById('newClientPackage').value = 'Custom';
+            document.getElementById('newClientCost').value = ''; document.getElementById('newClientVideos').value = '0';
         });
 
         function renderDashboard() {
             const grid = document.getElementById('clientsGrid');
             grid.innerHTML = '';
             let totalPaid = 0, totalOwed = 0, totalExpenses = db.expenses.reduce((sum, e) => sum + parseFloat(e.amount), 0);
-
             const sortedClients = [...db.clients].sort((a, b) => (a.status === 'inactive') - (b.status === 'inactive'));
 
             sortedClients.forEach(c => {
@@ -334,20 +352,16 @@
                 const isInactive = c.status === 'inactive';
                 const opacityClass = isInactive ? 'opacity-60 grayscale-[30%]' : '';
                 const borderClass = owed > 0 && !isInactive ? 'border-brandRed/30' : 'border-gray-800';
-                const statusBadge = isInactive ? '<span class="text-[10px] bg-red-500/20 text-red-500 px-2 py-1 rounded font-bold">ΑΝΕΝΕΡΓΟΣ</span>' : '';
-
-                const totalVideosDelivered = c.months.reduce((sum, m) => sum + parseInt(m.delivered || 0), 0);
-                const totalVideosTarget = c.months.reduce((sum, m) => sum + parseInt(m.target || 0), 0);
-
+                
                 grid.insertAdjacentHTML('beforeend', `
                     <div class="bg-cardDark border ${borderClass} ${opacityClass} rounded-xl p-4 md:p-5 hover:border-gray-600 cursor-pointer transition flex flex-col" onclick="openModal(${c.id})">
                         <div class="flex justify-between items-start mb-2">
                             <h3 class="text-lg md:text-xl font-bold truncate pr-2">${c.name}</h3>
-                            ${statusBadge || `<span class="text-[10px] bg-gray-800 text-gray-400 px-2 py-1 rounded truncate max-w-[80px] text-right">${c.package}</span>`}
+                            ${isInactive ? '<span class="text-[10px] bg-red-500/20 text-red-500 px-2 py-1 rounded font-bold">ΑΝΕΝΕΡΓΟΣ</span>' : `<span class="text-[10px] bg-gray-800 text-gray-400 px-2 py-1 rounded truncate max-w-[80px] text-right">${c.package}</span>`}
                         </div>
                         <div class="flex justify-between text-xs md:text-sm text-gray-400 mb-4 border-b border-gray-800 pb-3">
                             <span>Αξία: <strong class="text-white">${totalCost}€</strong></span>
-                            <span>Βίντεο: <strong class="text-white">${totalVideosDelivered}/${totalVideosTarget}</strong></span>
+                            <span>Βίντεο: <strong class="text-white">${c.months.reduce((s, m) => s + parseInt(m.delivered || 0), 0)}/${c.months.reduce((s, m) => s + parseInt(m.target || 0), 0)}</strong></span>
                         </div>
                         <div class="mt-auto pt-1">
                             <p class="text-[10px] text-gray-500 uppercase mb-1">Οικονομικα</p>
@@ -362,28 +376,134 @@
             document.getElementById('statNet').innerText = `${totalPaid - totalExpenses}€`;
         }
 
-        // --- EXPENSES ---
+        // --- EXPENSES (Οργανωμένα) ---
         function openExpensesModal() { document.getElementById('expDate').value = today; renderExpensesList(); document.getElementById('expensesModal').classList.remove('hidden'); }
         function closeExpensesModal() { document.getElementById('expensesModal').classList.add('hidden'); }
         function addExpense() {
             const desc = document.getElementById('expDesc').value, amount = document.getElementById('expAmount').value;
             if(!desc || !amount) return;
-            db.expenses.push({ id: Date.now(), date: document.getElementById('expDate').value, desc, amount: parseFloat(amount) });
+            db.expenses.push({ id: Date.now(), date: document.getElementById('expDate').value, category: document.getElementById('expCategory').value, desc, amount: parseFloat(amount) });
             saveToServer(); document.getElementById('expDesc').value = ''; document.getElementById('expAmount').value = ''; renderExpensesList();
         }
         function deleteExpense(id) { db.expenses = db.expenses.filter(e => e.id !== id); saveToServer(); renderExpensesList(); }
+        
         function renderExpensesList() {
-            document.getElementById('expensesList').innerHTML = db.expenses.sort((a,b) => new Date(b.date) - new Date(a.date)).map(e => `
-                <div class="flex justify-between items-center bg-black/50 p-3 rounded border border-gray-800 text-sm">
-                    <span class="text-gray-400 text-xs w-20">${formatDate(e.date)}</span>
-                    <span class="text-gray-200 flex-1 truncate px-2">${e.desc}</span>
-                    <span class="font-bold text-red-500 mr-2">-${e.amount}€</span>
-                    <button onclick="deleteExpense(${e.id})" class="text-gray-600 hover:text-red-500 p-1">&times;</button>
-                </div>
-            `).join('');
+            const list = document.getElementById('expensesList');
+            list.innerHTML = '';
+            
+            // Group by Month-Year (YYYY-MM)
+            const grouped = {};
+            db.expenses.forEach(e => {
+                const monthKey = e.date.substring(0, 7); // e.g., "2026-07"
+                if(!grouped[monthKey]) grouped[monthKey] = [];
+                grouped[monthKey].push(e);
+            });
+
+            // Sort months descending
+            const sortedMonths = Object.keys(grouped).sort().reverse();
+            
+            sortedMonths.forEach(monthKey => {
+                const parts = monthKey.split('-');
+                const d = new Date(parts[0], parts[1] - 1);
+                const monthName = d.toLocaleString('el-GR', { month: 'long', year: 'numeric' });
+                const monthExpenses = grouped[monthKey].sort((a,b) => new Date(b.date) - new Date(a.date));
+                const monthTotal = monthExpenses.reduce((sum, e) => sum + e.amount, 0);
+
+                let html = `
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center bg-[#1a1a1a] p-3 rounded-t-xl border border-gray-800 border-b-0">
+                            <h4 class="font-bold text-white capitalize">${monthName}</h4>
+                            <span class="text-sm font-black text-red-500">Σύνολο: ${monthTotal}€</span>
+                        </div>
+                        <div class="bg-black/30 border border-gray-800 rounded-b-xl p-2 space-y-2">
+                `;
+
+                monthExpenses.forEach(e => {
+                    html += `
+                        <div class="flex justify-between items-center bg-[#111] p-3 rounded border border-gray-800 text-sm">
+                            <div class="flex-1 flex flex-col md:flex-row md:items-center gap-1 md:gap-3 overflow-hidden">
+                                <span class="text-gray-400 text-xs w-20">${formatDate(e.date)}</span>
+                                <span class="text-[10px] bg-gray-800 text-gray-300 px-2 py-0.5 rounded w-fit whitespace-nowrap">${e.category || 'Γενικά'}</span>
+                                <span class="text-gray-200 truncate">${e.desc}</span>
+                            </div>
+                            <div class="flex items-center gap-3 pl-2">
+                                <span class="font-bold text-red-500">-${e.amount}€</span>
+                                <button onclick="deleteExpense(${e.id})" class="text-gray-600 hover:text-red-500 text-lg">&times;</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += `</div></div>`;
+                list.insertAdjacentHTML('beforeend', html);
+            });
+            
+            if(sortedMonths.length === 0) list.innerHTML = '<p class="text-gray-500 text-sm text-center mt-4">Δεν υπάρχουν έξοδα ακόμα.</p>';
         }
 
-        // --- MODAL & MONTHLY LOGIC ---
+        // --- CALENDAR LOGIC (Νέο) ---
+        function openCalendarModal() { renderCalendar(); document.getElementById('calendarModal').classList.remove('hidden'); }
+        function closeCalendarModal() { document.getElementById('calendarModal').classList.add('hidden'); }
+        function changeCalendarMonth(offset) {
+            currentCalMonth += offset;
+            if (currentCalMonth < 0) { currentCalMonth = 11; currentCalYear--; }
+            else if (currentCalMonth > 11) { currentCalMonth = 0; currentCalYear++; }
+            renderCalendar();
+        }
+        
+        function renderCalendar() {
+            const date = new Date(currentCalYear, currentCalMonth, 1);
+            const monthName = date.toLocaleString('el-GR', { month: 'long', year: 'numeric' });
+            document.getElementById('calendarMonthYear').innerText = monthName;
+
+            const grid = document.getElementById('calendarDaysGrid');
+            grid.innerHTML = '';
+
+            // Get events (Notes) from all clients
+            const events = {}; // Key: "YYYY-MM-DD"
+            db.clients.forEach(c => {
+                if (c.status === 'inactive') return; // Skip inactive clients in calendar
+                c.notes.forEach(n => {
+                    if (!events[n.date]) events[n.date] = [];
+                    events[n.date].push({ client: c.name, text: n.text });
+                });
+            });
+
+            // Logic to fill the grid (Starts on Monday)
+            let firstDay = new Date(currentCalYear, currentCalMonth, 1).getDay();
+            firstDay = firstDay === 0 ? 6 : firstDay - 1; // JS Sunday is 0, we want Monday to be 0
+            const daysInMonth = new Date(currentCalYear, currentCalMonth + 1, 0).getDate();
+
+            // Padding days before start of month
+            for (let i = 0; i < firstDay; i++) {
+                grid.insertAdjacentHTML('beforeend', `<div class="bg-cardDark/30 border border-gray-800/50 rounded-lg"></div>`);
+            }
+
+            // Actual days
+            for (let day = 1; day <= daysInMonth; day++) {
+                // Format day to match note dates "YYYY-MM-DD"
+                const dateString = `${currentCalYear}-${String(currentCalMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const isToday = dateString === today;
+                const dayEvents = events[dateString] || [];
+
+                let eventsHtml = dayEvents.map(ev => `
+                    <div class="mt-1 bg-brandRed/20 border border-brandRed/30 text-white text-[9px] md:text-[10px] p-1 rounded leading-tight overflow-hidden text-ellipsis whitespace-nowrap" title="${ev.client}: ${ev.text}">
+                        <strong class="text-brandRed">${ev.client}</strong>: ${ev.text}
+                    </div>
+                `).join('');
+
+                grid.insertAdjacentHTML('beforeend', `
+                    <div class="calendar-day bg-[#111] border border-gray-800 rounded-lg p-1 md:p-2 flex flex-col ${isToday ? 'ring-1 ring-brandRed' : ''}">
+                        <span class="text-xs font-bold ${isToday ? 'text-brandRed bg-brandRed/10 rounded px-1.5 w-fit' : 'text-gray-400'}">${day}</span>
+                        <div class="flex-1 overflow-y-auto mt-1 no-scrollbar">
+                            ${eventsHtml}
+                        </div>
+                    </div>
+                `);
+            }
+        }
+
+        // --- CLIENT MODAL (Ίδιο με πριν) ---
         function openModal(id) {
             activeClientId = id; const c = db.clients.find(x => x.id === id);
             document.getElementById('modalClientName').innerText = c.name;
@@ -435,41 +555,17 @@
         }
 
         function updateStatus(val) { db.clients.find(x => x.id === activeClientId).status = val; saveToServer(); }
+        function addMonth() { const currentMonthName = new Date().toLocaleString('el-GR', { month: 'long', year: 'numeric' }); db.clients.find(x => x.id === activeClientId).months.push({ id: Date.now(), name: currentMonthName, target: 0, delivered: 0, cost: 0 }); saveToServer(); refreshModalUI(); }
+        function updateMonth(mId, field, val) { const m = db.clients.find(x => x.id === activeClientId).months.find(m => m.id === mId); if(m) { if (field === 'name') m[field] = val; else if (field === 'cost') m[field] = parseFloat(val) || 0; else m[field] = parseInt(val) || 0; saveToServer(); refreshModalUI(); } }
+        function deleteMonth(mId) { const c = db.clients.find(x => x.id === activeClientId); c.months = c.months.filter(m => m.id !== mId); saveToServer(); refreshModalUI(); }
         
-        function addMonth() {
-            const currentMonthName = new Date().toLocaleString('el-GR', { month: 'long', year: 'numeric' });
-            db.clients.find(x => x.id === activeClientId).months.push({ id: Date.now(), name: currentMonthName, target: 0, delivered: 0, cost: 0 });
-            saveToServer(); refreshModalUI();
-        }
-        function updateMonth(mId, field, val) {
-            const m = db.clients.find(x => x.id === activeClientId).months.find(m => m.id === mId);
-            if(m) { 
-                if (field === 'name') m[field] = val;
-                else if (field === 'cost') m[field] = parseFloat(val) || 0;
-                else m[field] = parseInt(val) || 0;
-                saveToServer(); refreshModalUI(); // refresh modal to update Total Cost display
-            }
-        }
-        function deleteMonth(mId) {
-            const c = db.clients.find(x => x.id === activeClientId);
-            c.months = c.months.filter(m => m.id !== mId); saveToServer(); refreshModalUI();
-        }
-
-        function addPayment() {
-            const amount = document.getElementById('newPayAmount').value; if(!amount) return;
-            db.clients.find(x => x.id === activeClientId).payments.push({ id: Date.now(), date: document.getElementById('newPayDate').value, amount: parseFloat(amount) });
-            saveToServer(); refreshModalUI(); document.getElementById('newPayAmount').value = '';
-        }
+        function addPayment() { const amount = document.getElementById('newPayAmount').value; if(!amount) return; db.clients.find(x => x.id === activeClientId).payments.push({ id: Date.now(), date: document.getElementById('newPayDate').value, amount: parseFloat(amount) }); saveToServer(); refreshModalUI(); document.getElementById('newPayAmount').value = ''; }
         function deletePayment(pid) { db.clients.find(x => x.id === activeClientId).payments = db.clients.find(x => x.id === activeClientId).payments.filter(p => p.id !== pid); saveToServer(); refreshModalUI(); }
         
-        function addNote() {
-            const text = document.getElementById('newNoteText').value; if(!text) return;
-            db.clients.find(x => x.id === activeClientId).notes.push({ id: Date.now(), date: document.getElementById('newNoteDate').value, text });
-            saveToServer(); refreshModalUI(); document.getElementById('newNoteText').value = '';
-        }
+        function addNote() { const text = document.getElementById('newNoteText').value; if(!text) return; db.clients.find(x => x.id === activeClientId).notes.push({ id: Date.now(), date: document.getElementById('newNoteDate').value, text }); saveToServer(); refreshModalUI(); document.getElementById('newNoteText').value = ''; }
         function deleteNote(nid) { db.clients.find(x => x.id === activeClientId).notes = db.clients.find(x => x.id === activeClientId).notes.filter(n => n.id !== nid); saveToServer(); refreshModalUI(); }
-        
         function deleteCurrentClient() { if(confirm('Διαγραφή Project οριστικά;')) { db.clients = db.clients.filter(c => c.id !== activeClientId); saveToServer(); closeModal(); } }
+        
         function formatDate(d) { if(!d) return ''; const parts = d.split('-'); return `${parts[2]}/${parts[1]}/${parts[0]}`; }
     </script>
 </body>
