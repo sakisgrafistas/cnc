@@ -1,9 +1,18 @@
+Είναι πολύ σωστή πρακτική για να ξέρεις πάντα ότι "τρέχεις" την τελευταία έκδοση.
+
+Ονόμασα αυτή την έκδοση **v2.0**, καθώς η μετάβαση από τα "κλειστά πακέτα" στην ευέλικτη (a la carte) χρέωση είναι μια τεράστια αναβάθμιση στη λογική του συστήματος!
+
+Πρόσθεσα το λογότυπο και το **"Agency OS v2.0"** τόσο στην οθόνη του PIN (για να το βλέπεις πριν καν μπεις), όσο και μόνιμα καρφιτσωμένο πάνω αριστερά στο κεντρικό Dashboard (στη θέση που έγραφε απλά "Dashboard").
+
+Αντικατέστησε τον κώδικά σου με αυτόν:
+
+```html
 <!DOCTYPE html>
 <html lang="el">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Click & Clip | Agency OS</title>
+    <title>Click & Clip | Agency OS v2.0</title>
 
 <!-- Εικονίδια App & Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
@@ -41,7 +50,7 @@
     <!-- PIN SECURITY OVERLAY -->
     <div id="pinScreen" class="fixed inset-0 bg-brandDark z-[100] flex flex-col items-center justify-center p-4">
         <h1 class="text-4xl font-black text-white mb-2 tracking-wider">CLICK<span class="text-brandRed">&</span>CLIP</h1>
-        <p class="text-gray-500 mb-8 uppercase tracking-widest text-sm text-center">Secure Cloud Access</p>
+        <p class="text-gray-500 mb-8 uppercase tracking-widest text-xs md:text-sm text-center font-bold">Agency OS <span class="text-white">v2.0</span> • Secure Access</p>
         
         <input type="password" id="pinInput" placeholder="PIN" class="bg-cardDark border border-gray-700 rounded-lg px-6 py-4 text-white text-center text-2xl tracking-widest focus:border-brandRed outline-none mb-4 w-full max-w-xs shadow-2xl" onkeyup="if(event.key === 'Enter') unlockApp()">
         <button onclick="unlockApp()" class="bg-brandRed hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition w-full max-w-xs text-lg">Είσοδος</button>
@@ -55,12 +64,15 @@
         <!-- Pinned Slim Header -->
         <header class="p-3 md:p-5 border-b border-gray-800 bg-[#050505] z-10 shrink-0 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
             <div>
-                <h2 class="text-xl md:text-2xl font-bold flex items-center gap-2">
-                    Dashboard 
-                    <span class="text-green-500 text-[10px] md:text-xs mt-1 font-bold tracking-widest uppercase flex items-center gap-1">
-                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Sync
-                    </span>
+                <h2 class="text-xl md:text-2xl font-black flex items-center gap-2 tracking-wider">
+                    CLICK<span class="text-brandRed">&</span>CLIP
                 </h2>
+                <div class="flex items-center gap-2 mt-1">
+                    <span class="text-[11px] md:text-xs text-gray-400 font-bold uppercase tracking-widest">Agency OS <span class="text-white">v2.0</span></span>
+                    <span class="text-green-500 text-[9px] md:text-[10px] font-bold tracking-widest uppercase flex items-center gap-1 bg-green-500/10 px-2 py-0.5 rounded">
+                        <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> Sync
+                    </span>
+                </div>
             </div>
             <div class="flex gap-2 w-full sm:w-auto">
                 <button onclick="openCalendarModal()" class="flex-1 sm:flex-none bg-blue-600/20 text-blue-400 hover:bg-blue-600/40 border border-blue-600/30 px-3 py-2 rounded-lg text-xs md:text-sm font-bold transition flex items-center justify-center gap-2">
@@ -690,3 +702,5 @@
     </script>
 </body>
 </html>
+
+```
