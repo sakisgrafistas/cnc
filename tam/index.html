@@ -52,7 +52,7 @@
     <!-- Main Content -->
     <main class="flex-1 flex flex-col h-full overflow-hidden relative hidden" id="mainContent">
         
-        <!-- Pinned Slim Header (Always Visible) -->
+        <!-- Pinned Slim Header -->
         <header class="p-3 md:p-5 border-b border-gray-800 bg-[#050505] z-10 shrink-0 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
             <div>
                 <h2 class="text-xl md:text-2xl font-bold flex items-center gap-2">
@@ -72,21 +72,30 @@
             </div>
         </header>
 
-        <!-- Scrollable Area (Stats + Form + Clients) -->
+        <!-- Scrollable Area -->
         <div class="flex-1 overflow-y-auto p-4 md:p-8 pb-20">
             
-            <!-- Dashboard Stats Section (Scrolls away) -->
             <div class="mb-8 space-y-4">
-                <!-- Global Video Tracker -->
+                <!-- Global Production Tracker -->
                 <div class="bg-[#111] border border-gray-800 rounded-xl p-4 md:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                    <div class="w-full md:w-auto">
-                        <p class="text-xs text-gray-500 uppercase tracking-widest mb-1 flex justify-between">
-                            <span>Προοδος Παραγωγης: <strong class="text-white" id="trackerMonthName">-</strong></span>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase tracking-widest mb-2">
+                            Παραγωγη Τρεχοντος Μηνα: <strong class="text-white" id="trackerMonthName">-</strong>
                         </p>
-                        <p class="text-lg font-black"><span id="globalDelivered" class="text-brandRed">0</span> / <span id="globalTarget">0</span> Βίντεο</p>
-                    </div>
-                    <div class="w-full md:flex-1 md:max-w-xl bg-black rounded-full h-3 border border-gray-800 overflow-hidden relative">
-                        <div id="globalProgressBar" class="bg-brandRed h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+                        <div class="flex gap-6 md:gap-10">
+                            <div class="flex items-center gap-2">
+                                <span class="text-3xl font-black text-brandRed" id="globalVideos">0</span>
+                                <span class="text-gray-400 text-xs md:text-sm leading-tight">Videos<br>(50€)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-3xl font-black text-blue-400" id="globalEdits">0</span>
+                                <span class="text-gray-400 text-xs md:text-sm leading-tight">Edits<br>(25€)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-3xl font-black text-green-400" id="globalLPs">0</span>
+                                <span class="text-gray-400 text-xs md:text-sm leading-tight">Landing<br>Pages</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -113,38 +122,39 @@
                 </div>
             </div>
 
-            <!-- Add Project Form -->
+            <!-- Add Project Form (A la Carte) -->
             <div class="bg-cardDark border border-gray-800 rounded-2xl p-4 md:p-6 mb-8">
                 <h3 class="text-lg font-bold mb-4 flex items-center"><span class="text-brandRed mr-2">➕</span> Νέο Project</h3>
-                <form id="addClientForm" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 md:gap-4 items-end">
-                    <div>
-                        <label class="block text-xs text-gray-400 mb-1">Όνομα Πελάτη</label>
-                        <input type="text" id="newClientName" required class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-4 py-3 md:py-2 text-white focus:border-brandRed outline-none">
+                <form id="addClientForm" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-3 md:gap-4 items-end">
+                    <div class="lg:col-span-2">
+                        <label class="block text-xs text-gray-400 mb-1">Όνομα & Τύπος</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="newClientName" placeholder="Όνομα..." required class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-3 py-3 md:py-2 text-white focus:border-brandRed outline-none">
+                            <select id="newClientType" class="bg-[#0a0a0a] border border-gray-700 rounded-lg px-2 text-white focus:border-brandRed outline-none w-32">
+                                <option value="mrr">MRR</option>
+                                <option value="one-off">One-off</option>
+                            </select>
+                        </div>
                     </div>
                     <div>
-                        <label class="block text-xs text-gray-400 mb-1">Τύπος Εσόδου</label>
-                        <select id="newClientType" class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-4 py-3 md:py-2 text-white focus:border-brandRed outline-none">
-                            <option value="mrr">Συνδρομή (MRR)</option>
-                            <option value="one-off">Εφάπαξ (One-off)</option>
-                        </select>
+                        <label class="block text-xs text-gray-400 mb-1">🎥 Videos (50€)</label>
+                        <input type="number" id="newClientVideos" min="0" value="0" oninput="calcNewClientCost()" class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-4 py-3 md:py-2 text-white focus:border-brandRed outline-none text-center">
                     </div>
                     <div>
-                        <label class="block text-xs text-gray-400 mb-1">Επιλογή Πακέτου</label>
-                        <select id="newClientPackage" onchange="autoFillPackage()" class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-4 py-3 md:py-2 text-white focus:border-brandRed outline-none">
-                            <option value="Custom">Custom (Άλλο)</option>
-                            <option value="The Ultimate Combo">The Ultimate Combo</option>
-                            <option value="The Click Page">The Click Page</option>
-                        </select>
+                        <label class="block text-xs text-gray-400 mb-1">✂️ Edits (25€)</label>
+                        <input type="number" id="newClientEdits" min="0" value="0" oninput="calcNewClientCost()" class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-4 py-3 md:py-2 text-white focus:border-brandRed outline-none text-center">
                     </div>
                     <div>
-                        <label class="block text-xs text-gray-400 mb-1">Αξία 1ου Μήνα (€)</label>
-                        <input type="number" id="newClientCost" required class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-4 py-3 md:py-2 text-white focus:border-brandRed outline-none">
+                        <label class="block text-xs text-gray-400 mb-1">🌐 Landing (350€)</label>
+                        <input type="number" id="newClientLPs" min="0" value="0" oninput="calcNewClientCost()" class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-4 py-3 md:py-2 text-white focus:border-brandRed outline-none text-center">
                     </div>
-                    <div>
-                        <label class="block text-xs text-gray-400 mb-1">Στόχος Βίντεο</label>
-                        <input type="number" id="newClientVideos" required value="0" class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-4 py-3 md:py-2 text-white focus:border-brandRed outline-none">
+                    <div class="lg:col-span-2">
+                        <label class="block text-xs text-brandRed font-bold mb-1">Σύνολο 1ου Μήνα (€)</label>
+                        <div class="flex gap-2">
+                            <input type="number" id="newClientCost" required class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-4 py-3 md:py-2 text-white focus:border-brandRed outline-none font-bold">
+                            <button type="submit" class="bg-brandRed hover:bg-red-600 text-white font-bold px-5 rounded-lg transition h-auto md:h-[42px]">+</button>
+                        </div>
                     </div>
-                    <button type="submit" class="bg-brandRed hover:bg-red-600 text-white font-bold py-3 md:py-2 px-4 rounded-lg transition w-full h-auto md:h-[42px] mt-2 lg:mt-0">Προσθήκη</button>
                 </form>
             </div>
 
@@ -155,10 +165,10 @@
 
     <!-- CLIENT MODAL -->
     <div id="clientModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 hidden flex items-center justify-center p-2 md:p-4">
-        <div class="bg-cardDark border border-gray-700 rounded-2xl w-full max-w-4xl max-h-[95vh] md:max-h-[90vh] flex flex-col shadow-2xl">
+        <div class="bg-cardDark border border-gray-700 rounded-2xl w-full max-w-5xl max-h-[95vh] md:max-h-[90vh] flex flex-col shadow-2xl">
             <div class="p-4 md:p-6 border-b border-gray-800 flex flex-col md:flex-row justify-between items-start md:items-center bg-[#050505] rounded-t-2xl gap-4">
                 <div class="flex-1 w-full">
-                    <div class="flex flex-wrap items-center gap-3 mb-1">
+                    <div class="flex flex-wrap items-center gap-3 mb-2">
                         <h2 class="text-xl md:text-2xl font-black text-white" id="modalClientName">Όνομα</h2>
                         <select id="modalClientStatus" onchange="updateStatus(this.value)" class="bg-[#111] border border-gray-700 rounded px-2 py-1 text-xs outline-none font-bold">
                             <option value="active">🟢 Ενεργός</option>
@@ -169,8 +179,6 @@
                             <option value="one-off">📌 Εφάπαξ Project</option>
                         </select>
                     </div>
-                    <p class="text-sm text-gray-400 mb-3" id="modalClientPackage">Πακέτο</p>
-                    
                     <div class="flex items-center gap-2">
                         <span class="text-xs text-gray-500 uppercase">Σταδιο:</span>
                         <select id="modalClientPipeline" onchange="updatePipeline(this.value)" class="bg-cardDark border border-gray-700 rounded px-2 py-1 text-xs outline-none font-bold cursor-pointer">
@@ -187,25 +195,21 @@
 
             <div class="p-4 md:p-6 overflow-y-auto flex-1 grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
                 <div class="space-y-6">
-                    <div class="bg-[#0a0a0a] p-4 md:p-5 rounded-xl border border-gray-800">
+                    
+                    <!-- Monthly Breakdown -->
+                    <div class="bg-[#0a0a0a] p-3 md:p-5 rounded-xl border border-gray-800">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-brandRed">Μηνιαία Χρέωση & Βίντεο</h3>
+                            <h3 class="font-bold text-brandRed">Υπηρεσίες ανά Μήνα</h3>
                             <button onclick="addMonth()" class="text-xs bg-brandRed/20 text-brandRed hover:bg-brandRed/40 px-2 py-1 rounded transition">+ Νέος Μήνας</button>
                         </div>
-                        <div class="flex text-[10px] text-gray-500 uppercase mb-2 px-1">
-                            <div class="w-[35%]">Περιοδος</div>
-                            <div class="w-[30%] text-center">Εγιν / Στοχ</div>
-                            <div class="w-[25%] text-right pr-2">Αξια</div>
-                            <div class="w-[10%]"></div>
-                        </div>
-                        <div id="modalMonthsList" class="space-y-2 max-h-56 overflow-y-auto pr-1"></div>
-                        
+                        <div id="modalMonthsList" class="max-h-64 overflow-y-auto pr-1"></div>
                         <div class="mt-4 pt-3 border-t border-gray-800 flex justify-between items-center">
                             <span class="text-sm text-gray-400 uppercase tracking-widest">Γενικο Συνολο:</span>
                             <span id="modalTotalCostDisplay" class="text-lg font-black text-white">0€</span>
                         </div>
                     </div>
 
+                    <!-- Payments -->
                     <div class="bg-[#0a0a0a] p-4 md:p-5 rounded-xl border border-gray-800">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-green-500">Πληρωμές</h3>
@@ -222,6 +226,7 @@
                     </div>
                 </div>
 
+                <!-- Notes -->
                 <div class="bg-[#0a0a0a] p-4 md:p-5 rounded-xl border border-gray-800 flex flex-col h-full min-h-[300px]">
                     <h3 class="font-bold mb-4 text-blue-400">Εκκρεμότητες & Σημειώσεις</h3>
                     <div id="modalNotesList" class="flex-1 space-y-3 mb-4 overflow-y-auto pr-1"></div>
@@ -243,6 +248,7 @@
 
     <!-- EXPENSES MODAL -->
     <div id="expensesModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 hidden flex items-center justify-center p-2 md:p-4">
+        <!-- Κώδικας Εξόδων παραμένει ίδιος... -->
         <div class="bg-cardDark border border-gray-700 rounded-2xl w-full max-w-3xl shadow-2xl flex flex-col max-h-[90vh]">
             <div class="p-4 md:p-6 border-b border-gray-800 flex justify-between items-center bg-[#050505] rounded-t-2xl">
                 <h2 class="text-xl md:text-2xl font-black text-white">Οργάνωση Εξόδων</h2>
@@ -274,6 +280,7 @@
 
     <!-- CALENDAR MODAL -->
     <div id="calendarModal" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[60] hidden flex items-center justify-center p-2 md:p-6">
+        <!-- Κώδικας Calendar παραμένει ίδιος... -->
         <div class="bg-cardDark border border-gray-700 rounded-2xl w-full max-w-6xl h-full md:h-[90vh] flex flex-col shadow-2xl">
             <div class="p-4 md:p-6 border-b border-gray-800 flex justify-between items-center bg-[#050505] rounded-t-2xl">
                 <div class="flex items-center gap-4">
@@ -305,7 +312,6 @@
         let currentCalMonth = new Date().getMonth();
         let currentCalYear = new Date().getFullYear();
 
-        // Pipeline color mapping
         const pipelineColors = {
             'Δημιουργια σεναριων': { bg: 'bg-yellow-500/10', text: 'text-yellow-500', border: 'border-yellow-500/20' },
             'Εγκριση Σεναρίων': { bg: 'bg-blue-500/10', text: 'text-blue-500', border: 'border-blue-500/20' },
@@ -331,15 +337,29 @@
                     const serverData = await response.json();
                     if(serverData.clients) {
                         db = serverData;
+                        
+                        // MIGRATION: Convert old generic Target/Delivered to explicit Videos/Edits/LPs
                         db.clients.forEach(c => {
                             if (!c.status) c.status = 'active';
                             if (!c.type) c.type = (c.package === 'The Click Page') ? 'one-off' : 'mrr';
                             if (!c.pipeline) c.pipeline = 'Δημιουργια σεναριων';
                             if (!c.months) {
                                 const currentMonthName = new Date().toLocaleString('el-GR', { month: 'long', year: 'numeric' });
-                                c.months = [{ id: Date.now() + Math.floor(Math.random() * 1000), name: currentMonthName, target: c.videoTarget || 0, delivered: c.delivered || 0, cost: c.cost || 0 }];
+                                c.months = [{ 
+                                    id: Date.now() + Math.floor(Math.random() * 1000), 
+                                    name: currentMonthName, 
+                                    videos: c.delivered || 0,
+                                    edits: 0,
+                                    lps: 0,
+                                    cost: c.cost || 0 
+                                }];
                             } else {
-                                c.months.forEach((m, idx) => { if (m.cost === undefined) m.cost = (idx === 0) ? (c.cost || 0) : 0; });
+                                c.months.forEach((m, idx) => { 
+                                    if (m.cost === undefined) m.cost = (idx === 0) ? (c.cost || 0) : 0; 
+                                    if (m.videos === undefined) m.videos = m.delivered || 0;
+                                    if (m.edits === undefined) m.edits = 0;
+                                    if (m.lps === undefined) m.lps = (c.package === 'The Click Page' && idx === 0) ? 1 : 0;
+                                });
                             }
                         });
                         db.expenses.forEach(e => { if(!e.category) e.category = 'Γενικά'; });
@@ -358,12 +378,12 @@
             } catch (err) { alert('Αποτυχία αποθήκευσης στο Cloud.'); }
         }
 
-        function autoFillPackage() {
-            const pkg = document.getElementById('newClientPackage').value;
-            const typeSelect = document.getElementById('newClientType');
-            if (pkg === 'The Ultimate Combo') { document.getElementById('newClientCost').value = 700; document.getElementById('newClientVideos').value = 8; typeSelect.value = 'mrr'; } 
-            else if (pkg === 'The Click Page') { document.getElementById('newClientCost').value = 350; document.getElementById('newClientVideos').value = 0; typeSelect.value = 'one-off'; } 
-            else { document.getElementById('newClientCost').value = ''; document.getElementById('newClientVideos').value = '0'; }
+        // --- NEW AUTO-CALCULATION FOR ADDING PROJECT ---
+        function calcNewClientCost() {
+            const v = parseFloat(document.getElementById('newClientVideos').value || 0);
+            const e = parseFloat(document.getElementById('newClientEdits').value || 0);
+            const lp = parseFloat(document.getElementById('newClientLPs').value || 0);
+            document.getElementById('newClientCost').value = (v * 50) + (e * 25) + (lp * 350);
         }
 
         document.getElementById('addClientForm').addEventListener('submit', (e) => {
@@ -372,16 +392,25 @@
             db.clients.push({
                 id: Date.now(),
                 name: document.getElementById('newClientName').value,
-                package: document.getElementById('newClientPackage').value,
                 type: document.getElementById('newClientType').value,
                 status: 'active',
                 pipeline: 'Δημιουργια σεναριων',
-                months: [{ id: Date.now(), name: currentMonthName, target: parseInt(document.getElementById('newClientVideos').value || 0), delivered: 0, cost: parseFloat(document.getElementById('newClientCost').value || 0) }],
+                months: [{ 
+                    id: Date.now(), 
+                    name: currentMonthName, 
+                    videos: parseInt(document.getElementById('newClientVideos').value || 0), 
+                    edits: parseInt(document.getElementById('newClientEdits').value || 0), 
+                    lps: parseInt(document.getElementById('newClientLPs').value || 0), 
+                    cost: parseFloat(document.getElementById('newClientCost').value || 0) 
+                }],
                 payments: [], notes: []
             });
             saveToServer();
-            document.getElementById('newClientName').value = ''; document.getElementById('newClientPackage').value = 'Custom';
-            document.getElementById('newClientCost').value = ''; document.getElementById('newClientVideos').value = '0';
+            document.getElementById('newClientName').value = '';
+            document.getElementById('newClientVideos').value = '0';
+            document.getElementById('newClientEdits').value = '0';
+            document.getElementById('newClientLPs').value = '0';
+            document.getElementById('newClientCost').value = '';
         });
 
         function renderDashboard() {
@@ -393,7 +422,7 @@
 
             let totalPaid = 0, totalOwed = 0, totalExpenses = db.expenses.reduce((sum, e) => sum + parseFloat(e.amount), 0);
             let mrrThisMonth = 0, oneOffThisMonth = 0;
-            let globalVideosTarget = 0, globalVideosDelivered = 0;
+            let globalVideos = 0, globalEdits = 0, globalLPs = 0;
 
             const sortedClients = [...db.clients].sort((a, b) => (a.status === 'inactive') - (b.status === 'inactive'));
 
@@ -412,10 +441,16 @@
                     if (currentMonthData) {
                         if (c.type === 'mrr') mrrThisMonth += parseFloat(currentMonthData.cost || 0);
                         if (c.type === 'one-off') oneOffThisMonth += parseFloat(currentMonthData.cost || 0);
-                        globalVideosTarget += parseInt(currentMonthData.target || 0);
-                        globalVideosDelivered += parseInt(currentMonthData.delivered || 0);
+                        
+                        globalVideos += parseInt(currentMonthData.videos || 0);
+                        globalEdits += parseInt(currentMonthData.edits || 0);
+                        globalLPs += parseInt(currentMonthData.lps || 0);
                     }
                 }
+
+                const cTotalVids = c.months.reduce((s, m) => s + parseInt(m.videos || 0), 0);
+                const cTotalEdits = c.months.reduce((s, m) => s + parseInt(m.edits || 0), 0);
+                const cTotalLPs = c.months.reduce((s, m) => s + parseInt(m.lps || 0), 0);
 
                 const pipeInfo = pipelineColors[c.pipeline || 'Δημιουργια σεναριων'];
                 const pipelineBadge = !isInactive ? `<span class="text-[10px] ${pipeInfo.bg} ${pipeInfo.text} border ${pipeInfo.border} px-2 py-1 rounded truncate ml-2">${c.pipeline}</span>` : '';
@@ -424,7 +459,7 @@
                     <div class="bg-cardDark border ${borderClass} ${opacityClass} rounded-xl p-4 md:p-5 hover:border-gray-600 cursor-pointer transition flex flex-col" onclick="openModal(${c.id})">
                         <div class="flex justify-between items-start mb-2">
                             <h3 class="text-lg md:text-xl font-bold truncate pr-2 flex-1">${c.name}</h3>
-                            ${isInactive ? '<span class="text-[10px] bg-red-500/20 text-red-500 px-2 py-1 rounded font-bold">ΑΝΕΝΕΡΓΟΣ</span>' : `<span class="text-[10px] bg-gray-800 text-gray-400 px-2 py-1 rounded truncate max-w-[80px] text-right">${c.package}</span>`}
+                            ${isInactive ? '<span class="text-[10px] bg-red-500/20 text-red-500 px-2 py-1 rounded font-bold">ΑΝΕΝΕΡΓΟΣ</span>' : ''}
                         </div>
                         <div class="flex items-center mb-3 mt-[-4px]">
                             <span class="text-[10px] text-gray-500 uppercase">${c.type === 'mrr' ? '🔄 Συνδρομη' : '📌 Εφαπαξ'}</span>
@@ -432,7 +467,7 @@
                         </div>
                         <div class="flex justify-between text-xs md:text-sm text-gray-400 mb-4 border-b border-gray-800 pb-3">
                             <span>Αξία: <strong class="text-white">${totalCost}€</strong></span>
-                            <span>Βίντεο: <strong class="text-white">${c.months.reduce((s, m) => s + parseInt(m.delivered || 0), 0)}/${c.months.reduce((s, m) => s + parseInt(m.target || 0), 0)}</strong></span>
+                            <span>Υπηρεσίες: <strong class="text-white">🎥 ${cTotalVids} | ✂️ ${cTotalEdits} | 🌐 ${cTotalLPs}</strong></span>
                         </div>
                         <div class="mt-auto pt-1">
                             <p class="text-[10px] text-gray-500 uppercase mb-1">Οικονομικα</p>
@@ -448,16 +483,12 @@
             document.getElementById('statOwed').innerText = `${totalOwed}€`;
             document.getElementById('statExpenses').innerText = `${totalExpenses}€`;
             
-            document.getElementById('globalDelivered').innerText = globalVideosDelivered;
-            document.getElementById('globalTarget').innerText = globalVideosTarget;
-            const progressPercent = globalVideosTarget > 0 ? Math.min((globalVideosDelivered / globalVideosTarget) * 100, 100) : 0;
-            const bar = document.getElementById('globalProgressBar');
-            bar.style.width = `${progressPercent}%`;
-            if (progressPercent >= 100 && globalVideosTarget > 0) { bar.classList.replace('bg-brandRed', 'bg-green-500'); } 
-            else { bar.classList.replace('bg-green-500', 'bg-brandRed'); }
+            document.getElementById('globalVideos').innerText = globalVideos;
+            document.getElementById('globalEdits').innerText = globalEdits;
+            document.getElementById('globalLPs').innerText = globalLPs;
         }
 
-        // --- EXPENSES ---
+        // --- EXPENSES LOGIC ---
         function openExpensesModal() { document.getElementById('expDate').value = today; renderExpensesList(); document.getElementById('expensesModal').classList.remove('hidden'); }
         function closeExpensesModal() { document.getElementById('expensesModal').classList.add('hidden'); }
         function addExpense() {
@@ -480,7 +511,6 @@
                 const d = new Date(parts[0], parts[1] - 1);
                 const monthExpenses = grouped[monthKey].sort((a,b) => new Date(b.date) - new Date(a.date));
                 const monthTotal = monthExpenses.reduce((sum, e) => sum + e.amount, 0);
-
                 let html = `
                     <div class="mb-4">
                         <div class="flex justify-between items-center bg-[#1a1a1a] p-3 rounded-t-xl border border-gray-800 border-b-0">
@@ -519,7 +549,6 @@
             else if (currentCalMonth > 11) { currentCalMonth = 0; currentCalYear++; }
             renderCalendar();
         }
-        
         function renderCalendar() {
             const date = new Date(currentCalYear, currentCalMonth, 1);
             document.getElementById('calendarMonthYear').innerText = date.toLocaleString('el-GR', { month: 'long', year: 'numeric' });
@@ -530,11 +559,9 @@
                 if (c.status === 'inactive') return;
                 c.notes.forEach(n => { if (!events[n.date]) events[n.date] = []; events[n.date].push({ client: c.name, text: n.text }); });
             });
-
             let firstDay = new Date(currentCalYear, currentCalMonth, 1).getDay();
             firstDay = firstDay === 0 ? 6 : firstDay - 1;
             const daysInMonth = new Date(currentCalYear, currentCalMonth + 1, 0).getDate();
-
             for (let i = 0; i < firstDay; i++) grid.insertAdjacentHTML('beforeend', `<div class="bg-cardDark/30 border border-gray-800/50 rounded-lg"></div>`);
             for (let day = 1; day <= daysInMonth; day++) {
                 const dateString = `${currentCalYear}-${String(currentCalMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
@@ -554,11 +581,10 @@
             }
         }
 
-        // --- CLIENT MODAL ---
+        // --- CLIENT MODAL & MONTH UPDATES ---
         function openModal(id) {
             activeClientId = id; const c = db.clients.find(x => x.id === id);
             document.getElementById('modalClientName').innerText = c.name;
-            document.getElementById('modalClientPackage').innerText = c.package || 'Custom';
             document.getElementById('modalClientStatus').value = c.status || 'active';
             document.getElementById('modalClientType').value = c.type || 'mrr';
             
@@ -576,21 +602,35 @@
             const c = db.clients.find(x => x.id === activeClientId);
             const totalCost = c.months.reduce((sum, m) => sum + (parseFloat(m.cost) || 0), 0);
             document.getElementById('modalTotalCostDisplay').innerText = `${totalCost}€`;
+            
+            // NEW MONTH CARDS UI
             document.getElementById('modalMonthsList').innerHTML = c.months.map(m => `
-                <div class="flex items-center gap-1 bg-[#111] p-2 rounded border border-gray-800 text-sm">
-                    <input type="text" value="${m.name}" onchange="updateMonth(${m.id}, 'name', this.value)" class="bg-transparent text-white w-[35%] outline-none focus:border-gray-600 px-1 text-xs" placeholder="Όνομα">
-                    <div class="flex items-center justify-center gap-1 w-[30%]">
-                        <input type="number" value="${m.delivered}" onchange="updateMonth(${m.id}, 'delivered', this.value)" class="w-8 bg-black border border-gray-700 rounded text-center py-1 focus:border-brandRed outline-none text-xs">
-                        <span class="text-gray-500 text-xs">/</span>
-                        <input type="number" value="${m.target}" onchange="updateMonth(${m.id}, 'target', this.value)" class="w-8 bg-black border border-gray-700 rounded text-center py-1 focus:border-brandRed outline-none text-xs">
+                <div class="bg-[#111] p-3 rounded-lg border border-gray-800 text-sm mb-3 shadow-sm">
+                    <div class="flex justify-between items-center mb-3 border-b border-gray-800 pb-2">
+                        <input type="text" value="${m.name}" onchange="updateMonth(${m.id}, 'name', this.value)" class="bg-transparent text-white font-bold w-2/3 outline-none focus:border-gray-600 text-sm" placeholder="Περίοδος">
+                        <button onclick="deleteMonth(${m.id})" class="text-gray-500 hover:text-red-500 text-xs font-bold">&times; Διαγραφή</button>
                     </div>
-                    <div class="flex items-center justify-end w-[25%]">
-                        <input type="number" value="${m.cost}" onchange="updateMonth(${m.id}, 'cost', this.value)" class="w-12 bg-black border border-gray-700 rounded text-right pr-1 py-1 focus:border-brandRed outline-none text-brandRed font-bold text-xs">
-                        <span class="text-gray-500 text-[10px] ml-1">€</span>
+                    <div class="grid grid-cols-4 gap-2">
+                        <div>
+                            <label class="block text-[10px] text-gray-500 mb-1 text-center">🎥 Videos</label>
+                            <input type="number" value="${m.videos || 0}" onchange="updateMonth(${m.id}, 'videos', this.value)" class="w-full bg-black border border-gray-700 rounded text-center py-1.5 focus:border-brandRed outline-none font-bold">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-gray-500 mb-1 text-center">✂️ Edits</label>
+                            <input type="number" value="${m.edits || 0}" onchange="updateMonth(${m.id}, 'edits', this.value)" class="w-full bg-black border border-gray-700 rounded text-center py-1.5 focus:border-brandRed outline-none font-bold">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-gray-500 mb-1 text-center">🌐 Landings</label>
+                            <input type="number" value="${m.lps || 0}" onchange="updateMonth(${m.id}, 'lps', this.value)" class="w-full bg-black border border-gray-700 rounded text-center py-1.5 focus:border-brandRed outline-none font-bold">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-brandRed mb-1 text-right">Σύνολο €</label>
+                            <input type="number" value="${m.cost}" onchange="updateMonth(${m.id}, 'cost', this.value)" class="w-full bg-black border border-gray-700 rounded text-right pr-2 py-1.5 focus:border-brandRed outline-none text-brandRed font-black">
+                        </div>
                     </div>
-                    <button onclick="deleteMonth(${m.id})" class="w-[10%] text-gray-600 hover:text-red-500 text-center">&times;</button>
                 </div>
             `).join('');
+
             document.getElementById('modalTotalPaid').innerText = `${c.payments.reduce((sum, p) => sum + parseFloat(p.amount), 0)}€`;
             document.getElementById('modalPaymentsList').innerHTML = c.payments.map(p => `
                 <div class="flex justify-between items-center bg-[#111] p-2 rounded border border-gray-800 text-sm">
@@ -618,8 +658,28 @@
             select.classList.add(colorClass);
         }
 
-        function addMonth() { const currentMonthName = new Date().toLocaleString('el-GR', { month: 'long', year: 'numeric' }); db.clients.find(x => x.id === activeClientId).months.push({ id: Date.now(), name: currentMonthName, target: 0, delivered: 0, cost: 0 }); saveToServer(); refreshModalUI(); }
-        function updateMonth(mId, field, val) { const m = db.clients.find(x => x.id === activeClientId).months.find(m => m.id === mId); if(m) { if (field === 'name') m[field] = val; else if (field === 'cost') m[field] = parseFloat(val) || 0; else m[field] = parseInt(val) || 0; saveToServer(); refreshModalUI(); } }
+        function addMonth() { 
+            const currentMonthName = new Date().toLocaleString('el-GR', { month: 'long', year: 'numeric' }); 
+            db.clients.find(x => x.id === activeClientId).months.push({ id: Date.now(), name: currentMonthName, videos: 0, edits: 0, lps: 0, cost: 0 }); 
+            saveToServer(); refreshModalUI(); 
+        }
+        
+        // NEW AUTO-CALCULATION FOR EXISTING PROJECTS
+        function updateMonth(mId, field, val) { 
+            const m = db.clients.find(x => x.id === activeClientId).months.find(m => m.id === mId); 
+            if(m) { 
+                if (field === 'name') m[field] = val; 
+                else {
+                    m[field] = parseFloat(val) || 0; 
+                    // Auto-calculate only if they changed a quantity. (If they manually change cost, we keep their manual override).
+                    if (['videos', 'edits', 'lps'].includes(field)) {
+                        m.cost = ((m.videos || 0) * 50) + ((m.edits || 0) * 25) + ((m.lps || 0) * 350);
+                    }
+                }
+                saveToServer(); refreshModalUI(); 
+            } 
+        }
+
         function deleteMonth(mId) { const c = db.clients.find(x => x.id === activeClientId); c.months = c.months.filter(m => m.id !== mId); saveToServer(); refreshModalUI(); }
         function addPayment() { const amount = document.getElementById('newPayAmount').value; if(!amount) return; db.clients.find(x => x.id === activeClientId).payments.push({ id: Date.now(), date: document.getElementById('newPayDate').value, amount: parseFloat(amount) }); saveToServer(); refreshModalUI(); document.getElementById('newPayAmount').value = ''; }
         function deletePayment(pid) { db.clients.find(x => x.id === activeClientId).payments = db.clients.find(x => x.id === activeClientId).payments.filter(p => p.id !== pid); saveToServer(); refreshModalUI(); }
