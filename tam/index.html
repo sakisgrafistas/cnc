@@ -1,9 +1,22 @@
+Πολύ σωστή σκέψη. Αφού κάθε πελάτης είναι διαφορετική περίπτωση, το σύστημα πρέπει να είναι **100% παραμετροποιήσιμο**, χωρίς να σε κλειδώνει σε προκαθορισμένες τιμές.
+
+Πρόσθεσα αυτό ακριβώς το χαρακτηριστικό και ανέβασα την έκδοση σε **v2.1**:
+
+1. **Δυναμικές Τιμές (Unit Prices):** Στη φόρμα νέου πελάτη, αλλά και μέσα στην κάρτα κάθε μήνα, δίπλα στο εικονίδιο 🎥, ✂️, 🌐 υπάρχει πλέον η τιμή μονάδας (π.χ. 50€). Μπορείς να την αλλάξεις επιτόπου (π.χ. να βάλεις 30€ για το edit).
+2. **Αυτόματος Υπολογισμός:** Ο υπολογισμός του συνόλου πλέον διαβάζει τις δικές σου τιμές (π.χ. 10 videos x 45€ + 2 edits x 30€) και τα υπολογίζει αμέσως.
+3. **Έξυπνη Μνήμη:** Όταν προσθέτεις "Νέο Μήνα" σε έναν υπάρχοντα πελάτη, το σύστημα θυμάται τις τιμές που του είχες βάλει στον προηγούμενο μήνα και τις μεταφέρει αυτόματα, για να μην τις ξαναγράφεις!
+
+Επίσης αφαίρεσα το "(50€)" από τα γενικά στατιστικά πάνω ψηλά, αφού πλέον οι τιμές μεταβάλλονται.
+
+Αντικατέστησε τον κώδικα με τον παρακάτω (έκανα και το migration ώστε να περαστούν οι default τιμές 50/25/350 στα ήδη υπάρχοντα projects σου):
+
+```html
 <!DOCTYPE html>
 <html lang="el">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Click & Clip | Agency OS v2.0</title>
+    <title>Click & Clip | Agency OS v2.1</title>
 
 <!-- Εικονίδια App & Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
@@ -34,6 +47,13 @@
         .calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
         .calendar-day { min-height: 80px; }
         @media (max-width: 640px) { .calendar-day { min-height: 60px; } }
+        
+        /* Κρύβουμε τα arrows (spinners) από τα μικρά number inputs */
+        input[type=number].no-spinners::-webkit-inner-spin-button, 
+        input[type=number].no-spinners::-webkit-outer-spin-button { 
+            -webkit-appearance: none; margin: 0; 
+        }
+        input[type=number].no-spinners { -moz-appearance: textfield; }
     </style>
 </head>
 <body class="bg-brandDark text-white font-sans h-screen flex flex-col overflow-hidden">
@@ -41,7 +61,7 @@
     <!-- PIN SECURITY OVERLAY -->
     <div id="pinScreen" class="fixed inset-0 bg-brandDark z-[100] flex flex-col items-center justify-center p-4">
         <h1 class="text-4xl font-black text-white mb-2 tracking-wider">CLICK<span class="text-brandRed">&</span>CLIP</h1>
-        <p class="text-gray-500 mb-8 uppercase tracking-widest text-xs md:text-sm text-center font-bold">Agency OS <span class="text-white">v2.0</span> • Secure Access</p>
+        <p class="text-gray-500 mb-8 uppercase tracking-widest text-xs md:text-sm text-center font-bold">Agency OS <span class="text-white">v2.1</span> • Secure Access</p>
         
         <input type="password" id="pinInput" placeholder="PIN" class="bg-cardDark border border-gray-700 rounded-lg px-6 py-4 text-white text-center text-2xl tracking-widest focus:border-brandRed outline-none mb-4 w-full max-w-xs shadow-2xl" onkeyup="if(event.key === 'Enter') unlockApp()">
         <button onclick="unlockApp()" class="bg-brandRed hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition w-full max-w-xs text-lg">Είσοδος</button>
@@ -59,7 +79,7 @@
                     CLICK<span class="text-brandRed">&</span>CLIP
                 </h2>
                 <div class="flex items-center gap-2 mt-1">
-                    <span class="text-[11px] md:text-xs text-gray-400 font-bold uppercase tracking-widest">Agency OS <span class="text-white">v2.0</span></span>
+                    <span class="text-[11px] md:text-xs text-gray-400 font-bold uppercase tracking-widest">Agency OS <span class="text-white">v2.1</span></span>
                     <span class="text-green-500 text-[9px] md:text-[10px] font-bold tracking-widest uppercase flex items-center gap-1 bg-green-500/10 px-2 py-0.5 rounded">
                         <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> Sync
                     </span>
@@ -88,11 +108,11 @@
                         <div class="flex gap-6 md:gap-10">
                             <div class="flex items-center gap-2">
                                 <span class="text-3xl font-black text-brandRed" id="globalVideos">0</span>
-                                <span class="text-gray-400 text-xs md:text-sm leading-tight">Videos<br>(50€)</span>
+                                <span class="text-gray-400 text-xs md:text-sm leading-tight">Videos</span>
                             </div>
                             <div class="flex items-center gap-2">
                                 <span class="text-3xl font-black text-blue-400" id="globalEdits">0</span>
-                                <span class="text-gray-400 text-xs md:text-sm leading-tight">Edits<br>(25€)</span>
+                                <span class="text-gray-400 text-xs md:text-sm leading-tight">Edits</span>
                             </div>
                             <div class="flex items-center gap-2">
                                 <span class="text-3xl font-black text-green-400" id="globalLPs">0</span>
@@ -125,7 +145,7 @@
                 </div>
             </div>
 
-            <!-- Add Project Form (A la Carte) -->
+            <!-- Add Project Form (A la Carte with dynamic pricing) -->
             <div class="bg-cardDark border border-gray-800 rounded-2xl p-4 md:p-6 mb-8">
                 <h3 class="text-lg font-bold mb-4 flex items-center"><span class="text-brandRed mr-2">➕</span> Νέο Project</h3>
                 <form id="addClientForm" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-3 md:gap-4 items-end">
@@ -140,15 +160,30 @@
                         </div>
                     </div>
                     <div>
-                        <label class="block text-xs text-gray-400 mb-1">🎥 Videos (50€)</label>
+                        <label class="flex justify-between items-center text-xs text-gray-400 mb-1">
+                            <span>🎥 Videos</span>
+                            <span class="flex items-center text-brandRed font-bold text-[11px]">
+                                <input type="number" id="newClientVPrice" value="50" oninput="calcNewClientCost()" class="no-spinners bg-transparent text-right w-6 outline-none border-b border-gray-700 focus:border-brandRed p-0">€
+                            </span>
+                        </label>
                         <input type="number" id="newClientVideos" min="0" value="0" oninput="calcNewClientCost()" class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-4 py-3 md:py-2 text-white focus:border-brandRed outline-none text-center">
                     </div>
                     <div>
-                        <label class="block text-xs text-gray-400 mb-1">✂️ Edits (25€)</label>
+                        <label class="flex justify-between items-center text-xs text-gray-400 mb-1">
+                            <span>✂️ Edits</span>
+                            <span class="flex items-center text-blue-400 font-bold text-[11px]">
+                                <input type="number" id="newClientEPrice" value="25" oninput="calcNewClientCost()" class="no-spinners bg-transparent text-right w-6 outline-none border-b border-gray-700 focus:border-blue-400 p-0">€
+                            </span>
+                        </label>
                         <input type="number" id="newClientEdits" min="0" value="0" oninput="calcNewClientCost()" class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-4 py-3 md:py-2 text-white focus:border-brandRed outline-none text-center">
                     </div>
                     <div>
-                        <label class="block text-xs text-gray-400 mb-1">🌐 Landing (350€)</label>
+                        <label class="flex justify-between items-center text-xs text-gray-400 mb-1">
+                            <span>🌐 Landing</span>
+                            <span class="flex items-center text-green-400 font-bold text-[11px]">
+                                <input type="number" id="newClientLPPrice" value="350" oninput="calcNewClientCost()" class="no-spinners bg-transparent text-right w-8 outline-none border-b border-gray-700 focus:border-green-400 p-0">€
+                            </span>
+                        </label>
                         <input type="number" id="newClientLPs" min="0" value="0" oninput="calcNewClientCost()" class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-4 py-3 md:py-2 text-white focus:border-brandRed outline-none text-center">
                     </div>
                     <div class="lg:col-span-2">
@@ -341,7 +376,7 @@
                     if(serverData.clients) {
                         db = serverData;
                         
-                        // MIGRATION: Convert old generic Target/Delivered to explicit Videos/Edits/LPs
+                        // MIGRATION: Convert old data & attach dynamic prices
                         db.clients.forEach(c => {
                             if (!c.status) c.status = 'active';
                             if (!c.type) c.type = (c.package === 'The Click Page') ? 'one-off' : 'mrr';
@@ -351,9 +386,8 @@
                                 c.months = [{ 
                                     id: Date.now() + Math.floor(Math.random() * 1000), 
                                     name: currentMonthName, 
-                                    videos: c.delivered || 0,
-                                    edits: 0,
-                                    lps: 0,
+                                    videos: c.delivered || 0, edits: 0, lps: 0,
+                                    vPrice: 50, ePrice: 25, lpPrice: 350,
                                     cost: c.cost || 0 
                                 }];
                             } else {
@@ -362,6 +396,10 @@
                                     if (m.videos === undefined) m.videos = m.delivered || 0;
                                     if (m.edits === undefined) m.edits = 0;
                                     if (m.lps === undefined) m.lps = (c.package === 'The Click Page' && idx === 0) ? 1 : 0;
+                                    // Set default prices if they don't exist
+                                    if (m.vPrice === undefined) m.vPrice = 50;
+                                    if (m.ePrice === undefined) m.ePrice = 25;
+                                    if (m.lpPrice === undefined) m.lpPrice = 350;
                                 });
                             }
                         });
@@ -381,12 +419,18 @@
             } catch (err) { alert('Αποτυχία αποθήκευσης στο Cloud.'); }
         }
 
-        // --- NEW AUTO-CALCULATION FOR ADDING PROJECT ---
+        // --- NEW AUTO-CALCULATION FOR ADDING PROJECT (WITH DYNAMIC PRICING) ---
         function calcNewClientCost() {
             const v = parseFloat(document.getElementById('newClientVideos').value || 0);
+            const vp = parseFloat(document.getElementById('newClientVPrice').value || 0);
+            
             const e = parseFloat(document.getElementById('newClientEdits').value || 0);
+            const ep = parseFloat(document.getElementById('newClientEPrice').value || 0);
+            
             const lp = parseFloat(document.getElementById('newClientLPs').value || 0);
-            document.getElementById('newClientCost').value = (v * 50) + (e * 25) + (lp * 350);
+            const lpp = parseFloat(document.getElementById('newClientLPPrice').value || 0);
+            
+            document.getElementById('newClientCost').value = (v * vp) + (e * ep) + (lp * lpp);
         }
 
         document.getElementById('addClientForm').addEventListener('submit', (e) => {
@@ -403,7 +447,10 @@
                     name: currentMonthName, 
                     videos: parseInt(document.getElementById('newClientVideos').value || 0), 
                     edits: parseInt(document.getElementById('newClientEdits').value || 0), 
-                    lps: parseInt(document.getElementById('newClientLPs').value || 0), 
+                    lps: parseInt(document.getElementById('newClientLPs').value || 0),
+                    vPrice: parseFloat(document.getElementById('newClientVPrice').value || 0),
+                    ePrice: parseFloat(document.getElementById('newClientEPrice').value || 0),
+                    lpPrice: parseFloat(document.getElementById('newClientLPPrice').value || 0),
                     cost: parseFloat(document.getElementById('newClientCost').value || 0) 
                 }],
                 payments: [], notes: []
@@ -606,7 +653,7 @@
             const totalCost = c.months.reduce((sum, m) => sum + (parseFloat(m.cost) || 0), 0);
             document.getElementById('modalTotalCostDisplay').innerText = `${totalCost}€`;
             
-            // NEW MONTH CARDS UI
+            // NEW MONTH CARDS UI WITH DYNAMIC PRICING
             document.getElementById('modalMonthsList').innerHTML = c.months.map(m => `
                 <div class="bg-[#111] p-3 rounded-lg border border-gray-800 text-sm mb-3 shadow-sm">
                     <div class="flex justify-between items-center mb-3 border-b border-gray-800 pb-2">
@@ -615,19 +662,34 @@
                     </div>
                     <div class="grid grid-cols-4 gap-2">
                         <div>
-                            <label class="block text-[10px] text-gray-500 mb-1 text-center">🎥 Videos</label>
+                            <label class="flex justify-between items-center text-[10px] text-gray-500 mb-1 px-1">
+                                <span>🎥 Vids</span>
+                                <span class="flex items-center text-gray-400">
+                                    <input type="number" value="${m.vPrice !== undefined ? m.vPrice : 50}" onchange="updateMonth(${m.id}, 'vPrice', this.value)" class="no-spinners bg-transparent text-right w-6 outline-none p-0 border-b border-gray-700 focus:border-brandRed">€
+                                </span>
+                            </label>
                             <input type="number" value="${m.videos || 0}" onchange="updateMonth(${m.id}, 'videos', this.value)" class="w-full bg-black border border-gray-700 rounded text-center py-1.5 focus:border-brandRed outline-none font-bold">
                         </div>
                         <div>
-                            <label class="block text-[10px] text-gray-500 mb-1 text-center">✂️ Edits</label>
+                            <label class="flex justify-between items-center text-[10px] text-gray-500 mb-1 px-1">
+                                <span>✂️ Edits</span>
+                                <span class="flex items-center text-gray-400">
+                                    <input type="number" value="${m.ePrice !== undefined ? m.ePrice : 25}" onchange="updateMonth(${m.id}, 'ePrice', this.value)" class="no-spinners bg-transparent text-right w-6 outline-none p-0 border-b border-gray-700 focus:border-brandRed">€
+                                </span>
+                            </label>
                             <input type="number" value="${m.edits || 0}" onchange="updateMonth(${m.id}, 'edits', this.value)" class="w-full bg-black border border-gray-700 rounded text-center py-1.5 focus:border-brandRed outline-none font-bold">
                         </div>
                         <div>
-                            <label class="block text-[10px] text-gray-500 mb-1 text-center">🌐 Landings</label>
+                            <label class="flex justify-between items-center text-[10px] text-gray-500 mb-1 px-1">
+                                <span>🌐 LP</span>
+                                <span class="flex items-center text-gray-400">
+                                    <input type="number" value="${m.lpPrice !== undefined ? m.lpPrice : 350}" onchange="updateMonth(${m.id}, 'lpPrice', this.value)" class="no-spinners bg-transparent text-right w-6 outline-none p-0 border-b border-gray-700 focus:border-brandRed">€
+                                </span>
+                            </label>
                             <input type="number" value="${m.lps || 0}" onchange="updateMonth(${m.id}, 'lps', this.value)" class="w-full bg-black border border-gray-700 rounded text-center py-1.5 focus:border-brandRed outline-none font-bold">
                         </div>
                         <div>
-                            <label class="block text-[10px] text-brandRed mb-1 text-right">Σύνολο €</label>
+                            <label class="block text-[10px] text-brandRed mb-1 text-right mt-1">Σύνολο €</label>
                             <input type="number" value="${m.cost}" onchange="updateMonth(${m.id}, 'cost', this.value)" class="w-full bg-black border border-gray-700 rounded text-right pr-2 py-1.5 focus:border-brandRed outline-none text-brandRed font-black">
                         </div>
                     </div>
@@ -663,7 +725,23 @@
 
         function addMonth() { 
             const currentMonthName = new Date().toLocaleString('el-GR', { month: 'long', year: 'numeric' }); 
-            db.clients.find(x => x.id === activeClientId).months.push({ id: Date.now(), name: currentMonthName, videos: 0, edits: 0, lps: 0, cost: 0 }); 
+            const client = db.clients.find(x => x.id === activeClientId);
+            
+            // Αντιγραφή τιμών από τον προηγούμενο μήνα αν υπάρχει (για να μην τα ξαναγράφεις)
+            let vp = 50, ep = 25, lpp = 350;
+            if (client.months.length > 0) {
+                const lastMonth = client.months[client.months.length - 1];
+                vp = lastMonth.vPrice !== undefined ? lastMonth.vPrice : 50;
+                ep = lastMonth.ePrice !== undefined ? lastMonth.ePrice : 25;
+                lpp = lastMonth.lpPrice !== undefined ? lastMonth.lpPrice : 350;
+            }
+
+            client.months.push({ 
+                id: Date.now(), name: currentMonthName, 
+                videos: 0, edits: 0, lps: 0, 
+                vPrice: vp, ePrice: ep, lpPrice: lpp, 
+                cost: 0 
+            }); 
             saveToServer(); refreshModalUI(); 
         }
         
@@ -674,9 +752,12 @@
                 if (field === 'name') m[field] = val; 
                 else {
                     m[field] = parseFloat(val) || 0; 
-                    // Auto-calculate only if they changed a quantity. (If they manually change cost, we keep their manual override).
-                    if (['videos', 'edits', 'lps'].includes(field)) {
-                        m.cost = ((m.videos || 0) * 50) + ((m.edits || 0) * 25) + ((m.lps || 0) * 350);
+                    // Auto-calculate only if they changed a quantity OR a unit price.
+                    if (['videos', 'edits', 'lps', 'vPrice', 'ePrice', 'lpPrice'].includes(field)) {
+                        const vp = m.vPrice !== undefined ? m.vPrice : 50;
+                        const ep = m.ePrice !== undefined ? m.ePrice : 25;
+                        const lpp = m.lpPrice !== undefined ? m.lpPrice : 350;
+                        m.cost = ((m.videos || 0) * vp) + ((m.edits || 0) * ep) + ((m.lps || 0) * lpp);
                     }
                 }
                 saveToServer(); refreshModalUI(); 
