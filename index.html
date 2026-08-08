@@ -89,7 +89,6 @@
 
     <!-- Header / Navigation -->
     <header class="py-8 px-4 w-full flex justify-center items-center relative z-10">
-        <!-- Προστέθηκε βελτιωμένο alt text για το SEO -->
         <img src="logo.png" alt="Click & Clip Premium Video Agency Logo" class="h-16 md:h-20 object-contain hover:scale-105 transition transform duration-300">
     </header>
 
@@ -106,7 +105,7 @@
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
             <a href="#how-it-works" class="inline-block border-2 border-gray-600 text-white hover:border-white font-bold py-3 px-8 rounded-full text-lg transition duration-300">Η Διαδικασία Μας</a>
-            <a href="#pricing" class="inline-block bg-brandRed text-white hover:bg-red-600 font-bold py-3 px-8 rounded-full text-lg transition duration-300 shadow-[0_0_20px_rgba(255,51,51,0.3)]">Δείτε τα Πακέτα</a>
+            <a href="#pricing" class="inline-block bg-brandRed text-white hover:bg-red-600 font-bold py-3 px-8 rounded-full text-lg transition duration-300 shadow-[0_0_20px_rgba(255,51,51,0.3)]">Δείτε τις Υπηρεσίες</a>
         </div>
     </section>
 
@@ -225,11 +224,11 @@
             
             <h2 class="text-3xl md:text-5xl font-bold text-center mb-4">Επενδύστε στην Εικόνα σας</h2>
             <p class="text-gray-400 text-center text-lg max-w-3xl mx-auto mb-10 leading-relaxed">
-                Ξεκάθαρες τιμές, κορυφαία ποιότητα παραγωγής. Αναλαμβάνουμε την παρουσία σας στα Social Media από την ιδέα μέχρι την υλοποίηση.
+                Ξεκάθαρες υπηρεσίες και διαφανείς τιμές. Αναλαμβάνουμε την παρουσία σας στα Social Media από την ιδέα μέχρι την υλοποίηση.
             </p>
             
             <!-- Trust Badges -->
-            <div class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 mb-16">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 mb-10">
                 <div class="flex items-center text-gray-200 bg-[#111] border border-gray-800 py-2 px-4 rounded-full">
                     <svg class="w-5 h-5 text-brandRed mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                     <span class="font-bold text-sm md:text-base tracking-wide">Χωρίς Κρυφές Χρεώσεις</span>
@@ -243,15 +242,21 @@
                     <span class="font-bold text-sm md:text-base tracking-wide">Agency Quality Result</span>
                 </div>
             </div>
+
+            <!-- Υπενθύμιση για το Minimum -->
+            <div class="bg-[#111] border border-brandRed/50 rounded-xl p-5 mb-12 text-center max-w-3xl mx-auto shadow-[0_0_20px_rgba(255,51,51,0.1)]">
+                <p class="text-white font-bold text-lg"><span class="text-brandRed uppercase tracking-wider">Σημαντικη Σημειωση:</span> Για τις υπηρεσίες βίντεο απαιτείται <span class="text-brandRed border-b-2 border-brandRed">ελάχιστη παραγωγή 10 βίντεο τον μήνα</span>.</p>
+                <p class="text-gray-400 text-sm mt-2">Μπορείτε να συνδυάσετε ελεύθερα βίντεο τύπου "Full Production" (50€) και "Remote Editing" (25€) προσαρμόζοντας το κόστος στις ανάγκες σας!</p>
+            </div>
             
             <!-- PRICING CARDS GRID -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8 items-stretch">
                 
-                <!-- ΠΑΚΕΤΟ 1: ΜΟΝΟ LANDING PAGE -->
+                <!-- ΥΠΗΡΕΣΙΑ 1: LANDING PAGE -->
                 <div class="p-6 md:p-8 border border-gray-800 bg-brandDark rounded-2xl flex flex-col hover:border-brandRed transition duration-300">
-                    <h3 class="text-2xl font-bold mb-3 tracking-wide">The Click Page</h3>
-                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">Μια ταχύτατη, premium σελίδα στημένη αποκλειστικά για να μετατρέπει τους επισκέπτες σε πελάτες.</p>
-                    <div class="text-5xl font-extrabold mb-6 text-white">350€ <span class="text-sm font-normal text-gray-500">+ΦΠΑ (Εφάπαξ)</span></div>
+                    <h3 class="text-2xl font-bold mb-3 tracking-wide">Κατασκευή Landing Page</h3>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">Ταχύτατη, premium σελίδα στημένη αποκλειστικά για να μετατρέπει τους επισκέπτες σε πελάτες.</p>
+                    <div class="text-5xl font-extrabold mb-6 text-white">300€ <span class="text-sm font-normal text-gray-500">+ΦΠΑ (Εφάπαξ)</span></div>
                     
                     <ul class="space-y-4 text-gray-300 flex-1 mb-8 text-sm">
                         <li class="flex items-start"><span class="text-brandRed mr-2 font-bold">✓</span> Custom Mobile-First Σχεδιασμός</li>
@@ -259,51 +264,38 @@
                         <li class="flex items-start"><span class="text-brandRed mr-2 font-bold">✓</span> Δωρεάν Hosting & Domain (2 έτη)</li>
                         <li class="flex items-start"><span class="text-brandRed mr-2 font-bold">✓</span> Basic On-page SEO & Google Maps</li>
                     </ul>
-                    <a href="javascript:void(0)" onclick="openModal('The Click Page (Μόνο Landing Page - 350€)')" class="text-center bg-[#111] border border-gray-700 hover:border-brandRed text-white font-bold py-3 rounded-xl transition duration-300 mt-auto">Επιλογή Πακέτου</a>
+                    <a href="javascript:void(0)" onclick="openModal('Κατασκευή Landing Page (300€)')" class="text-center bg-[#111] border border-gray-700 hover:border-brandRed text-white font-bold py-3 rounded-xl transition duration-300 mt-auto">Επιλογή Υπηρεσίας</a>
                 </div>
 
-                <!-- ΠΑΚΕΤΟ 3: THE COMBO (ΠΡΟΤΕΙΝΟΜΕΝΟ) -->
+                <!-- ΥΠΗΡΕΣΙΑ 2: FULL PRODUCTION VIDEO -->
                 <div class="p-6 md:p-8 border-2 border-brandRed bg-[#0a0a0a] rounded-2xl flex flex-col relative shadow-[0_0_25px_rgba(255,51,51,0.15)] md:-translate-y-4">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-brandRed text-white text-xs font-bold px-5 py-1 rounded-full uppercase tracking-wider whitespace-nowrap">Η Απολυτη Μηχανη Πωλησεων</div>
-                    <h3 class="text-2xl font-bold mb-3 tracking-wide text-white mt-2">The Ultimate Combo</h3>
-                    <p class="text-gray-300 text-sm mb-6 leading-relaxed">Κατασκευή Landing Page και μηνιαία παραγωγή 8 βίντεο. Κερδίζετε 50€ έκπτωση στο στήσιμο της σελίδας.</p>
-                    
-                    <div class="mb-6 bg-[#111] p-4 rounded-lg border border-gray-800">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-gray-400 text-sm">Landing Page:</span>
-                            <div class="text-right">
-                                <span class="line-through text-gray-500 text-sm mr-2">350€</span>
-                                <span class="text-2xl font-black text-brandRed">300€ <span class="text-xs font-normal text-gray-500">Εφάπαξ</span></span>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-400 text-sm">8 Pro Βίντεο:</span>
-                            <span class="text-xl font-bold text-white">400€ <span class="text-xs font-normal text-gray-500">/μήνα</span></span>
-                        </div>
-                    </div>
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-brandRed text-white text-xs font-bold px-5 py-1 rounded-full uppercase tracking-wider whitespace-nowrap">Η Απολυτη Εμπειρια</div>
+                    <h3 class="text-2xl font-bold mb-3 tracking-wide text-white mt-2">Full Video Production</h3>
+                    <p class="text-gray-300 text-sm mb-6 leading-relaxed">Ερχόμαστε στον χώρο σας, στήνουμε τον επαγγελματικό μας εξοπλισμό και τα αναλαμβάνουμε όλα.</p>
+                    <div class="text-5xl font-extrabold mb-6 text-white">50€ <span class="text-sm font-normal text-gray-500">/βίντεο +ΦΠΑ</span></div>
                     
                     <ul class="space-y-4 text-gray-200 flex-1 mb-8 text-sm relative z-10">
-                        <li class="flex items-start"><span class="text-brandRed mr-2 font-bold">✓</span> <strong class="text-white">Κατασκευή Premium Landing Page</strong></li>
-                        <li class="flex items-start"><span class="text-brandRed mr-2 font-bold">✓</span> <strong class="text-white">8 Βίντεο/μήνα με Φυσική Παρουσία μας</strong></li>
-                        <li class="flex items-start"><span class="text-brandRed mr-2 font-bold">✓</span> Απεριόριστα σενάρια & Marketing Strategy</li>
-                        <li class="flex items-start"><span class="text-brandRed mr-2 font-bold">✓</span> Όλα τα Leads οδηγούνται στη Σελίδα σας</li>
-                    </ul>
-                    <a href="javascript:void(0)" onclick="openModal('The Ultimate Combo (Σελίδα & 8 Βίντεο τον μήνα)')" class="text-center bg-brandRed hover:bg-red-600 text-white font-bold py-4 rounded-xl transition duration-300 shadow-[0_0_15px_rgba(255,51,51,0.4)] mt-auto">Απόκτησε το Combo</a>
-                </div>
-
-                <!-- ΠΑΚΕΤΟ 2: ΜΟΝΟ ΒΙΝΤΕΟ (AGENCY PACK) -->
-                <div class="p-6 md:p-8 border border-gray-800 bg-brandDark rounded-2xl flex flex-col hover:border-brandRed transition duration-300">
-                    <h3 class="text-2xl font-bold mb-3 tracking-wide">The Agency Pack</h3>
-                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">Μηνιαία παραγωγή 8 βίντεο. Ερχόμαστε στον χώρο σας, στήνουμε τον εξοπλισμό και τα αναλαμβάνουμε όλα.</p>
-                    <div class="text-5xl font-extrabold mb-6 text-white">400€ <span class="text-sm font-normal text-gray-500">/μήνα +ΦΠΑ</span></div>
-                    
-                    <ul class="space-y-4 text-gray-300 flex-1 mb-8 text-sm">
-                        <li class="flex items-start"><span class="text-brandRed mr-2 font-bold">✓</span> <strong class="text-white">8 Κάθετα Βίντεο</strong> (TikTok, Reels, Shorts)</li>
-                        <li class="flex items-start"><span class="text-brandRed mr-2 font-bold">✓</span> Γύρισμα στον χώρο σας με Pro Εξοπλισμό</li>
-                        <li class="flex items-start"><span class="text-brandRed mr-2 font-bold">✓</span> Εμείς γράφουμε τα Σενάρια / Ιδέες</li>
+                        <li class="flex items-start"><span class="text-brandRed mr-2 font-bold">✓</span> Γύρισμα με Pro Εξοπλισμό & Φωτισμό</li>
+                        <li class="flex items-start"><span class="text-brandRed mr-2 font-bold">✓</span> Φυσική παρουσία στον χώρο σας</li>
+                        <li class="flex items-start"><span class="text-brandRed mr-2 font-bold">✓</span> Εμείς γράφουμε τα Σενάρια & Hooks</li>
                         <li class="flex items-start"><span class="text-brandRed mr-2 font-bold">✓</span> Premium Edit (Υπότιτλοι, B-rolls, Effects)</li>
                     </ul>
-                    <a href="javascript:void(0)" onclick="openModal('The Agency Pack (8 Βίντεο τον μήνα - 400€)')" class="text-center bg-[#111] border border-gray-700 hover:border-brandRed text-white font-bold py-3 rounded-xl transition duration-300 mt-auto">Επιλογή Πακέτου</a>
+                    <a href="javascript:void(0)" onclick="openModal('Full Video Production (50€/βίντεο)')" class="text-center bg-brandRed hover:bg-red-600 text-white font-bold py-4 rounded-xl transition duration-300 shadow-[0_0_15px_rgba(255,51,51,0.4)] mt-auto">Επιλογή Υπηρεσίας</a>
+                </div>
+
+                <!-- ΥΠΗΡΕΣΙΑ 3: REMOTE VIDEO EDITING -->
+                <div class="p-6 md:p-8 border border-gray-800 bg-brandDark rounded-2xl flex flex-col hover:border-brandRed transition duration-300">
+                    <h3 class="text-2xl font-bold mb-3 tracking-wide">Remote Edit & Mentoring</h3>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">Εσείς τραβάτε τα πλάνα με την καθοδήγησή μας, και εμείς αναλαμβάνουμε το επαγγελματικό μοντάζ.</p>
+                    <div class="text-5xl font-extrabold mb-6 text-white">25€ <span class="text-sm font-normal text-gray-500">/βίντεο +ΦΠΑ</span></div>
+                    
+                    <ul class="space-y-4 text-gray-300 flex-1 mb-8 text-sm">
+                        <li class="flex items-start"><span class="text-brandRed mr-2 font-bold">✓</span> Τραβάτε μόνοι σας πλάνα/voiceover</li>
+                        <li class="flex items-start"><span class="text-brandRed mr-2 font-bold">✓</span> Πλήρης καθοδήγηση από την ομάδα μας</li>
+                        <li class="flex items-start"><span class="text-brandRed mr-2 font-bold">✓</span> Δυναμικό Μοντάζ & Color Grading</li>
+                        <li class="flex items-start"><span class="text-brandRed mr-2 font-bold">✓</span> Παράδοση έτοιμων βίντεο με Captions</li>
+                    </ul>
+                    <a href="javascript:void(0)" onclick="openModal('Remote Edit & Mentoring (25€/βίντεο)')" class="text-center bg-[#111] border border-gray-700 hover:border-brandRed text-white font-bold py-3 rounded-xl transition duration-300 mt-auto">Επιλογή Υπηρεσίας</a>
                 </div>
 
             </div>
@@ -322,7 +314,7 @@
                     <h3 class="text-xl font-bold mb-3 text-white flex items-center gap-3">
                         <span class="text-brandRed">💬</span> Ποιες περιοχές εξυπηρετείτε για την παραγωγή βίντεο;
                     </h3>
-                    <p class="text-gray-400 text-sm md:text-base leading-relaxed">Η υπηρεσία της πλήρους παραγωγής βίντεο (The Agency Pack) με φυσική παρουσία της ομάδας μας στον χώρο σας, καλύπτει αποκλειστικά τη <strong>Θεσσαλονίκη και τις γύρω περιοχές</strong>. (Η κατασκευή της Landing Page προσφέρεται πανελλαδικά).</p>
+                    <p class="text-gray-400 text-sm md:text-base leading-relaxed">Η υπηρεσία "Full Video Production" με φυσική παρουσία της ομάδας μας στον χώρο σας, καλύπτει αποκλειστικά τη <strong>Θεσσαλονίκη και τις γύρω περιοχές</strong>. (Το "Remote Editing" και η κατασκευή της Landing Page προσφέρονται πανελλαδικά).</p>
                 </div>
                 <!-- FAQ Item 2 -->
                 <div class="p-6 md:p-8 border border-gray-800 bg-black rounded-2xl hover:border-gray-600 transition duration-300">
@@ -334,9 +326,9 @@
                 <!-- FAQ Item 3 -->
                 <div class="p-6 md:p-8 border border-gray-800 bg-black rounded-2xl hover:border-gray-600 transition duration-300">
                     <h3 class="text-xl font-bold mb-3 text-white flex items-center gap-3">
-                        <span class="text-brandRed">💬</span> Πόση ώρα διαρκεί το γύρισμα στον χώρο μου;
+                        <span class="text-brandRed">💬</span> Πώς λειτουργεί ο συνδυασμός των υπηρεσιών βίντεο (50€ & 25€);
                     </h3>
-                    <p class="text-gray-400 text-sm md:text-base leading-relaxed">Οργανώνουμε την παραγωγή με σύστημα "Batching". Αυτό σημαίνει ότι κλείνουμε ένα συγκεκριμένο ραντεβού τον μήνα στον χώρο σας (συνήθως διαρκεί 2-3 ώρες), όπου και γυρίζουμε όλο το υλικό, και για τα 8 βίντεο του μήνα. Έτσι γλυτώνετε πολύτιμο χρόνο και δεν διακόπτουμε συνεχώς την εργασία σας.</p>
+                    <p class="text-gray-400 text-sm md:text-base leading-relaxed">Εφόσον καλύπτεται το ελάχιστο των 10 βίντεο τον μήνα, μπορείτε για παράδειγμα να επιλέξετε 4 βίντεο "Full Production" όπου ερχόμαστε εμείς (4 x 50€ = 200€) και 6 βίντεο "Remote Editing" (6 x 25€ = 150€) στέλνοντάς μας δικό σας συμπληρωματικό υλικό, κρατώντας το τελικό κόστος εξαιρετικά προσιτό.</p>
                 </div>
                 <!-- FAQ Item 4 -->
                 <div class="p-6 md:p-8 border border-gray-800 bg-black rounded-2xl hover:border-gray-600 transition duration-300">
@@ -495,3 +487,5 @@
 
 </body>
 </html>
+
+```
