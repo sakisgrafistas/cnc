@@ -77,7 +77,6 @@
     <!-- HERO SECTION ME PARALLAX -->
     <section class="relative py-24 md:py-40 px-4 text-center w-full overflow-hidden bg-[url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat bg-fixed">
         
-        <!-- Σκούρο Overlay για να διαβάζονται τα λευκά γράμματα -->
         <div class="absolute inset-0 bg-gray-900/75"></div>
         
         <div class="relative z-10 max-w-5xl mx-auto">
@@ -100,7 +99,7 @@
         </div>
     </section>
 
-    <!-- How it Works Section -->
+    <!-- How it Works Section (ΕΙΚΟΝΕΣ) -->
     <section id="how-it-works" class="py-20 md:py-32 bg-white px-4 border-y border-gray-100">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl md:text-5xl font-extrabold text-center mb-4 text-gray-900">Πλήρης Παραγωγή σε 4 Βήματα</h2>
@@ -108,43 +107,76 @@
                 Ξεχάστε το άγχος της δημιουργίας. Αναλαμβάνουμε <span class="text-gray-900 font-bold">το 100% της παραγωγής περιεχομένου</span>. Εσείς απλά μας ανοίγετε την πόρτα της επιχείρησής σας και εμείς φροντίζουμε για όλα τα υπόλοιπα.
             </p>
             
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-6 mt-10 md:mt-0">
+                
                 <!-- Step 1 -->
-                <div class="p-8 border border-gray-100 rounded-3xl bg-gray-50 relative transform transition hover:-translate-y-2 hover:shadow-xl duration-300 group">
-                    <div class="absolute -top-6 left-8 bg-brandRed text-white w-12 h-12 flex items-center justify-center rounded-2xl font-black text-xl shadow-lg shadow-brandRed/30 rotate-3 group-hover:rotate-6 transition">1</div>
-                    <div class="text-brandRed mb-6 mt-4 bg-red-100 w-16 h-16 rounded-full flex items-center justify-center">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"></path></svg>
+                <div class="relative p-8 border border-gray-800 rounded-3xl transform transition hover:-translate-y-2 hover:shadow-2xl hover:shadow-brandRed/20 duration-300 group flex flex-col">
+                    <!-- Background Image & Overlay -->
+                    <div class="absolute inset-0 rounded-3xl overflow-hidden z-0">
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center transition-transform duration-700 group-hover:scale-110"></div>
+                        <div class="absolute inset-0 bg-gray-900/85 group-hover:bg-gray-900/75 transition duration-300"></div>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-900">Στρατηγική & Σενάρια</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">Αναλύουμε την αγορά σας και δημιουργούμε τα σενάρια (Hooks, Call to Actions). Ξέρουμε ακριβώς τι πρέπει να ειπωθεί και να δειχθεί για να γίνει το βίντεο viral.</p>
+                    <!-- Number Badge -->
+                    <div class="absolute -top-6 left-8 bg-brandRed text-white w-12 h-12 flex items-center justify-center rounded-2xl font-black text-xl shadow-lg shadow-brandRed/30 rotate-3 group-hover:rotate-6 transition z-20">1</div>
+                    <!-- Content -->
+                    <div class="relative z-10 flex-1 flex flex-col">
+                        <div class="text-brandRed mb-6 mt-2 bg-brandRed/10 border border-brandRed/20 w-16 h-16 rounded-full flex items-center justify-center">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Στρατηγική & Σενάρια</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">Αναλύουμε την αγορά σας και δημιουργούμε τα σενάρια (Hooks, Call to Actions). Ξέρουμε ακριβώς τι πρέπει να ειπωθεί και να δειχθεί για να γίνει το βίντεο viral.</p>
+                    </div>
                 </div>
+
                 <!-- Step 2 -->
-                <div class="p-8 border border-gray-100 rounded-3xl bg-gray-50 relative transform transition hover:-translate-y-2 hover:shadow-xl duration-300 group">
-                    <div class="absolute -top-6 left-8 bg-brandRed text-white w-12 h-12 flex items-center justify-center rounded-2xl font-black text-xl shadow-lg shadow-brandRed/30 rotate-3 group-hover:rotate-6 transition">2</div>
-                    <div class="text-brandRed mb-6 mt-4 bg-red-100 w-16 h-16 rounded-full flex items-center justify-center">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"></path></svg>
+                <div class="relative p-8 border border-gray-100 rounded-3xl transform transition hover:-translate-y-2 hover:shadow-xl duration-300 group flex flex-col">
+                    <div class="absolute inset-0 rounded-3xl overflow-hidden z-0">
+                        <!-- Η φωτογραφία που επέλεξες -->
+                        <div class="absolute inset-0 bg-[url('https://source.unsplash.com/jiOByhCw2jE')] bg-cover bg-center transition-transform duration-700 group-hover:scale-110"></div>
+                        <div class="absolute inset-0 bg-gray-900/85 group-hover:bg-gray-900/75 transition duration-300"></div>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-900">Επαγγελματικό Γύρισμα</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">Ερχόμαστε στον χώρο σας με 4K κάμερες, ασύρματα μικρόφωνα και επαγγελματικό φωτισμό. Σας καθοδηγούμε σκηνοθετικά βήμα-βήμα για άψογο αποτέλεσμα.</p>
+                    <div class="absolute -top-6 left-8 bg-brandRed text-white w-12 h-12 flex items-center justify-center rounded-2xl font-black text-xl shadow-lg shadow-brandRed/30 rotate-3 group-hover:rotate-6 transition z-20">2</div>
+                    <div class="relative z-10 flex-1 flex flex-col">
+                        <div class="text-brandRed mb-6 mt-2 bg-brandRed/10 border border-brandRed/20 w-16 h-16 rounded-full flex items-center justify-center">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Επαγγελματικό Γύρισμα</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">Ερχόμαστε στον χώρο σας με 4K κάμερες, ασύρματα μικρόφωνα και επαγγελματικό φωτισμό. Σας καθοδηγούμε σκηνοθετικά βήμα-βήμα για άψογο αποτέλεσμα.</p>
+                    </div>
                 </div>
+
                 <!-- Step 3 -->
-                <div class="p-8 border border-gray-100 rounded-3xl bg-gray-50 relative transform transition hover:-translate-y-2 hover:shadow-xl duration-300 group">
-                    <div class="absolute -top-6 left-8 bg-brandRed text-white w-12 h-12 flex items-center justify-center rounded-2xl font-black text-xl shadow-lg shadow-brandRed/30 rotate-3 group-hover:rotate-6 transition">3</div>
-                    <div class="text-brandRed mb-6 mt-4 bg-red-100 w-16 h-16 rounded-full flex items-center justify-center">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"></path></svg>
+                <div class="relative p-8 border border-gray-800 rounded-3xl transform transition hover:-translate-y-2 hover:shadow-2xl hover:shadow-brandRed/20 duration-300 group flex flex-col">
+                    <div class="absolute inset-0 rounded-3xl overflow-hidden z-0">
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1574717025058-2f8737d2e2b7?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center transition-transform duration-700 group-hover:scale-110"></div>
+                        <div class="absolute inset-0 bg-gray-900/85 group-hover:bg-gray-900/75 transition duration-300"></div>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-900">Premium Μοντάζ</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">Μαζεύουμε το υλικό στο studio μας και το απογειώνουμε: Δυναμικά cuts, color grading, ηχητικά εφέ (SFX), background music και custom υπότιτλοι με υψηλό retention.</p>
+                    <div class="absolute -top-6 left-8 bg-brandRed text-white w-12 h-12 flex items-center justify-center rounded-2xl font-black text-xl shadow-lg shadow-brandRed/30 rotate-3 group-hover:rotate-6 transition z-20">3</div>
+                    <div class="relative z-10 flex-1 flex flex-col">
+                        <div class="text-brandRed mb-6 mt-2 bg-brandRed/10 border border-brandRed/20 w-16 h-16 rounded-full flex items-center justify-center">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Premium Μοντάζ</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">Μαζεύουμε το υλικό στο studio μας και το απογειώνουμε: Δυναμικά cuts, color grading, ηχητικά εφέ (SFX), background music και custom υπότιτλοι με υψηλό retention.</p>
+                    </div>
                 </div>
+
                 <!-- Step 4 -->
-                <div class="p-8 border border-gray-100 rounded-3xl bg-gray-50 relative transform transition hover:-translate-y-2 hover:shadow-xl duration-300 group">
-                    <div class="absolute -top-6 left-8 bg-brandRed text-white w-12 h-12 flex items-center justify-center rounded-2xl font-black text-xl shadow-lg shadow-brandRed/30 rotate-3 group-hover:rotate-6 transition">4</div>
-                    <div class="text-brandRed mb-6 mt-4 bg-red-100 w-16 h-16 rounded-full flex items-center justify-center">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.438 4.438 0 002.946 2.946 4.493 4.493 0 004.306-1.758q.24-.24.438-.507m-2.822-2.823a1.99 1.99 0 00-2.823 2.823"></path></svg>
+                <div class="relative p-8 border border-gray-800 rounded-3xl transform transition hover:-translate-y-2 hover:shadow-2xl hover:shadow-brandRed/20 duration-300 group flex flex-col">
+                    <div class="absolute inset-0 rounded-3xl overflow-hidden z-0">
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center transition-transform duration-700 group-hover:scale-110"></div>
+                        <div class="absolute inset-0 bg-gray-900/85 group-hover:bg-gray-900/75 transition duration-300"></div>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-900">Έτοιμα για Upload</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">Παραλαμβάνετε έναν έτοιμο φάκελο με την παραγωγή του μήνα. Τα βίντεο είναι βελτιστοποιημένα για TikTok, Instagram Reels & YouTube Shorts. Απλά πατάτε "Δημοσίευση".</p>
+                    <div class="absolute -top-6 left-8 bg-brandRed text-white w-12 h-12 flex items-center justify-center rounded-2xl font-black text-xl shadow-lg shadow-brandRed/30 rotate-3 group-hover:rotate-6 transition z-20">4</div>
+                    <div class="relative z-10 flex-1 flex flex-col">
+                        <div class="text-brandRed mb-6 mt-2 bg-brandRed/10 border border-brandRed/20 w-16 h-16 rounded-full flex items-center justify-center">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.438 4.438 0 002.946 2.946 4.493 4.493 0 004.306-1.758q.24-.24.438-.507m-2.822-2.823a1.99 1.99 0 00-2.823 2.823"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Έτοιμα για Upload</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">Παραλαμβάνετε έναν έτοιμο φάκελο με την παραγωγή του μήνα. Τα βίντεο είναι βελτιστοποιημένα για TikTok, Instagram Reels & YouTube Shorts. Απλά πατάτε "Δημοσίευση".</p>
+                    </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -418,8 +450,19 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT ΓΙΑ ΤΟ POPUP -->
+    <!-- JAVASCRIPT ΓΙΑ ΤΟ POPUP ΚΑΙ ΤΟ PARALLAX -->
     <script>
+        // --- PARALLAX JAVASCRIPT ---
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const blob = document.getElementById('hero-blob');
+            if(blob) {
+                // Η ταχύτητα κίνησης του blob καθορίζεται από το 0.4
+                blob.style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.4}px))`;
+            }
+        });
+
+        // --- MODAL JAVASCRIPT ---
         function openModal(packageName) {
             document.getElementById('packageModal').classList.remove('hidden');
             document.getElementById('modalPackageName').innerText = 'Ενδιαφερομαι για: ' + packageName;
