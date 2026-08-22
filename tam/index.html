@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Click & Clip | Agency OS v2.1</title>
+    <title>Click & Clip | Agency OS v2.2</title>
 
 <!-- Εικονίδια App & Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
@@ -35,7 +35,6 @@
         .calendar-day { min-height: 80px; }
         @media (max-width: 640px) { .calendar-day { min-height: 60px; } }
         
-        /* Κρύβουμε τα arrows (spinners) από τα μικρά number inputs */
         input[type=number].no-spinners::-webkit-inner-spin-button, 
         input[type=number].no-spinners::-webkit-outer-spin-button { 
             -webkit-appearance: none; margin: 0; 
@@ -48,7 +47,7 @@
     <!-- PIN SECURITY OVERLAY -->
     <div id="pinScreen" class="fixed inset-0 bg-brandDark z-[100] flex flex-col items-center justify-center p-4">
         <h1 class="text-4xl font-black text-white mb-2 tracking-wider">CLICK<span class="text-brandRed">&</span>CLIP</h1>
-        <p class="text-gray-500 mb-8 uppercase tracking-widest text-xs md:text-sm text-center font-bold">Agency OS <span class="text-white">v2.1</span> • Secure Access</p>
+        <p class="text-gray-500 mb-8 uppercase tracking-widest text-xs md:text-sm text-center font-bold">Agency OS <span class="text-white">v2.2</span> • Secure Access</p>
         
         <input type="password" id="pinInput" placeholder="PIN" class="bg-cardDark border border-gray-700 rounded-lg px-6 py-4 text-white text-center text-2xl tracking-widest focus:border-brandRed outline-none mb-4 w-full max-w-xs shadow-2xl" onkeyup="if(event.key === 'Enter') unlockApp()">
         <button onclick="unlockApp()" class="bg-brandRed hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition w-full max-w-xs text-lg">Είσοδος</button>
@@ -59,14 +58,13 @@
     <!-- Main Content -->
     <main class="flex-1 flex flex-col h-full overflow-hidden relative hidden" id="mainContent">
         
-        <!-- Pinned Slim Header -->
         <header class="p-3 md:p-5 border-b border-gray-800 bg-[#050505] z-10 shrink-0 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
             <div>
                 <h2 class="text-xl md:text-2xl font-black flex items-center gap-2 tracking-wider">
                     CLICK<span class="text-brandRed">&</span>CLIP
                 </h2>
                 <div class="flex items-center gap-2 mt-1">
-                    <span class="text-[11px] md:text-xs text-gray-400 font-bold uppercase tracking-widest">Agency OS <span class="text-white">v2.1</span></span>
+                    <span class="text-[11px] md:text-xs text-gray-400 font-bold uppercase tracking-widest">Agency OS <span class="text-white">v2.2</span></span>
                     <span class="text-green-500 text-[9px] md:text-[10px] font-bold tracking-widest uppercase flex items-center gap-1 bg-green-500/10 px-2 py-0.5 rounded">
                         <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> Sync
                     </span>
@@ -82,11 +80,8 @@
             </div>
         </header>
 
-        <!-- Scrollable Area -->
         <div class="flex-1 overflow-y-auto p-4 md:p-8 pb-20">
-            
             <div class="mb-8 space-y-4">
-                <!-- Global Production Tracker -->
                 <div class="bg-[#111] border border-gray-800 rounded-xl p-4 md:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                     <div>
                         <p class="text-xs text-gray-500 uppercase tracking-widest mb-2">
@@ -109,13 +104,12 @@
                     </div>
                 </div>
 
-                <!-- Stats Grid -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                     <div class="bg-blue-900/10 border border-blue-900/30 px-4 py-3 rounded-xl flex flex-col justify-center relative overflow-hidden">
                         <div class="absolute left-0 top-0 h-full w-1 bg-blue-500"></div>
-                        <p class="text-[10px] md:text-xs text-blue-400 uppercase font-bold">Μηνιαια Εσοδα (MRR)</p>
-                        <p class="text-lg md:text-xl font-black text-white" id="statMRR">0€</p>
-                        <p class="text-[10px] text-gray-500 mt-1">Εφάπαξ (One-off): <span id="statOneOff" class="text-gray-300">0€</span></p>
+                        <p class="text-[10px] md:text-xs text-blue-400 uppercase font-bold">Εσοδα Video (Μηνα)</p>
+                        <p class="text-lg md:text-xl font-black text-white" id="statVideoRev">0€</p>
+                        <p class="text-[10px] text-gray-500 mt-1">Από Landing Pages: <span id="statLandingRev" class="text-gray-300">0€</span></p>
                     </div>
                     <div class="bg-cardDark border border-gray-800 px-4 py-3 rounded-xl flex flex-col justify-center">
                         <p class="text-[10px] md:text-xs text-gray-500 uppercase">Συνολο Εισπραξεων</p>
@@ -132,7 +126,6 @@
                 </div>
             </div>
 
-            <!-- Add Project Form (A la Carte with dynamic pricing) -->
             <div class="bg-cardDark border border-gray-800 rounded-2xl p-4 md:p-6 mb-8">
                 <h3 class="text-lg font-bold mb-4 flex items-center"><span class="text-brandRed mr-2">➕</span> Νέο Project</h3>
                 <form id="addClientForm" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-3 md:gap-4 items-end">
@@ -140,9 +133,9 @@
                         <label class="block text-xs text-gray-400 mb-1">Όνομα & Τύπος</label>
                         <div class="flex gap-2">
                             <input type="text" id="newClientName" placeholder="Όνομα..." required class="w-full bg-[#0a0a0a] border border-gray-700 rounded-lg px-3 py-3 md:py-2 text-white focus:border-brandRed outline-none">
-                            <select id="newClientType" class="bg-[#0a0a0a] border border-gray-700 rounded-lg px-2 text-white focus:border-brandRed outline-none w-32">
-                                <option value="mrr">MRR</option>
-                                <option value="one-off">One-off</option>
+                            <select id="newClientType" class="bg-[#0a0a0a] border border-gray-700 rounded-lg px-2 text-white focus:border-brandRed outline-none w-36">
+                                <option value="video">Παραγωγή Video</option>
+                                <option value="landing">Landing Page</option>
                             </select>
                         </div>
                     </div>
@@ -196,22 +189,19 @@
                     <div class="flex flex-wrap items-center gap-3 mb-2">
                         <h2 class="text-xl md:text-2xl font-black text-white" id="modalClientName">Όνομα</h2>
                         <select id="modalClientStatus" onchange="updateStatus(this.value)" class="bg-[#111] border border-gray-700 rounded px-2 py-1 text-xs outline-none font-bold">
-                            <option value="active">🟢 Ενεργός</option>
-                            <option value="inactive">🔴 Ανενεργός</option>
+                            <option value="active" class="text-green-500">🟢 Ενεργός</option>
+                            <option value="paused" class="text-yellow-500">⏸ Παύση</option>
+                            <option value="inactive" class="text-red-500">🔴 Ανενεργός</option>
                         </select>
                         <select id="modalClientType" onchange="updateClientType(this.value)" class="bg-[#111] border border-gray-700 rounded px-2 py-1 text-xs outline-none text-blue-400 font-bold">
-                            <option value="mrr">🔄 Συνδρομή (MRR)</option>
-                            <option value="one-off">📌 Εφάπαξ Project</option>
+                            <option value="video">🎥 Παραγωγή Video</option>
+                            <option value="landing">🌐 Landing Page</option>
                         </select>
                     </div>
                     <div class="flex items-center gap-2">
                         <span class="text-xs text-gray-500 uppercase">Σταδιο:</span>
                         <select id="modalClientPipeline" onchange="updatePipeline(this.value)" class="bg-cardDark border border-gray-700 rounded px-2 py-1 text-xs outline-none font-bold cursor-pointer">
-                            <option value="Δημιουργια σεναριων" class="text-yellow-500">Δημιουργια σεναριων</option>
-                            <option value="Εγκριση Σεναρίων" class="text-blue-500">Εγκριση Σεναρίων</option>
-                            <option value="Αναμονη γυρισματων" class="text-purple-500">Αναμονη γυρισματων</option>
-                            <option value="Γυρισματα" class="text-red-500">Γυρισματα</option>
-                            <option value="Παραδοθηκε" class="text-green-500">Παραδοθηκε</option>
+                            <!-- Dynamic Options via JS -->
                         </select>
                     </div>
                 </div>
@@ -220,8 +210,6 @@
 
             <div class="p-4 md:p-6 overflow-y-auto flex-1 grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
                 <div class="space-y-6">
-                    
-                    <!-- Monthly Breakdown -->
                     <div class="bg-[#0a0a0a] p-3 md:p-5 rounded-xl border border-gray-800">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-brandRed">Υπηρεσίες ανά Μήνα</h3>
@@ -234,7 +222,6 @@
                         </div>
                     </div>
 
-                    <!-- Payments -->
                     <div class="bg-[#0a0a0a] p-4 md:p-5 rounded-xl border border-gray-800">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="font-bold text-green-500">Πληρωμές</h3>
@@ -251,7 +238,6 @@
                     </div>
                 </div>
 
-                <!-- Notes -->
                 <div class="bg-[#0a0a0a] p-4 md:p-5 rounded-xl border border-gray-800 flex flex-col h-full min-h-[300px]">
                     <h3 class="font-bold mb-4 text-blue-400">Εκκρεμότητες & Σημειώσεις</h3>
                     <div id="modalNotesList" class="flex-1 space-y-3 mb-4 overflow-y-auto pr-1"></div>
@@ -273,7 +259,6 @@
 
     <!-- EXPENSES MODAL -->
     <div id="expensesModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 hidden flex items-center justify-center p-2 md:p-4">
-        <!-- Κώδικας Εξόδων παραμένει ίδιος... -->
         <div class="bg-cardDark border border-gray-700 rounded-2xl w-full max-w-3xl shadow-2xl flex flex-col max-h-[90vh]">
             <div class="p-4 md:p-6 border-b border-gray-800 flex justify-between items-center bg-[#050505] rounded-t-2xl">
                 <h2 class="text-xl md:text-2xl font-black text-white">Οργάνωση Εξόδων</h2>
@@ -305,7 +290,6 @@
 
     <!-- CALENDAR MODAL -->
     <div id="calendarModal" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[60] hidden flex items-center justify-center p-2 md:p-6">
-        <!-- Κώδικας Calendar παραμένει ίδιος... -->
         <div class="bg-cardDark border border-gray-700 rounded-2xl w-full max-w-6xl h-full md:h-[90vh] flex flex-col shadow-2xl">
             <div class="p-4 md:p-6 border-b border-gray-800 flex justify-between items-center bg-[#050505] rounded-t-2xl">
                 <div class="flex items-center gap-4">
@@ -318,7 +302,6 @@
                 </div>
                 <button onclick="closeCalendarModal()" class="text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 p-2 md:px-4 md:py-2 rounded-lg transition text-sm font-bold">✕ <span class="hidden md:inline ml-1">Κλείσιμο</span></button>
             </div>
-            
             <div class="p-2 md:p-6 flex-1 overflow-y-auto bg-[#0a0a0a]">
                 <div class="calendar-grid mb-2 text-center text-xs text-gray-500 font-bold uppercase tracking-wider">
                     <div>Δευ</div><div>Τρι</div><div>Τετ</div><div>Πεμ</div><div>Παρ</div><div>Σαβ</div><div>Κυρ</div>
@@ -338,11 +321,11 @@
         let currentCalYear = new Date().getFullYear();
 
         const pipelineColors = {
-            'Δημιουργια σεναριων': { bg: 'bg-yellow-500/10', text: 'text-yellow-500', border: 'border-yellow-500/20' },
-            'Εγκριση Σεναρίων': { bg: 'bg-blue-500/10', text: 'text-blue-500', border: 'border-blue-500/20' },
-            'Αναμονη γυρισματων': { bg: 'bg-purple-500/10', text: 'text-purple-500', border: 'border-purple-500/20' },
-            'Γυρισματα': { bg: 'bg-red-500/10', text: 'text-red-500', border: 'border-red-500/20' },
-            'Παραδοθηκε': { bg: 'bg-green-500/10', text: 'text-green-500', border: 'border-green-500/20' }
+            'Σενάρια': { bg: 'bg-yellow-500/10', text: 'text-yellow-500', border: 'border-yellow-500/20' },
+            'Γυρίσματα': { bg: 'bg-red-500/10', text: 'text-red-500', border: 'border-red-500/20' },
+            'Αναμονή': { bg: 'bg-purple-500/10', text: 'text-purple-500', border: 'border-purple-500/20' },
+            'Παραδόθηκε': { bg: 'bg-green-500/10', text: 'text-green-500', border: 'border-green-500/20' },
+            'Κατασκευή': { bg: 'bg-blue-500/10', text: 'text-blue-500', border: 'border-blue-500/20' }
         };
 
         // --- CLOUD API & DATA MIGRATION ---
@@ -363,11 +346,27 @@
                     if(serverData.clients) {
                         db = serverData;
                         
-                        // MIGRATION: Convert old data & attach dynamic prices
+                        // MIGRATION v2.2
                         db.clients.forEach(c => {
-                            if (!c.status) c.status = 'active';
-                            if (!c.type) c.type = (c.package === 'The Click Page') ? 'one-off' : 'mrr';
-                            if (!c.pipeline) c.pipeline = 'Δημιουργια σεναριων';
+                            // Status mapping
+                            if (!['active', 'inactive', 'paused'].includes(c.status)) c.status = 'active';
+                            
+                            // Type mapping
+                            if (c.type === 'mrr') c.type = 'video';
+                            if (c.type === 'one-off') c.type = 'landing';
+                            if (!c.type) c.type = 'video';
+                            
+                            // Pipeline mapping
+                            if (c.type === 'video') {
+                                if (['Δημιουργια σεναριων', 'Εγκριση Σεναρίων'].includes(c.pipeline)) c.pipeline = 'Σενάρια';
+                                else if (c.pipeline === 'Αναμονη γυρισματων') c.pipeline = 'Αναμονή';
+                                else if (c.pipeline === 'Γυρισματα') c.pipeline = 'Γυρίσματα';
+                                else if (c.pipeline === 'Παραδοθηκε') c.pipeline = 'Παραδόθηκε';
+                                else if (!['Σενάρια', 'Γυρίσματα', 'Αναμονή', 'Παραδόθηκε'].includes(c.pipeline)) c.pipeline = 'Σενάρια';
+                            } else {
+                                if (c.pipeline !== 'Παραδόθηκε') c.pipeline = 'Κατασκευή';
+                            }
+
                             if (!c.months) {
                                 const currentMonthName = new Date().toLocaleString('el-GR', { month: 'long', year: 'numeric' });
                                 c.months = [{ 
@@ -383,7 +382,6 @@
                                     if (m.videos === undefined) m.videos = m.delivered || 0;
                                     if (m.edits === undefined) m.edits = 0;
                                     if (m.lps === undefined) m.lps = (c.package === 'The Click Page' && idx === 0) ? 1 : 0;
-                                    // Set default prices if they don't exist
                                     if (m.vPrice === undefined) m.vPrice = 50;
                                     if (m.ePrice === undefined) m.ePrice = 25;
                                     if (m.lpPrice === undefined) m.lpPrice = 350;
@@ -406,29 +404,28 @@
             } catch (err) { alert('Αποτυχία αποθήκευσης στο Cloud.'); }
         }
 
-        // --- NEW AUTO-CALCULATION FOR ADDING PROJECT (WITH DYNAMIC PRICING) ---
         function calcNewClientCost() {
             const v = parseFloat(document.getElementById('newClientVideos').value || 0);
             const vp = parseFloat(document.getElementById('newClientVPrice').value || 0);
-            
             const e = parseFloat(document.getElementById('newClientEdits').value || 0);
             const ep = parseFloat(document.getElementById('newClientEPrice').value || 0);
-            
             const lp = parseFloat(document.getElementById('newClientLPs').value || 0);
             const lpp = parseFloat(document.getElementById('newClientLPPrice').value || 0);
-            
             document.getElementById('newClientCost').value = (v * vp) + (e * ep) + (lp * lpp);
         }
 
         document.getElementById('addClientForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const currentMonthName = new Date().toLocaleString('el-GR', { month: 'long', year: 'numeric' });
+            const pType = document.getElementById('newClientType').value;
+            const initPipeline = pType === 'video' ? 'Σενάρια' : 'Κατασκευή';
+            
             db.clients.push({
                 id: Date.now(),
                 name: document.getElementById('newClientName').value,
-                type: document.getElementById('newClientType').value,
+                type: pType,
                 status: 'active',
-                pipeline: 'Δημιουργια σεναριων',
+                pipeline: initPipeline,
                 months: [{ 
                     id: Date.now(), 
                     name: currentMonthName, 
@@ -458,10 +455,14 @@
             document.getElementById('trackerMonthName').innerText = currentMonthName;
 
             let totalPaid = 0, totalOwed = 0, totalExpenses = db.expenses.reduce((sum, e) => sum + parseFloat(e.amount), 0);
-            let mrrThisMonth = 0, oneOffThisMonth = 0;
+            let videoThisMonth = 0, landingThisMonth = 0;
             let globalVideos = 0, globalEdits = 0, globalLPs = 0;
 
-            const sortedClients = [...db.clients].sort((a, b) => (a.status === 'inactive') - (b.status === 'inactive'));
+            // Sort: Active first, then Paused, then Inactive
+            const sortedClients = [...db.clients].sort((a, b) => {
+                const getWeight = (s) => s === 'active' ? 1 : (s === 'paused' ? 2 : 3);
+                return getWeight(a.status) - getWeight(b.status);
+            });
 
             sortedClients.forEach(c => {
                 const totalCost = c.months.reduce((sum, m) => sum + (parseFloat(m.cost) || 0), 0);
@@ -470,14 +471,21 @@
                 totalPaid += paid; totalOwed += owed;
 
                 const isInactive = c.status === 'inactive';
-                const opacityClass = isInactive ? 'opacity-60 grayscale-[30%]' : '';
-                const borderClass = owed > 0 && !isInactive ? 'border-brandRed/30' : 'border-gray-800';
+                const isPaused = c.status === 'paused';
+                const opacityClass = isInactive ? 'opacity-60 grayscale-[30%]' : (isPaused ? 'opacity-80' : '');
+                const borderClass = owed > 0 && !isInactive && !isPaused ? 'border-brandRed/30' : (isPaused ? 'border-yellow-500/30' : 'border-gray-800');
                 
-                if (!isInactive) {
+                let statusBadge = '';
+                if (isInactive) statusBadge = '<span class="text-[10px] bg-red-500/20 text-red-500 px-2 py-1 rounded font-bold">ΑΝΕΝΕΡΓΟΣ</span>';
+                else if (isPaused) statusBadge = '<span class="text-[10px] bg-yellow-500/20 text-yellow-500 px-2 py-1 rounded font-bold">ΠΑΥΣΗ</span>';
+
+                const typeBadgeText = c.type === 'video' ? '🎥 VIDEO' : '🌐 LANDING';
+
+                if (!isInactive && !isPaused) {
                     const currentMonthData = c.months.find(m => m.name === currentMonthName) || c.months[c.months.length - 1];
                     if (currentMonthData) {
-                        if (c.type === 'mrr') mrrThisMonth += parseFloat(currentMonthData.cost || 0);
-                        if (c.type === 'one-off') oneOffThisMonth += parseFloat(currentMonthData.cost || 0);
+                        if (c.type === 'video') videoThisMonth += parseFloat(currentMonthData.cost || 0);
+                        if (c.type === 'landing') landingThisMonth += parseFloat(currentMonthData.cost || 0);
                         
                         globalVideos += parseInt(currentMonthData.videos || 0);
                         globalEdits += parseInt(currentMonthData.edits || 0);
@@ -489,17 +497,18 @@
                 const cTotalEdits = c.months.reduce((s, m) => s + parseInt(m.edits || 0), 0);
                 const cTotalLPs = c.months.reduce((s, m) => s + parseInt(m.lps || 0), 0);
 
-                const pipeInfo = pipelineColors[c.pipeline || 'Δημιουργια σεναριων'];
-                const pipelineBadge = !isInactive ? `<span class="text-[10px] ${pipeInfo.bg} ${pipeInfo.text} border ${pipeInfo.border} px-2 py-1 rounded truncate ml-2">${c.pipeline}</span>` : '';
+                const currentPipeline = c.pipeline || (c.type === 'landing' ? 'Κατασκευή' : 'Σενάρια');
+                const pipeInfo = pipelineColors[currentPipeline];
+                const pipelineBadge = (!isInactive && !isPaused) ? `<span class="text-[10px] ${pipeInfo.bg} ${pipeInfo.text} border ${pipeInfo.border} px-2 py-1 rounded truncate ml-2">${currentPipeline}</span>` : '';
                 
                 grid.insertAdjacentHTML('beforeend', `
                     <div class="bg-cardDark border ${borderClass} ${opacityClass} rounded-xl p-4 md:p-5 hover:border-gray-600 cursor-pointer transition flex flex-col" onclick="openModal(${c.id})">
                         <div class="flex justify-between items-start mb-2">
                             <h3 class="text-lg md:text-xl font-bold truncate pr-2 flex-1">${c.name}</h3>
-                            ${isInactive ? '<span class="text-[10px] bg-red-500/20 text-red-500 px-2 py-1 rounded font-bold">ΑΝΕΝΕΡΓΟΣ</span>' : ''}
+                            ${statusBadge}
                         </div>
                         <div class="flex items-center mb-3 mt-[-4px]">
-                            <span class="text-[10px] text-gray-500 uppercase">${c.type === 'mrr' ? '🔄 Συνδρομη' : '📌 Εφαπαξ'}</span>
+                            <span class="text-[10px] text-gray-500 uppercase">${typeBadgeText}</span>
                             ${pipelineBadge}
                         </div>
                         <div class="flex justify-between text-xs md:text-sm text-gray-400 mb-4 border-b border-gray-800 pb-3">
@@ -514,8 +523,8 @@
                 `);
             });
 
-            document.getElementById('statMRR').innerText = `${mrrThisMonth}€`;
-            document.getElementById('statOneOff').innerText = `${oneOffThisMonth}€`;
+            document.getElementById('statVideoRev').innerText = `${videoThisMonth}€`;
+            document.getElementById('statLandingRev').innerText = `${landingThisMonth}€`;
             document.getElementById('statPaid').innerText = `${totalPaid}€`;
             document.getElementById('statOwed').innerText = `${totalOwed}€`;
             document.getElementById('statExpenses').innerText = `${totalExpenses}€`;
@@ -525,7 +534,6 @@
             document.getElementById('globalLPs').innerText = globalLPs;
         }
 
-        // --- EXPENSES LOGIC ---
         function openExpensesModal() { document.getElementById('expDate').value = today; renderExpensesList(); document.getElementById('expensesModal').classList.remove('hidden'); }
         function closeExpensesModal() { document.getElementById('expensesModal').classList.add('hidden'); }
         function addExpense() {
@@ -577,7 +585,6 @@
             if(sortedMonths.length === 0) list.innerHTML = '<p class="text-gray-500 text-sm text-center mt-4">Δεν υπάρχουν έξοδα ακόμα.</p>';
         }
 
-        // --- CALENDAR LOGIC ---
         function openCalendarModal() { renderCalendar(); document.getElementById('calendarModal').classList.remove('hidden'); }
         function closeCalendarModal() { document.getElementById('calendarModal').classList.add('hidden'); }
         function changeCalendarMonth(offset) {
@@ -618,16 +625,31 @@
             }
         }
 
-        // --- CLIENT MODAL & MONTH UPDATES ---
+        function updatePipelineSelect(type, selectedVal) {
+            const select = document.getElementById('modalClientPipeline');
+            let options = '';
+            if (type === 'video') {
+                const vOpts = ['Σενάρια', 'Γυρίσματα', 'Αναμονή', 'Παραδόθηκε'];
+                if (!vOpts.includes(selectedVal)) selectedVal = 'Σενάρια';
+                options = vOpts.map(o => `<option value="${o}" class="${pipelineColors[o].text}">${o}</option>`).join('');
+            } else {
+                const lOpts = ['Κατασκευή', 'Παραδόθηκε'];
+                if (!lOpts.includes(selectedVal)) selectedVal = 'Κατασκευή';
+                options = lOpts.map(o => `<option value="${o}" class="${pipelineColors[o].text}">${o}</option>`).join('');
+            }
+            select.innerHTML = options;
+            select.value = selectedVal;
+            updatePipelineColor(selectedVal);
+            return selectedVal;
+        }
+
         function openModal(id) {
             activeClientId = id; const c = db.clients.find(x => x.id === id);
             document.getElementById('modalClientName').innerText = c.name;
             document.getElementById('modalClientStatus').value = c.status || 'active';
-            document.getElementById('modalClientType').value = c.type || 'mrr';
+            document.getElementById('modalClientType').value = c.type || 'video';
             
-            const pipelineSelect = document.getElementById('modalClientPipeline');
-            pipelineSelect.value = c.pipeline || 'Δημιουργια σεναριων';
-            updatePipelineColor(pipelineSelect.value);
+            updatePipelineSelect(c.type || 'video', c.pipeline);
 
             document.getElementById('newPayDate').value = today;
             document.getElementById('newNoteDate').value = today;
@@ -640,7 +662,6 @@
             const totalCost = c.months.reduce((sum, m) => sum + (parseFloat(m.cost) || 0), 0);
             document.getElementById('modalTotalCostDisplay').innerText = `${totalCost}€`;
             
-            // NEW MONTH CARDS UI WITH DYNAMIC PRICING
             document.getElementById('modalMonthsList').innerHTML = c.months.map(m => `
                 <div class="bg-[#111] p-3 rounded-lg border border-gray-800 text-sm mb-3 shadow-sm">
                     <div class="flex justify-between items-center mb-3 border-b border-gray-800 pb-2">
@@ -701,8 +722,17 @@
         }
 
         function updateStatus(val) { db.clients.find(x => x.id === activeClientId).status = val; saveToServer(); }
-        function updateClientType(val) { db.clients.find(x => x.id === activeClientId).type = val; saveToServer(); }
+        
+        function updateClientType(val) { 
+            const c = db.clients.find(x => x.id === activeClientId);
+            c.type = val; 
+            c.pipeline = updatePipelineSelect(val, c.pipeline);
+            saveToServer();
+            refreshModalUI();
+        }
+        
         function updatePipeline(val) { db.clients.find(x => x.id === activeClientId).pipeline = val; updatePipelineColor(val); saveToServer(); }
+        
         function updatePipelineColor(val) {
             const select = document.getElementById('modalClientPipeline');
             select.className = "bg-cardDark border border-gray-700 rounded px-2 py-1 text-xs outline-none font-bold cursor-pointer";
@@ -714,7 +744,6 @@
             const currentMonthName = new Date().toLocaleString('el-GR', { month: 'long', year: 'numeric' }); 
             const client = db.clients.find(x => x.id === activeClientId);
             
-            // Αντιγραφή τιμών από τον προηγούμενο μήνα αν υπάρχει (για να μην τα ξαναγράφεις)
             let vp = 50, ep = 25, lpp = 350;
             if (client.months.length > 0) {
                 const lastMonth = client.months[client.months.length - 1];
@@ -732,14 +761,12 @@
             saveToServer(); refreshModalUI(); 
         }
         
-        // NEW AUTO-CALCULATION FOR EXISTING PROJECTS
         function updateMonth(mId, field, val) { 
             const m = db.clients.find(x => x.id === activeClientId).months.find(m => m.id === mId); 
             if(m) { 
                 if (field === 'name') m[field] = val; 
                 else {
                     m[field] = parseFloat(val) || 0; 
-                    // Auto-calculate only if they changed a quantity OR a unit price.
                     if (['videos', 'edits', 'lps', 'vPrice', 'ePrice', 'lpPrice'].includes(field)) {
                         const vp = m.vPrice !== undefined ? m.vPrice : 50;
                         const ep = m.ePrice !== undefined ? m.ePrice : 25;
@@ -761,5 +788,3 @@
     </script>
 </body>
 </html>
-
-```
