@@ -98,39 +98,40 @@
         </div>
     </section>
 
-   <!-- AI SHOWCASE SECTION -->
+  <!-- AI SHOWCASE SECTION -->
     <section id="ai-showcase" class="py-24 bg-gray-900 border-t border-b border-gray-800 overflow-hidden relative shadow-[inset_0_20px_50px_rgba(0,0,0,0.5)]">
         <!-- Subtle Glow Background -->
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brandRed/10 rounded-full blur-[120px] pointer-events-none"></div>
         
         <div class="max-w-7xl mx-auto px-4 relative z-10">
-            <div class="text-center mb-16 reveal-on-scroll">
+            <div class="text-center mb-12 md:mb-16 reveal-on-scroll">
                 <div class="inline-block bg-brandRed/20 text-brandRed font-black px-4 py-1.5 rounded-full text-xs mb-4 uppercase tracking-widest border border-brandRed/30">The Future of Content</div>
                 <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6">Η Δύναμη του <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandRed to-orange-500">AI Video</span></h2>
                 <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">Φανταστείτε σενάρια που δεν μπορούν να γυριστούν με συμβατική κάμερα. Εμείς τα κάνουμε πραγματικότητα εξολοκλήρου με τεχνητή νοημοσύνη, σε 9:16 format, έτοιμα να γίνουν viral στο TikTok και τα Reels.</p>
             </div>
             
-            <div class="flex gap-8 overflow-x-auto pb-12 snap-x snap-mandatory hide-scrollbar justify-center items-center">
+            <!-- ΔΙΑΤΑΞΗ: Κάθετα στο κινητό (flex-col), Οριζόντια στο Desktop (md:flex-row) -->
+            <div class="flex flex-col md:flex-row gap-10 md:gap-8 pb-12 justify-center items-center">
                 
                 <!-- VIDEO 1: prosfo.app -->
-                <div class="snap-center shrink-0 w-[300px] h-[533px] bg-black rounded-[2rem] overflow-hidden relative border-[4px] border-gray-800 shadow-[0_0_40px_rgba(255,51,51,0.15)] group reveal-on-scroll hover:border-brandRed transition duration-500 transform hover:-translate-y-2">
+                <div class="w-full max-w-[300px] aspect-[9/16] bg-black rounded-[2rem] overflow-hidden relative border-[4px] border-gray-800 shadow-[0_0_40px_rgba(255,51,51,0.15)] group reveal-on-scroll hover:border-brandRed transition duration-500 transform hover:-translate-y-2">
                    <video src="aisample1.mp4" autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-90 group-hover:opacity-100"></video>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-80"></div>
-                    <div class="absolute bottom-0 left-0 w-full p-6">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-80 pointer-events-none"></div>
+                    <div class="absolute bottom-0 left-0 w-full p-6 pointer-events-none">
                         <span class="text-brandDark font-bold text-[10px] uppercase tracking-widest bg-white px-3 py-1 rounded-full shadow-lg">App Promo</span>
                         <h4 class="text-white text-xl font-bold mt-3 leading-tight drop-shadow-md">prosfo.app</h4>
-                        <p class="text-gray-300 text-xs mt-2 opacity-0 group-hover:opacity-100 transition duration-300 transform translate-y-2 group-hover:translate-y-0">Προώθηση Εφαρμογής με AI B-Rolls</p>
+                        <p class="text-gray-300 text-xs mt-2 md:opacity-0 md:group-hover:opacity-100 transition duration-300 transform md:translate-y-2 md:group-hover:translate-y-0">Προώθηση Εφαρμογής με AI B-Rolls</p>
                     </div>
                 </div>
 
                 <!-- VIDEO 2: Spiti Bio Clean -->
-                <div class="snap-center shrink-0 w-[300px] h-[533px] bg-black rounded-[2rem] overflow-hidden relative border-[4px] border-gray-800 shadow-[0_0_40px_rgba(255,51,51,0.15)] group reveal-on-scroll delay-100 hover:border-brandRed transition duration-500 transform hover:-translate-y-2">
+                <div class="w-full max-w-[300px] aspect-[9/16] bg-black rounded-[2rem] overflow-hidden relative border-[4px] border-gray-800 shadow-[0_0_40px_rgba(255,51,51,0.15)] group reveal-on-scroll md:delay-100 hover:border-brandRed transition duration-500 transform hover:-translate-y-2">
                     <video src="aisample2.mp4" autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-90 group-hover:opacity-100"></video>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-80"></div>
-                    <div class="absolute bottom-0 left-0 w-full p-6">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-80 pointer-events-none"></div>
+                    <div class="absolute bottom-0 left-0 w-full p-6 pointer-events-none">
                         <span class="text-white font-bold text-[10px] uppercase tracking-widest bg-brandRed px-3 py-1 rounded-full shadow-lg">Case Study</span>
                         <h4 class="text-white text-xl font-bold mt-3 leading-tight drop-shadow-md">Spiti Bio Clean vs Ακάρεα</h4>
-                        <p class="text-gray-300 text-xs mt-2 opacity-0 group-hover:opacity-100 transition duration-300 transform translate-y-2 group-hover:translate-y-0">100% AI Generated Video & Voice</p>
+                        <p class="text-gray-300 text-xs mt-2 md:opacity-0 md:group-hover:opacity-100 transition duration-300 transform md:translate-y-2 md:group-hover:translate-y-0">100% AI Generated Video & Voice</p>
                     </div>
                 </div>
 
