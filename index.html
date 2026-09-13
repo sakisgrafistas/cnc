@@ -27,7 +27,7 @@
                 extend: {
                     colors: {
                         brandRed: '#FF3333',
-                        brandDark: '#0B0F19', /* Λίγο πιο βαθύ, tech σκοτεινό */
+                        brandDark: '#0B0F19', 
                     },
                     animation: {
                         'infinite-scroll': 'infinite-scroll 25s linear infinite',
@@ -46,7 +46,7 @@
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans antialiased relative selection:bg-brandRed selection:text-white">
 
-    <!-- Scrolling Ticker Banner (Ανανεωμένο με AI) -->
+    <!-- Scrolling Ticker Banner -->
     <div class="w-full bg-brandDark py-2 overflow-hidden flex whitespace-nowrap border-b-2 border-brandRed shadow-md">
         <div class="animate-infinite-scroll flex items-center space-x-12 px-6">
             <span class="text-white font-bold tracking-widest text-sm uppercase">🎥 Επαγγελματικα Γυρισματα</span>
@@ -72,16 +72,12 @@
 
     <!-- Header / Navigation -->
     <header class="py-6 px-4 w-full flex justify-center items-center sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-sm">
-        <!-- Βάλε το δικό σου λογότυπο εδώ -->
         <img src="logo.png" alt="Click & Clip Premium Video Agency Logo" class="h-14 md:h-16 object-contain hover:scale-105 transition transform duration-300">
     </header>
 
     <!-- HERO SECTION ME PARALLAX -->
-    <!-- [ΑΝΤΙΚΑΤΑΣΤΑΣΗ ΕΙΚΟΝΑΣ]: Εδώ μπορείς να βάλεις μια δική σου σκοτεινή, tech/studio εικόνα -->
     <section class="relative py-16 md:py-32 px-4 text-center w-full overflow-hidden bg-[url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat bg-fixed">
-        
         <div class="absolute inset-0 bg-brandDark/85"></div>
-        
         <div class="relative z-10 max-w-5xl mx-auto">
             <div class="reveal-on-scroll inline-block bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold py-1.5 px-5 rounded-full text-sm mb-8 uppercase tracking-wider shadow-sm">
                 ⚡ Video Agency & Web Development
@@ -96,169 +92,204 @@
             </p>
             
             <div class="reveal-on-scroll delay-300 flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#pricing" class="inline-block bg-brandRed text-white hover:bg-red-600 font-bold py-3.5 px-8 rounded-full text-lg transition duration-300 shadow-[0_0_20px_rgba(255,51,51,0.5)] hover:shadow-[0_0_30px_rgba(255,51,51,0.7)] transform hover:-translate-y-1">Δείτε τα Πακέτα</a>
-                <a href="#how-it-works" class="inline-block bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-gray-900 font-bold py-3.5 px-8 rounded-full text-lg transition duration-300 shadow-sm">Η Διαδικασία Μας</a>
+                <a href="#ai-showcase" class="inline-block bg-brandRed text-white hover:bg-red-600 font-bold py-3.5 px-8 rounded-full text-lg transition duration-300 shadow-[0_0_20px_rgba(255,51,51,0.5)] hover:shadow-[0_0_30px_rgba(255,51,51,0.7)] transform hover:-translate-y-1">Δείτε το AI σε δράση</a>
+                <a href="#pricing" class="inline-block bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-gray-900 font-bold py-3.5 px-8 rounded-full text-lg transition duration-300 shadow-sm">Τα Πακέτα Μας</a>
             </div>
         </div>
     </section>
 
-    <!-- PRICING SECTION -->
-    <section id="pricing" class="py-20 md:py-32 bg-white px-4 border-b border-gray-100">
+    <!-- AI SHOWCASE SECTION (ΜΕΤΑΦΕΡΘΗΚΕ ΣΤΗΝ ΚΟΡΥΦΗ - PANO PANO) -->
+    <section id="ai-showcase" class="py-24 bg-gray-900 border-t border-b border-gray-800 overflow-hidden relative shadow-[inset_0_20px_50px_rgba(0,0,0,0.5)]">
+        <!-- Subtle Glow Background -->
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brandRed/10 rounded-full blur-[120px] pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16 reveal-on-scroll">
+                <div class="inline-block bg-brandRed/20 text-brandRed font-black px-4 py-1.5 rounded-full text-xs mb-4 uppercase tracking-widest border border-brandRed/30">The Future of Content</div>
+                <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6">Η Δύναμη του <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandRed to-orange-500">AI Video</span></h2>
+                <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">Φανταστείτε σενάρια που δεν μπορούν να γυριστούν με συμβατική κάμερα. Εμείς τα κάνουμε πραγματικότητα εξολοκλήρου με τεχνητή νοημοσύνη, σε 9:16 format, έτοιμα να γίνουν viral στο TikTok και τα Reels.</p>
+            </div>
+            
+            <div class="flex gap-8 overflow-x-auto pb-12 snap-x snap-mandatory hide-scrollbar justify-center items-center">
+                
+                <!-- PLACEHOLDER 1: AI VIDEO -->
+                <div class="snap-center shrink-0 w-[300px] h-[533px] bg-black rounded-[2rem] overflow-hidden relative border-[4px] border-gray-800 shadow-[0_0_40px_rgba(255,51,51,0.15)] group reveal-on-scroll hover:border-brandRed transition duration-500 transform hover:-translate-y-2">
+                   <video src="aisample1.mp4" autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-90 group-hover:opacity-100"></video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-80"></div>
+                    <div class="absolute bottom-0 left-0 w-full p-6">
+                        <span class="text-white font-bold text-[10px] uppercase tracking-widest bg-brandRed px-3 py-1 rounded-full shadow-lg">Case Study</span>
+                        <h4 class="text-white text-xl font-bold mt-3 leading-tight drop-shadow-md">Bio-Clean Hero vs Ακάρεα</h4>
+                        <p class="text-gray-300 text-xs mt-2 opacity-0 group-hover:opacity-100 transition duration-300 transform translate-y-2 group-hover:translate-y-0">100% AI Generated Video & Voice</p>
+                    </div>
+                </div>
+
+                <!-- PLACEHOLDER 2: AI VIDEO -->
+                <div class="snap-center shrink-0 w-[300px] h-[533px] bg-black rounded-[2rem] overflow-hidden relative border-[4px] border-gray-800 shadow-[0_0_40px_rgba(255,51,51,0.15)] group reveal-on-scroll delay-100 hover:border-brandRed transition duration-500 transform hover:-translate-y-2">
+                    <video src="aisample2.mp4" autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-90 group-hover:opacity-100"></video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-80"></div>
+                    <div class="absolute bottom-0 left-0 w-full p-6">
+                        <span class="text-brandDark font-bold text-[10px] uppercase tracking-widest bg-white px-3 py-1 rounded-full shadow-lg">100% AI Generated</span>
+                        <h4 class="text-white text-xl font-bold mt-3 leading-tight drop-shadow-md">Απόλυτα Προσωποποιημένο</h4>
+                        <p class="text-gray-300 text-xs mt-2 opacity-0 group-hover:opacity-100 transition duration-300 transform translate-y-2 group-hover:translate-y-0">Φαντασία χωρίς όρια στην παραγωγή</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING SECTION (Premium Grid Design) -->
+    <section id="pricing" class="py-24 md:py-32 bg-gray-50 px-4 border-b border-gray-200">
         <div class="max-w-7xl mx-auto">
             
             <h2 class="reveal-on-scroll text-3xl md:text-5xl font-extrabold text-center mb-4 text-gray-900">Ξεκάθαρες Υπηρεσίες. Ανά Project.</h2>
-            <p class="reveal-on-scroll delay-100 text-gray-500 text-center text-lg max-w-3xl mx-auto mb-12 leading-relaxed">
-                Χωρίς δεσμευτικές μηνιαίες συνδρομές. Πληρώνετε ακριβώς για τα βίντεο και τις σελίδες που θέλετε να παραχθούν.
+            <p class="reveal-on-scroll delay-100 text-gray-500 text-center text-lg max-w-3xl mx-auto mb-16 leading-relaxed">
+                Χωρίς δεσμευτικές μηνιαίες συνδρομές. Πληρώνετε ακριβώς για τα βίντεο και τις σελίδες που θέλετε να παραχθούν. Συνδυάστε τις υπηρεσίες ελεύθερα (Ελάχιστη παραγωγή βίντεο: 10/μήνα).
             </p>
             
-            <!-- ΥΠΗΡΕΣΙΕΣ ΒΙΝΤΕΟ (ΟΜΑΔΑ 1) -->
-            <div class="mb-20">
-                <div class="reveal-on-scroll flex items-center justify-center gap-4 mb-8">
-                    <div class="h-px bg-gray-200 flex-1 max-w-[100px]"></div>
-                    <h3 class="text-2xl md:text-3xl font-black text-gray-900 uppercase tracking-widest">Video Production</h3>
-                    <div class="h-px bg-gray-200 flex-1 max-w-[100px]"></div>
-                </div>
+            <div class="reveal-on-scroll flex items-center justify-center gap-4 mb-10">
+                <div class="h-px bg-gray-300 flex-1 max-w-[100px]"></div>
+                <h3 class="text-2xl md:text-3xl font-black text-gray-900 uppercase tracking-widest">Video Production</h3>
+                <div class="h-px bg-gray-300 flex-1 max-w-[100px]"></div>
+            </div>
 
-                <!-- Υπενθύμιση για το Minimum -->
-                <div class="reveal-on-scroll delay-100 bg-brandDark border border-gray-800 rounded-2xl p-6 mb-12 text-center max-w-3xl mx-auto shadow-lg">
-                    <p class="text-white font-extrabold text-lg"><span class="text-brandRed uppercase tracking-wider">Σημαντικη Σημειωση:</span> Για τις υπηρεσίες βίντεο απαιτείται <span class="text-brandRed border-b-2 border-brandRed">ελάχιστη παραγωγή 10 βίντεο τον μήνα</span>.</p>
-                    <p class="text-gray-400 text-sm mt-2 font-medium">Μπορείτε να συνδυάσετε τα παρακάτω πακέτα ανάλογα με τις ανάγκες σας!</p>
-                </div>
-
-                <!-- PRICING CARDS GRID - VIDEOS -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mt-8 md:mt-0">
-                    
-                    <!-- ΥΠΗΡΕΣΙΑ 1: REMOTE EDITING -->
-                    <div class="reveal-on-scroll delay-100">
-                        <div class="h-full p-8 border border-gray-200 bg-gray-50 shadow-sm hover:shadow-xl rounded-3xl flex flex-col transition duration-300 relative mt-6 md:mt-0">
-                            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs font-bold px-6 py-1.5 rounded-full uppercase tracking-wider whitespace-nowrap shadow-md">It's All You</div>
-                            <h3 class="text-2xl font-bold mb-3 tracking-wide text-gray-900 mt-2">Remote Edit</h3>
-                            <p class="text-gray-600 text-sm mb-6 leading-relaxed">Εσείς τραβάτε τα πλάνα με την καθοδήγησή μας, και εμείς αναλαμβάνουμε το επαγγελματικό κάθετο μοντάζ.</p>
-                            <div class="text-5xl font-extrabold mb-6 text-gray-900">25€ <span class="text-sm font-bold text-gray-500">/βίντεο +ΦΠΑ</span></div>
-                            
-                            <ul class="space-y-4 text-gray-700 flex-1 mb-8 text-sm font-medium">
-                                <li class="flex items-start"><span class="text-brandRed mr-2 font-bold text-lg">✓</span> Τραβάτε μόνοι σας πλάνα με κινητό</li>
-                                <li class="flex items-start"><span class="text-brandRed mr-2 font-bold text-lg">✓</span> Καθοδήγηση για Hook & Σενάριο</li>
-                                <li class="flex items-start"><span class="text-brandRed mr-2 font-bold text-lg">✓</span> Δυναμικό Μοντάζ (Jump cuts, SFX)</li>
-                                <li class="flex items-start"><span class="text-brandRed mr-2 font-bold text-lg">✓</span> Dynamic Captions & Color Grading</li>
-                            </ul>
-                            <a href="javascript:void(0)" onclick="openModal('Remote Edit (25€/βίντεο)')" class="text-center bg-white border-2 border-gray-300 hover:border-gray-900 text-gray-900 font-bold py-4 rounded-xl transition duration-300 mt-auto">Επιλογή</a>
-                        </div>
-                    </div>
-
-                    <!-- ΥΠΗΡΕΣΙΑ 2: FULL PRODUCTION VIDEO -->
-                    <div class="reveal-on-scroll delay-200">
-                        <div class="h-full p-8 border border-gray-200 bg-gray-50 shadow-sm hover:shadow-xl rounded-3xl flex flex-col transition duration-300 relative mt-6 md:mt-0">
-                            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs font-bold px-6 py-1.5 rounded-full uppercase tracking-wider whitespace-nowrap shadow-md">With You On Camera</div>
-                            <h3 class="text-2xl font-bold mb-3 tracking-wide text-gray-900 mt-2">Full Production</h3>
-                            <p class="text-gray-600 text-sm mb-6 leading-relaxed">Ερχόμαστε στον χώρο σας, στήνουμε τον εξοπλισμό, σας σκηνοθετούμε και εσείς παρουσιάζετε.</p>
-                            <div class="text-5xl font-extrabold mb-6 text-gray-900">50€ <span class="text-sm font-bold text-gray-500">/βίντεο +ΦΠΑ</span></div>
-                            
-                            <ul class="space-y-4 text-gray-700 flex-1 mb-8 text-sm font-medium">
-                                <li class="flex items-start"><span class="text-brandRed mr-2 font-bold text-lg">✓</span> Γύρισμα με Pro Κάμερες & Φώτα</li>
-                                <li class="flex items-start"><span class="text-brandRed mr-2 font-bold text-lg">✓</span> Εμείς γράφουμε τα Σενάρια & Hooks</li>
-                                <li class="flex items-start"><span class="text-brandRed mr-2 font-bold text-lg">✓</span> Επαγγελματικός ήχος (Μικρόφωνα)</li>
-                                <li class="flex items-start"><span class="text-brandRed mr-2 font-bold text-lg">✓</span> Premium Edit έτοιμο για Social Media</li>
-                            </ul>
-                            <a href="javascript:void(0)" onclick="openModal('Full Production (50€/βίντεο)')" class="text-center bg-white border-2 border-gray-300 hover:border-gray-900 text-gray-900 font-bold py-4 rounded-xl transition duration-300 mt-auto">Επιλογή</a>
-                        </div>
-                    </div>
-
-                    <!-- ΥΠΗΡΕΣΙΑ 3: AI VIDEO PRODUCTION (ΝΕΟ) -->
-                    <div class="reveal-on-scroll delay-300 transform md:-translate-y-4">
-                        <div class="h-full p-8 border-2 border-brandRed bg-brandDark shadow-[0_10px_30px_rgba(255,51,51,0.2)] hover:shadow-[0_15px_40px_rgba(255,51,51,0.3)] rounded-3xl flex flex-col transition duration-300 relative mt-6 md:mt-0">
-                            
-                            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-brandRed text-white text-xs font-black px-8 py-2 rounded-full uppercase tracking-wider whitespace-nowrap shadow-lg animate-pulse-slow">
+            <!-- PRICING CARDS GRID -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+                
+                <!-- ΥΠΗΡΕΣΙΑ 1: AI VIDEO PRODUCTION (ΜΠΗΚΕ ΠΡΩΤΗ) -->
+                <div class="reveal-on-scroll delay-100 transform md:-translate-y-4">
+                    <div class="h-full bg-brandDark rounded-[2rem] flex flex-col transition duration-300 relative overflow-hidden shadow-[0_20px_50px_rgba(255,51,51,0.2)] hover:shadow-[0_20px_60px_rgba(255,51,51,0.4)] group">
+                        
+                        <!-- AI Premium Header Image -->
+                        <div class="h-48 w-full bg-[url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center relative">
+                            <div class="absolute inset-0 bg-brandDark/60 group-hover:bg-brandDark/40 transition duration-500"></div>
+                            <div class="absolute top-4 right-4 bg-brandRed text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg animate-pulse-slow">
                                 Best Value
                             </div>
-                            
-                            <h3 class="text-2xl font-black mb-3 tracking-wide text-white mt-4 flex items-center gap-2">
-                                AI Video Production <span class="text-xl">🤖</span>
+                        </div>
+
+                        <div class="p-8 flex-1 flex flex-col relative z-10 -mt-8 bg-gradient-to-b from-brandDark/90 to-brandDark">
+                            <h3 class="text-3xl font-black mb-3 tracking-wide text-white flex items-center gap-2 drop-shadow-md">
+                                AI Video <span class="text-2xl">🤖</span>
                             </h3>
-                            <p class="text-gray-300 text-sm mb-4 leading-relaxed">Δεν κάνετε τίποτα. Δημιουργούμε εντυπωσιακά βίντεο εξολοκλήρου με τεχνητή νοημοσύνη, χωρίς κάμερες.</p>
+                            <p class="text-gray-300 text-sm mb-6 leading-relaxed">Δεν κάνετε τίποτα απολύτως. Δημιουργούμε εντυπωσιακά βίντεο εξολοκλήρου με τεχνητή νοημοσύνη (χωρίς κάμερες).</p>
                             
-                            <div class="text-5xl font-extrabold mb-1 text-white">80€ <span class="text-sm font-bold text-gray-400">/βίντεο</span></div>
-                            <div class="text-brandRed font-black text-sm mb-6 bg-brandRed/10 inline-block px-3 py-1 rounded-lg">
+                            <div class="text-5xl font-extrabold mb-1 text-white drop-shadow-md">80€ <span class="text-sm font-bold text-gray-400">/βίντεο</span></div>
+                            <div class="text-brandRed font-black text-sm mb-8 bg-brandRed/10 inline-block px-3 py-1.5 rounded-lg border border-brandRed/20">
                                 🎁 ΠΑΚΕΤΟ 4 ΒΙΝΤΕΟ: 250€
                             </div>
                             
                             <ul class="space-y-4 text-gray-300 flex-1 mb-8 text-sm font-medium">
-                                <li class="flex items-start"><span class="text-brandRed mr-2 font-bold text-lg">✓</span> <strong class="text-white">Zero Effort:</strong> Τα κάνουμε όλα εμείς!</li>
-                                <li class="flex items-start"><span class="text-brandRed mr-2 font-bold text-lg">✓</span> AI Παραγωγή Εικόνας & Κίνησης</li>
-                                <li class="flex items-start"><span class="text-brandRed mr-2 font-bold text-lg">✓</span> AI Voiceovers κορυφαίας ποιότητας</li>
-                                <li class="flex items-start"><span class="text-brandRed mr-2 font-bold text-lg">✓</span> Εντυπωσιακά VFX (π.χ. Typewriter text)</li>
+                                <li class="flex items-start"><span class="text-brandRed mr-3 font-bold text-lg leading-none">✓</span> <strong class="text-white font-bold">Zero Effort:</strong> Τα κάνουμε όλα εμείς!</li>
+                                <li class="flex items-start"><span class="text-brandRed mr-3 font-bold text-lg leading-none">✓</span> AI Παραγωγή Εικόνας & Κίνησης</li>
+                                <li class="flex items-start"><span class="text-brandRed mr-3 font-bold text-lg leading-none">✓</span> AI Voiceovers κορυφαίας ποιότητας</li>
+                                <li class="flex items-start"><span class="text-brandRed mr-3 font-bold text-lg leading-none">✓</span> Εντυπωσιακά VFX & Animations</li>
                             </ul>
-                            <a href="javascript:void(0)" onclick="openModal('AI Video Production (4 για 250€)')" class="text-center bg-brandRed hover:bg-red-600 text-white font-bold py-4 rounded-xl transition duration-300 mt-auto shadow-lg shadow-brandRed/40">Επιλογή Πακέτου AI</a>
+                            <a href="javascript:void(0)" onclick="openModal('AI Video Production (4 για 250€)')" class="text-center bg-brandRed hover:bg-red-600 text-white font-bold py-4 rounded-xl transition duration-300 mt-auto shadow-lg shadow-brandRed/40 w-full block">Επιλογή AI Πακέτου</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ΥΠΗΡΕΣΙΑ 2: FULL PRODUCTION VIDEO -->
+                <div class="reveal-on-scroll delay-200">
+                    <div class="h-full bg-white rounded-[2rem] shadow-xl hover:shadow-2xl flex flex-col transition duration-300 relative overflow-hidden group border border-gray-100">
+                        
+                        <!-- Full Production Header Image -->
+                        <div class="h-48 w-full bg-[url('https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center relative">
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-500"></div>
+                            <div class="absolute top-4 right-4 bg-gray-900/90 text-white text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest backdrop-blur-sm">
+                                With You On Camera
+                            </div>
+                        </div>
+
+                        <div class="p-8 flex-1 flex flex-col relative z-10 -mt-6 bg-white rounded-t-3xl">
+                            <h3 class="text-2xl font-bold mb-3 tracking-wide text-gray-900 mt-2">Full Production</h3>
+                            <p class="text-gray-600 text-sm mb-6 leading-relaxed">Ερχόμαστε στον χώρο σας, στήνουμε τον επαγγελματικό εξοπλισμό, σας σκηνοθετούμε και εσείς παρουσιάζετε.</p>
+                            
+                            <div class="text-4xl font-extrabold mb-8 text-gray-900">50€ <span class="text-sm font-bold text-gray-500">/βίντεο +ΦΠΑ</span></div>
+                            
+                            <ul class="space-y-4 text-gray-700 flex-1 mb-8 text-sm font-medium">
+                                <li class="flex items-start"><span class="text-brandRed mr-3 font-bold text-lg leading-none">✓</span> Γύρισμα με Pro Κάμερες & Φώτα</li>
+                                <li class="flex items-start"><span class="text-brandRed mr-3 font-bold text-lg leading-none">✓</span> Εμείς γράφουμε τα Σενάρια & Hooks</li>
+                                <li class="flex items-start"><span class="text-brandRed mr-3 font-bold text-lg leading-none">✓</span> Επαγγελματικός ήχος (Μικρόφωνα)</li>
+                                <li class="flex items-start"><span class="text-brandRed mr-3 font-bold text-lg leading-none">✓</span> Premium Edit έτοιμο για Social Media</li>
+                            </ul>
+                            <a href="javascript:void(0)" onclick="openModal('Full Production (50€/βίντεο)')" class="text-center bg-white border-2 border-gray-300 hover:border-gray-900 text-gray-900 font-bold py-4 rounded-xl transition duration-300 mt-auto w-full block">Επιλογή Υπηρεσίας</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ΥΠΗΡΕΣΙΑ 3: REMOTE EDITING -->
+                <div class="reveal-on-scroll delay-300">
+                    <div class="h-full bg-white rounded-[2rem] shadow-xl hover:shadow-2xl flex flex-col transition duration-300 relative overflow-hidden group border border-gray-100">
+                        
+                        <!-- Remote Edit Header Image -->
+                        <div class="h-48 w-full bg-[url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center relative">
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-500"></div>
+                            <div class="absolute top-4 right-4 bg-gray-900/90 text-white text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest backdrop-blur-sm">
+                                It's All You
+                            </div>
+                        </div>
+
+                        <div class="p-8 flex-1 flex flex-col relative z-10 -mt-6 bg-white rounded-t-3xl">
+                            <h3 class="text-2xl font-bold mb-3 tracking-wide text-gray-900 mt-2">Remote Edit</h3>
+                            <p class="text-gray-600 text-sm mb-6 leading-relaxed">Εσείς τραβάτε τα πλάνα από το κινητό σας με την καθοδήγησή μας, και εμείς αναλαμβάνουμε το κάθετο μοντάζ.</p>
+                            
+                            <div class="text-4xl font-extrabold mb-8 text-gray-900">25€ <span class="text-sm font-bold text-gray-500">/βίντεο +ΦΠΑ</span></div>
+                            
+                            <ul class="space-y-4 text-gray-700 flex-1 mb-8 text-sm font-medium">
+                                <li class="flex items-start"><span class="text-brandRed mr-3 font-bold text-lg leading-none">✓</span> Τραβάτε μόνοι σας πλάνα με κινητό</li>
+                                <li class="flex items-start"><span class="text-brandRed mr-3 font-bold text-lg leading-none">✓</span> Καθοδήγηση για Hook & Σενάριο</li>
+                                <li class="flex items-start"><span class="text-brandRed mr-3 font-bold text-lg leading-none">✓</span> Δυναμικό Μοντάζ (Jump cuts, SFX)</li>
+                                <li class="flex items-start"><span class="text-brandRed mr-3 font-bold text-lg leading-none">✓</span> Dynamic Captions & Color Grading</li>
+                            </ul>
+                            <a href="javascript:void(0)" onclick="openModal('Remote Edit (25€/βίντεο)')" class="text-center bg-white border-2 border-gray-300 hover:border-gray-900 text-gray-900 font-bold py-4 rounded-xl transition duration-300 mt-auto w-full block">Επιλογή Υπηρεσίας</a>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- ΥΠΗΡΕΣΙΕΣ WEB (ΟΜΑΔΑ 2) -->
-            <div>
-                <div class="reveal-on-scroll flex items-center justify-center gap-4 mb-8">
-                    <div class="h-px bg-gray-200 flex-1 max-w-[100px]"></div>
+            <div class="mt-24">
+                <div class="reveal-on-scroll flex items-center justify-center gap-4 mb-10">
+                    <div class="h-px bg-gray-300 flex-1 max-w-[100px]"></div>
                     <h3 class="text-2xl md:text-3xl font-black text-gray-900 uppercase tracking-widest">Web Development</h3>
-                    <div class="h-px bg-gray-200 flex-1 max-w-[100px]"></div>
+                    <div class="h-px bg-gray-300 flex-1 max-w-[100px]"></div>
                 </div>
 
-                <div class="max-w-md mx-auto reveal-on-scroll delay-100">
+                <div class="max-w-xl mx-auto reveal-on-scroll delay-100">
                     <!-- ΥΠΗΡΕΣΙΑ 4: LANDING PAGE -->
-                    <div class="p-8 border border-gray-800 bg-brandDark shadow-xl rounded-3xl flex flex-col hover:border-brandRed transition duration-300">
-                        <h3 class="text-2xl font-bold mb-3 tracking-wide text-white">Κατασκευή Landing Page</h3>
-                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">Ταχύτατη, μοντέρνα σελίδα προσανατολισμένη αυστηρά στο να κλείνει ραντεβού ή πωλήσεις από τα social media.</p>
-                        <div class="text-5xl font-extrabold mb-6 text-white">300€ <span class="text-sm font-bold text-gray-500">+ΦΠΑ (Εφάπαξ)</span></div>
+                    <div class="bg-white rounded-[2rem] shadow-2xl flex flex-col md:flex-row transition duration-300 relative overflow-hidden group border border-gray-100">
                         
-                        <ul class="space-y-4 text-gray-300 flex-1 mb-8 text-sm font-medium">
-                            <li class="flex items-start"><span class="text-brandRed mr-2 font-bold text-lg">✓</span> Custom Mobile-First Σχεδιασμός</li>
-                            <li class="flex items-start"><span class="text-brandRed mr-2 font-bold text-lg">✓</span> Φόρμες Επικοινωνίας & Call to Actions</li>
-                            <li class="flex items-start"><span class="text-brandRed mr-2 font-bold text-lg">✓</span> Δωρεάν Hosting & Domain (2 έτη)</li>
-                            <li class="flex items-start"><span class="text-brandRed mr-2 font-bold text-lg">✓</span> Basic On-page SEO & Σύνδεση API</li>
-                        </ul>
-                        <a href="javascript:void(0)" onclick="openModal('Κατασκευή Landing Page (300€)')" class="text-center bg-gray-800 border border-gray-700 hover:border-brandRed hover:bg-gray-800 text-white font-bold py-4 rounded-xl transition duration-300 mt-auto">Επιλογή Υπηρεσίας</a>
+                        <!-- Web Header Image (Left side on Desktop) -->
+                        <div class="h-48 md:h-auto md:w-2/5 bg-[url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center relative">
+                            <div class="absolute inset-0 bg-brandDark/70 group-hover:bg-brandDark/50 transition duration-500"></div>
+                        </div>
+
+                        <div class="p-8 md:w-3/5 flex flex-col bg-white">
+                            <h3 class="text-2xl font-bold mb-3 tracking-wide text-gray-900">Κατασκευή Landing Page</h3>
+                            <p class="text-gray-600 text-sm mb-6 leading-relaxed">Ταχύτατη, μοντέρνα σελίδα προσανατολισμένη αυστηρά στο να κλείνει ραντεβού ή πωλήσεις από τα social media.</p>
+                            
+                            <div class="text-4xl font-extrabold mb-6 text-gray-900">300€ <span class="text-sm font-bold text-gray-500">+ΦΠΑ (Εφάπαξ)</span></div>
+                            
+                            <ul class="space-y-4 text-gray-700 flex-1 mb-8 text-sm font-medium">
+                                <li class="flex items-start"><span class="text-brandRed mr-3 font-bold text-lg leading-none">✓</span> Custom Mobile-First Design</li>
+                                <li class="flex items-start"><span class="text-brandRed mr-3 font-bold text-lg leading-none">✓</span> Φόρμες & Call to Actions</li>
+                                <li class="flex items-start"><span class="text-brandRed mr-3 font-bold text-lg leading-none">✓</span> Δωρεάν Hosting & Domain (2 έτη)</li>
+                            </ul>
+                            <a href="javascript:void(0)" onclick="openModal('Κατασκευή Landing Page (300€)')" class="text-center bg-gray-900 hover:bg-brandRed text-white font-bold py-4 rounded-xl transition duration-300 mt-auto w-full block">Επιλογή Υπηρεσίας</a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <p class="reveal-on-scroll text-center text-gray-500 font-medium text-sm mt-12">* Στις παραπάνω τιμές δεν συμπεριλαμβάνεται ο ΦΠΑ 24%.</p>
+            <p class="reveal-on-scroll text-center text-gray-500 font-medium text-sm mt-16">* Στις παραπάνω τιμές δεν συμπεριλαμβάνεται ο ΦΠΑ 24%.</p>
 
-        </div>
-    </section>
-
-    <!-- AI SHOWCASE SECTION (Placeholders για εικόνες Hedra) -->
-    <section class="py-20 bg-gray-900 border-t border-b border-gray-800 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-12 reveal-on-scroll">
-                <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-4">Δείτε τη Δύναμη του <span class="text-brandRed">AI Video</span></h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto">Φανταστείτε σενάρια που δεν μπορούν να γυριστούν με κάμερα. Εμείς τα κάνουμε πραγματικότητα μέσα σε 9:16 format, έτοιμα για το TikTok σας.</p>
-            </div>
-            
-            <div class="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar justify-center">
-                
-                <!-- PLACEHOLDER 1: Βάλε εδώ την κάθετη εικόνα (9:16) με τα ακάρεα και τον ήρωα -->
-                <div class="snap-center shrink-0 w-[280px] h-[500px] bg-gray-800 rounded-2xl overflow-hidden relative border-2 border-gray-700 group reveal-on-scroll">
-                    <img src="https://placehold.co/560x1000/111827/FF3333?text=ΕΔΩ+Η+ΕΙΚΟΝΑ\nΑΠΟ+HEDRA\n(9:16)" alt="AI Video Frame" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-6 pt-12">
-                        <span class="text-brandRed font-bold text-xs uppercase tracking-wider bg-black/50 px-2 py-1 rounded">Case Study</span>
-                        <h4 class="text-white font-bold mt-2 leading-tight">Bio-Clean Hero vs Ακάρεα</h4>
-                    </div>
-                </div>
-
-                <!-- PLACEHOLDER 2: Βάλε εδώ άλλη μια δημιουργία σου -->
-                <div class="snap-center shrink-0 w-[280px] h-[500px] bg-gray-800 rounded-2xl overflow-hidden relative border-2 border-gray-700 group reveal-on-scroll delay-100">
-                    <img src="https://placehold.co/560x1000/111827/FFFFFF?text=ΕΔΩ+ΔΕΥΤΕΡΟ\nAI+VIDEO\n(9:16)" alt="AI Video Frame" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-6 pt-12">
-                        <span class="text-white font-bold text-xs uppercase tracking-wider bg-brandRed/80 px-2 py-1 rounded">100% AI Generated</span>
-                        <h4 class="text-white font-bold mt-2 leading-tight">Απόλυτα Προσωποποιημένο Περιεχόμενο</h4>
-                    </div>
-                </div>
-
-            </div>
         </div>
     </section>
 
     <!-- How it Works Section -->
-    <section id="how-it-works" class="py-20 md:py-32 bg-gray-50 px-4">
+    <section id="how-it-works" class="py-20 md:py-32 bg-white px-4">
         <div class="max-w-6xl mx-auto">
             <h2 class="reveal-on-scroll text-3xl md:text-5xl font-extrabold text-center mb-4 text-gray-900">Παραγωγή σε 4 Βήματα</h2>
             <p class="reveal-on-scroll delay-100 text-gray-500 text-center text-lg max-w-3xl mx-auto mb-20 leading-relaxed">
@@ -268,7 +299,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-6 mt-10 md:mt-0">
                 <!-- Step 1 -->
                 <div class="reveal-on-scroll delay-100">
-                    <div class="h-full relative p-8 border border-gray-200 bg-white rounded-3xl transform transition hover:-translate-y-2 hover:shadow-xl duration-300">
+                    <div class="h-full relative p-8 border border-gray-100 bg-gray-50 rounded-3xl transform transition hover:-translate-y-2 hover:shadow-xl duration-300">
                         <div class="absolute -top-6 left-8 bg-brandRed text-white w-12 h-12 flex items-center justify-center rounded-2xl font-black text-xl shadow-lg rotate-3 z-20">1</div>
                         <div class="relative z-10 flex flex-col pt-4">
                             <h3 class="text-xl font-bold mb-3 text-gray-900">Σενάριο & Hooks</h3>
@@ -279,29 +310,29 @@
 
                 <!-- Step 2 -->
                 <div class="reveal-on-scroll delay-200">
-                    <div class="h-full relative p-8 border border-gray-200 bg-white rounded-3xl transform transition hover:-translate-y-2 hover:shadow-xl duration-300">
+                    <div class="h-full relative p-8 border border-gray-100 bg-gray-50 rounded-3xl transform transition hover:-translate-y-2 hover:shadow-xl duration-300">
                         <div class="absolute -top-6 left-8 bg-brandRed text-white w-12 h-12 flex items-center justify-center rounded-2xl font-black text-xl shadow-lg rotate-3 z-20">2</div>
                         <div class="relative z-10 flex flex-col pt-4">
-                            <h3 class="text-xl font-bold mb-3 text-gray-900">Γύρισμα ή AI Generate</h3>
-                            <p class="text-gray-600 text-sm leading-relaxed">Ερχόμαστε στον χώρο σας με κάμερες, Ή δημιουργούμε το υλικό και τη φωνή εξολοκλήρου μέσω προηγμένων εργαλείων τεχνητής νοημοσύνης.</p>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900">Γύρισμα / Generate</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">Ερχόμαστε στον χώρο σας με κάμερες, Ή δημιουργούμε το υλικό εξολοκλήρου μέσω προηγμένων AI γεννητριών.</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Step 3 -->
                 <div class="reveal-on-scroll delay-300">
-                    <div class="h-full relative p-8 border border-gray-200 bg-white rounded-3xl transform transition hover:-translate-y-2 hover:shadow-xl duration-300">
+                    <div class="h-full relative p-8 border border-gray-100 bg-gray-50 rounded-3xl transform transition hover:-translate-y-2 hover:shadow-xl duration-300">
                         <div class="absolute -top-6 left-8 bg-brandRed text-white w-12 h-12 flex items-center justify-center rounded-2xl font-black text-xl shadow-lg rotate-3 z-20">3</div>
                         <div class="relative z-10 flex flex-col pt-4">
                             <h3 class="text-xl font-bold mb-3 text-gray-900">Dynamic Μοντάζ</h3>
-                            <p class="text-gray-600 text-sm leading-relaxed">Cuts που κρατούν το ενδιαφέρον, color grading, ηχητικά εφέ (όπως το Typewriter) και animated υπότιτλοι (captions).</p>
+                            <p class="text-gray-600 text-sm leading-relaxed">Cuts που κρατούν το ενδιαφέρον, color grading, ηχητικά εφέ (Typewriter κλπ.) και animated υπότιτλοι.</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Step 4 -->
                 <div class="reveal-on-scroll delay-[400ms]">
-                    <div class="h-full relative p-8 border border-gray-200 bg-white rounded-3xl transform transition hover:-translate-y-2 hover:shadow-xl duration-300">
+                    <div class="h-full relative p-8 border border-gray-100 bg-gray-50 rounded-3xl transform transition hover:-translate-y-2 hover:shadow-xl duration-300">
                         <div class="absolute -top-6 left-8 bg-brandRed text-white w-12 h-12 flex items-center justify-center rounded-2xl font-black text-xl shadow-lg rotate-3 z-20">4</div>
                         <div class="relative z-10 flex flex-col pt-4">
                             <h3 class="text-xl font-bold mb-3 text-gray-900">Έτοιμα για Publish</h3>
@@ -314,16 +345,15 @@
     </section>
 
     <!-- Experience / Authority Section -->
-    <section class="py-20 md:py-32 bg-white px-4 border-t border-gray-100">
+    <section class="py-20 md:py-32 bg-gray-50 px-4 border-t border-gray-200">
         <div class="max-w-6xl mx-auto">
             <div class="reveal-on-scroll text-center mb-16">
                 <h2 class="text-3xl md:text-5xl font-extrabold mb-6 text-gray-900">Δεν Πειραματιζόμαστε.<br><span class="text-brandRed">Φέρνουμε Αποτελέσματα.</span></h2>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <!-- Video Editing Experience -->
                 <div class="reveal-on-scroll delay-100">
-                    <div class="h-full p-10 border border-gray-200 rounded-3xl bg-gray-50 shadow-sm transition duration-300">
+                    <div class="h-full p-10 border border-gray-200 rounded-3xl bg-white shadow-sm transition duration-300">
                         <div class="text-6xl font-black text-gray-900 mb-2 tracking-tighter">15<span class="text-2xl text-brandRed font-bold tracking-normal ml-1">Χρόνια</span></div>
                         <h3 class="text-xl font-bold mb-4 mt-4 text-gray-900">Video Παραγωγή</h3>
                         <p class="text-gray-600 text-sm leading-relaxed">
@@ -332,9 +362,8 @@
                     </div>
                 </div>
                 
-                <!-- Web Design Experience -->
                 <div class="reveal-on-scroll delay-200">
-                    <div class="h-full p-10 border border-gray-200 rounded-3xl bg-gray-50 shadow-sm transition duration-300">
+                    <div class="h-full p-10 border border-gray-200 rounded-3xl bg-white shadow-sm transition duration-300">
                         <div class="text-6xl font-black text-gray-900 mb-2 tracking-tighter">25<span class="text-2xl text-brandRed font-bold tracking-normal ml-1">Χρόνια</span></div>
                         <h3 class="text-xl font-bold mb-4 mt-4 text-gray-900">Web Design & Code</h3>
                         <p class="text-gray-600 text-sm leading-relaxed">
@@ -343,14 +372,13 @@
                     </div>
                 </div>
                 
-                <!-- AI & Marketing Expertise -->
                 <div class="reveal-on-scroll delay-300">
                     <div class="h-full p-10 border-2 border-brandRed rounded-3xl bg-brandRed relative shadow-2xl md:-translate-y-4 text-white">
                         <div class="absolute -top-4 -right-2 bg-brandDark text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-lg">Next Gen</div>
                         <div class="text-6xl font-black mb-2 tracking-tighter">100<span class="text-2xl font-bold tracking-normal ml-1">%</span></div>
                         <h3 class="text-xl font-bold mb-4 mt-4">AI & Marketing Automation</h3>
                         <p class="text-white/90 text-sm leading-relaxed">
-                            Είμαστε μπροστά στις εξελίξεις. Ενσωματώνουμε AI γεννήτριες εικόνας/βίντεο (όπως Hedra, Veo) για να δημιουργήσουμε το αδύνατο.
+                            Είμαστε μπροστά στις εξελίξεις. Ενσωματώνουμε AI γεννήτριες εικόνας/βίντεο για να δημιουργήσουμε το αδύνατο.
                         </p>
                     </div>
                 </div>
@@ -359,26 +387,26 @@
     </section>
 
     <!-- FAQ Section -->
-    <section class="py-20 md:py-32 bg-gray-50 px-4 border-t border-gray-200">
+    <section class="py-20 md:py-32 bg-white px-4 border-t border-gray-100">
         <div class="max-w-4xl mx-auto">
             <h2 class="reveal-on-scroll text-3xl md:text-5xl font-extrabold text-center mb-16 text-gray-900">Συχνές Ερωτήσεις (FAQ)</h2>
             <div class="space-y-6">
                 <!-- FAQ 1 -->
-                <div class="reveal-on-scroll p-8 border border-gray-200 bg-white rounded-3xl shadow-sm">
+                <div class="reveal-on-scroll p-8 border border-gray-100 bg-gray-50 rounded-3xl shadow-sm">
                     <h3 class="text-xl font-bold mb-4 text-gray-900 flex items-center gap-3">
                         <span class="text-brandRed text-2xl">💬</span> Πώς ακριβώς δουλεύει το AI Video;
                     </h3>
                     <p class="text-gray-600 text-sm md:text-base leading-relaxed">Στο πακέτο AI δεν χρειάζεται καν να συναντηθούμε ή να βγείτε κάμερα. Εμείς στήνουμε το σενάριο, δημιουργούμε εντυπωσιακά 3D/ρεαλιστικά πλάνα με εξελιγμένα AI εργαλεία, προσθέτουμε επαγγελματική αφήγηση (AI Voiceover) και κάνουμε το μοντάζ.</p>
                 </div>
                 <!-- FAQ 2 -->
-                <div class="reveal-on-scroll delay-100 p-8 border border-gray-200 bg-white rounded-3xl shadow-sm">
+                <div class="reveal-on-scroll delay-100 p-8 border border-gray-100 bg-gray-50 rounded-3xl shadow-sm">
                     <h3 class="text-xl font-bold mb-4 text-gray-900 flex items-center gap-3">
                         <span class="text-brandRed text-2xl">💬</span> Πρέπει να δεσμευτώ με μηνιαία συνδρομή;
                     </h3>
                     <p class="text-gray-600 text-sm md:text-base leading-relaxed">Όχι! Το μοντέλο μας είναι Pay-Per-Project. Πληρώνετε ακριβώς για τα βίντεο που παραγγέλνετε (π.χ. το πακέτο των 4 AI βίντεο για 250€) ή εφάπαξ για τη Landing Page (300€). Δεν υπάρχουν κρυφές συνδρομές.</p>
                 </div>
                 <!-- FAQ 3 -->
-                <div class="reveal-on-scroll delay-200 p-8 border border-gray-200 bg-white rounded-3xl shadow-sm">
+                <div class="reveal-on-scroll delay-200 p-8 border border-gray-100 bg-gray-50 rounded-3xl shadow-sm">
                     <h3 class="text-xl font-bold mb-4 text-gray-900 flex items-center gap-3">
                         <span class="text-brandRed text-2xl">💬</span> Ποιες περιοχές καλύπτετε για γυρίσματα;
                     </h3>
@@ -389,31 +417,32 @@
     </section>
 
     <!-- Footer / CTA -->
-    <footer id="footer" class="py-20 md:py-32 border-t border-gray-800 bg-brandDark px-4">
-        <div class="max-w-5xl mx-auto text-center">
+    <footer id="footer" class="py-20 md:py-32 border-t border-gray-800 bg-brandDark px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-10"></div>
+        <div class="max-w-5xl mx-auto text-center relative z-10">
             <h2 class="reveal-on-scroll text-3xl md:text-5xl font-extrabold mb-6 text-white">Έτοιμοι να δημιουργήσουμε;</h2>
             <p class="reveal-on-scroll delay-100 text-gray-400 text-lg mb-12">Αφήστε την προβολή της επιχείρησής σας στα χέρια της τεχνολογίας και των ειδικών.</p>
             
             <div class="reveal-on-scroll delay-200 flex flex-col md:flex-row justify-center flex-wrap gap-4 mb-16">
                 <!-- Telegram -->
-                <a href="https://t.me/sakiscnc" target="_blank" class="flex items-center justify-center gap-3 bg-[#229ED9] hover:bg-[#1c88ba] text-white font-bold py-4 px-8 rounded-full text-lg transition duration-300">
+                <a href="https://t.me/sakiscnc" target="_blank" class="flex items-center justify-center gap-3 bg-[#229ED9] hover:bg-[#1c88ba] text-white font-bold py-4 px-8 rounded-full text-lg transition duration-300 shadow-lg">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
                     Telegram
                 </a>
                 <!-- Call -->
-                <a href="tel:+306947229951" class="flex items-center justify-center gap-3 bg-brandRed hover:bg-red-600 text-white font-bold py-4 px-8 rounded-full text-lg transition duration-300">
+                <a href="tel:+306947229951" class="flex items-center justify-center gap-3 bg-brandRed hover:bg-red-600 text-white font-bold py-4 px-8 rounded-full text-lg transition duration-300 shadow-lg shadow-brandRed/40">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                     Καλέστε μας
                 </a>
             </div>
 
-            <div class="mt-10 text-gray-600 text-sm font-medium">
+            <div class="mt-10 text-gray-500 text-sm font-medium">
                 &copy; 2026 Click n Clip. All rights reserved.
             </div>
         </div>
     </footer>
 
-    <!-- POPUP MODAL (Ίδιο με πριν) -->
+    <!-- POPUP MODAL -->
     <div id="packageModal" class="fixed inset-0 bg-gray-900/80 z-[100] hidden flex items-center justify-center backdrop-blur-sm transition-opacity px-4">
         <div class="bg-white border border-gray-200 rounded-3xl w-full max-w-md p-8 relative shadow-2xl">
             <button onclick="closeModal()" class="absolute top-5 right-5 text-gray-400 hover:text-brandRed transition bg-gray-100 hover:bg-red-50 p-2 rounded-full">
@@ -444,7 +473,7 @@
                     </div>
                 </div>
                 
-                <button type="submit" class="w-full bg-brandRed hover:bg-red-600 text-white font-bold py-4 rounded-xl mt-8 transition duration-300">
+                <button type="submit" class="w-full bg-brandRed hover:bg-red-600 text-white font-bold py-4 rounded-xl mt-8 transition duration-300 shadow-lg shadow-brandRed/30">
                     Αποστολή Στοιχείων
                 </button>
             </form>
