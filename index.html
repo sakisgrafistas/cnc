@@ -458,11 +458,16 @@
             <h3 class="text-2xl font-extrabold mb-1 text-gray-900">Εκδήλωση Ενδιαφέροντος</h3>
             <p id="modalPackageName" class="text-brandRed font-bold mb-6 text-sm uppercase tracking-wider"></p>
 
-            <form action="https://formsubmit.co/info@clicknclip.gr" method="POST" id="packageForm">
-                <input type="hidden" name="_subject" id="hiddenSubject" value="">
-                <input type="hidden" name="_captcha" value="false">
+<form action="https://api.web3forms.com/submit" method="POST" id="packageForm">
+                <!-- Το Access Key σου για το Web3Forms -->
+                <input type="hidden" name="access_key" value="dd575345-3a26-4f9f-819a-1febcd0049fc">
+                
+                <!-- Δυναμικά πεδία που γεμίζουν από το JavaScript -->
+                <input type="hidden" name="subject" id="hiddenSubject" value="">
                 <input type="hidden" name="Επιλεγμένο_Πακέτο" id="hiddenPackageInput" value="">
-                <input type="hidden" name="_template" value="table">
+                
+                <!-- Όνομα αποστολέα που θα βλέπεις στο email σου -->
+                <input type="hidden" name="from_name" value="Click n Clip (Νέο Lead)">
 
                 <div class="space-y-4">
                     <div>
@@ -486,7 +491,7 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT -->
+<!-- JAVASCRIPT -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const observer = new IntersectionObserver((entries) => {
@@ -507,7 +512,8 @@
 
         function openModal(packageName) {
             document.getElementById('packageModal').classList.remove('hidden');
-            document.getElementById('modalPackageName').innerText = 'Ενδιαφερομαι για: ' + packageName;
+            document.getElementById('modalPackageName').innerText = 'Ενδιαφέρομαι για: ' + packageName;
+            // Το Web3Forms αναγνωρίζει το πεδίο "subject"
             document.getElementById('hiddenSubject').value = 'Νέο Ενδιαφέρον: ' + packageName;
             document.getElementById('hiddenPackageInput').value = packageName;
             document.body.style.overflow = 'hidden';
@@ -528,17 +534,34 @@
             button.innerText = 'Αποστολή...';
             button.disabled = true;
             
-            fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
-            .then(response => {
-                if (response.ok) {
+            // Το Web3Forms δέχεται τα δεδομένα σε μορφή JSON
+            const object = Object.fromEntries(data);
+            const json = JSON.stringify(object);
+            
+            fetch(form.action, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let jsonResponse = await response.json();
+                if (response.status == 200) {
                     alert('Τα στοιχεία σας εστάλησαν επιτυχώς! Θα επικοινωνήσουμε άμεσα.');
-                    form.reset(); closeModal(); 
+                    form.reset(); 
+                    closeModal(); 
                 } else {
+                    console.log(jsonResponse);
                     alert('Υπήρξε ένα πρόβλημα κατά την αποστολή.');
                 }
-            }).catch(error => {
+            })
+            .catch(error => {
+                console.log(error);
                 alert('Σφάλμα δικτύου. Ελέγξτε τη σύνδεσή σας.');
-            }).finally(() => {
+            })
+            .finally(() => {
                 button.innerText = originalButtonText;
                 button.disabled = false;
             });
